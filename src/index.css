@@ -1,14 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --color-burgess-dark: #1a1a1a;
-  --color-burgess-gold: #c9a227;
-  --color-burgess-cream: #f5f5f0;
-  --color-burgess-navy: #0f172a;
-  --color-burgess-slate: #2d2d2d;
+  /* Primary Colors - Navy */
+  --color-primary: #0f172a;
+  --color-primary-light: #1e293b;
   
-  --font-sans: 'Helvetica Neue', Arial, sans-serif;
+  /* Brand/Aquamarine */
+  --color-brand: #0ea5e9;
+  --color-brand-dark: #0284c7;
+  --color-brand-foreground: #ffffff;
+  
+  /* Gold (from Burgess) */
+  --color-gold: #c9a227;
+  --color-gold-dark: #b8921f;
+  
+  /* Neutrals */
+  --color-cream: #fafaf9;
+  --color-slate: #2d2d2d;
+  
+  /* Fonts */
+  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
 }
 
 * {
@@ -22,13 +35,57 @@ html {
 body {
   font-family: var(--font-sans);
   background: #fff;
-  color: var(--color-burgess-dark);
+  color: var(--color-primary);
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
 }
 
+/* Theme Variables for Tailwind */
+:root {
+  /* Primary (Navy) */
+  --primary: 240 100% 25%;
+  --primary-foreground: 0 0% 100%;
+  
+  /* Brand (Aquamarine/Cyan) */
+  --brand: 187 90% 48%;
+  --brand-foreground: 222 47% 11%;
+  --hero-overlay: 240 100% 10% / 0.45;
+  
+  /* Gold (Burgess inspired) */
+  --gold: 45 60% 45%;
+  --gold-foreground: 0 0% 100%;
+  
+  /* Secondary */
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
+  
+  /* Accent */
+  --accent: 192 95% 43%;
+  --accent-foreground: 0 0% 100%;
+  
+  /* Charter accent (terracotta) */
+  --charter-accent: 10 63% 52%;
+  --charter-foreground: 0 0% 100%;
+  
+  --radius: 0.75rem;
+}
+
+/* Force identical palette regardless of dark mode */
+.dark {
+  --background: 0 0% 100%;
+  --foreground: 224 71% 4%;
+  --primary: 240 100% 25%;
+  --primary-foreground: 0 0% 100%;
+  --brand: 187 90% 48%;
+  --brand-foreground: 222 47% 11%;
+  --gold: 45 60% 45%;
+  --gold-foreground: 0 0% 100%;
+  --charter-accent: 10 63% 52%;
+}
+
 @layer components {
+  /* Gold Button (Burgess style) */
   .btn-gold {
     @apply bg-[#c9a227] text-white px-6 py-3 font-medium tracking-wide hover:bg-[#b8921f] transition-all duration-300 uppercase text-sm;
   }
@@ -37,18 +94,52 @@ body {
     @apply border-2 border-[#c9a227] text-[#c9a227] px-6 py-3 font-medium tracking-wide hover:bg-[#c9a227] hover:text-white transition-all duration-300 uppercase text-sm;
   }
   
+  /* Navy Button */
   .btn-navy {
-    @apply bg-[#1a1a1a] text-white px-6 py-3 font-medium tracking-wide hover:bg-[#2d2d2d] transition-all duration-300 uppercase text-sm;
+    @apply bg-[#0f172a] text-white px-6 py-3 font-medium tracking-wide hover:bg-[#1e293b] transition-all duration-300 uppercase text-sm;
   }
   
+  /* Brand Button (Aquamarine) */
+  .btn-brand {
+    background-color: hsl(var(--brand)) !important;
+    color: hsl(var(--brand-foreground)) !important;
+    border-color: transparent !important;
+  }
+  .btn-brand:hover {
+    filter: brightness(0.95);
+  }
+  
+  /* Light Button */
+  .btn-light {
+    background-color: hsl(var(--secondary)) !important;
+    color: hsl(var(--secondary-foreground)) !important;
+    border-color: transparent !important;
+  }
+  .btn-light:hover {
+    filter: brightness(0.97);
+  }
+  
+  /* Hero Button */
+  .btn-hero {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+  @media (min-width: 768px) {
+    .btn-hero {
+      letter-spacing: 0.25em;
+    }
+  }
+  
+  /* Section Styles */
   .section-title {
-    @apply text-4xl md:text-5xl font-serif font-medium text-[#1a1a1a] mb-4;
+    @apply text-4xl md:text-5xl font-serif font-medium text-[#0f172a] mb-4;
   }
   
   .section-subtitle {
     @apply text-lg md:text-xl text-gray-600 mb-8 max-w-2xl;
   }
   
+  /* Navigation */
   .nav-link {
     @apply text-sm uppercase tracking-wider text-white/80 hover:text-[#c9a227] transition-colors;
   }
@@ -57,14 +148,17 @@ body {
     @apply text-sm uppercase tracking-wider text-gray-700 hover:text-[#c9a227] transition-colors;
   }
   
+  /* Yacht Card */
   .yacht-card {
     @apply bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden;
   }
   
+  /* Gold Text */
   .gold-text {
     @apply text-[#c9a227];
   }
   
+  /* Filter Buttons */
   .filter-btn {
     @apply px-4 py-2 border border-gray-300 text-sm uppercase tracking-wider hover:border-[#c9a227] hover:text-[#c9a227] transition-all bg-white;
   }
@@ -73,11 +167,73 @@ body {
     @apply bg-[#c9a227] text-white border-[#c9a227] hover:bg-[#b8921f] hover:text-white;
   }
   
+  /* Crypto Badge */
   .crypto-badge {
     @apply inline-flex items-center gap-2 bg-green-900/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium;
   }
+  
+  /* Hero Frame (Aquamarine border) */
+  .hero-frame {
+    border-color: hsl(var(--brand));
+  }
+  .hero-frame-large {
+    border-color: hsl(var(--brand));
+    border-width: 3px;
+  }
+  @media (min-width: 768px) {
+    .hero-frame-large {
+      border-width: 4px;
+    }
+  }
+  
+  /* Charter Hero Frame (Terracotta) */
+  .charter-frame-large {
+    border-color: hsl(var(--charter-accent));
+    border-width: 3px;
+  }
+  @media (min-width: 768px) {
+    .charter-frame-large {
+      border-width: 4px;
+    }
+  }
+  .charter-hero-text {
+    color: hsl(var(--charter-accent));
+  }
+  .charter-hero-kicker {
+    color: hsl(var(--charter-accent));
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  
+  /* Hero Overlay */
+  .hero-overlay {
+    background: linear-gradient(to bottom, hsl(var(--hero-overlay)), transparent 40%, hsl(var(--hero-overlay)));
+  }
+  
+  /* Text Outline (Burgess style) */
+  .text-outline {
+    -webkit-text-stroke: 2px hsl(var(--primary-foreground));
+    color: transparent;
+  }
+  
+  /* Responsive outline for hero */
+  .text-outline-hero {
+    -webkit-text-stroke: 2px hsl(var(--primary-foreground));
+    color: transparent;
+  }
+  @media (min-width: 768px) {
+    .text-outline-hero {
+      -webkit-text-stroke: 4px hsl(var(--primary-foreground));
+    }
+  }
+  
+  /* Brand Text */
+  .brand-text {
+    color: hsl(var(--brand));
+  }
 }
 
+/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;

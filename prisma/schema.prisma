@@ -21,9 +21,10 @@ enum Source {
 }
 
 enum ServiceType {
-  CABIN_CHAPTER
+  CABIN_CHART
   FULL_CHARTER
   SALE
+  DAY_CHART
 }
 
 enum BookingStatus {
@@ -32,6 +33,24 @@ enum BookingStatus {
   CONFIRMED
   CANCELLED
   REFUNDED
+}
+
+enum YachtType {
+  MOTOR_YACHT
+  SAILING_YACHT
+  GULLET
+  CATAMARAN
+  TRIMARAN
+  SPEEDBOAT
+  JET_SKI
+  SAIL_BOAT
+}
+
+enum CharterType {
+  BAREBOAT
+  CREWED
+  CABIN
+  DAY
 }
 
 model Vessel {
@@ -45,24 +64,75 @@ model Vessel {
   description     String      @db.Text
   shortDescription String?    @db.Text
   
+  // Categorization
+  yachtType       YachtType?
+  charterType     CharterType?
+  
+  // Specs
+  length          Float?      // in meters
+  lengthFeet      Float?      // in feet
+  beam            Float?
+  draft           Float?
+  year            Int?
+  builder         String?
+  model           String?
+  refitYear       Int?
+  
+  engine          String?
+  maxSpeed        Float?
+  cruisingSpeed   Float?
+  fuelCapacity    Float?
+  waterCapacity   Float?
+  
+  cabins          Int?
+  guestCabins     Int?
+  beds            Int?
+  bathrooms       Int?
+  guests          Int       @default(0)
+  crew            Int       @default(0)
+  
   specs           Json?
   
+  // Locations & Regions
   location        String?
   region          String?
   departurePort   String?
   arrivalPort     String?
+  operatingAreas  String[]   // Where yacht typically operates
+  destinations    String[]   // Available destinations
   
+  // Features & Amenities
+  features        String[]
+  amenities       String[]
+  waterToys       String[]
+  entertainment   String[]
+  
+  // Media
   images          String[]
   videos          String[]
+  virtualTourUrl  String?
   
+  // Pricing
   basePrice       Decimal     @db.Decimal(12,2)
   currency        String      @default("EUR")
+  pricePerWeek    Decimal?    @db.Decimal(12,2)
+  pricePerDay     Decimal?    @db.Decimal(12,2)
+  pricePlusExpenses Boolean   @default(false)
   
+  // Availability
+  availableFrom   DateTime?
+  availableTo     DateTime?
+  isAvailable     Boolean     @default(true)
+  
+  // URL & Meta
   urlOriginal     String
   lastChecked     DateTime    @default(now())
   
   metaTitle       String?
   metaDescription String?
+  
+  // Search/Filter fields (denormalized for performance)
+  searchVector    String?     // For full-text search
   
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
@@ -71,25 +141,79 @@ model Vessel {
   bookings        Booking[]
   
   @@index([type, source])
+  @@index([yachtType])
+  @@index([charterType])
+  @@index([region])
+  @@index([location])
+  @@index([departurePort])
+  @@index([length])
+  @@index([year])
+  @@index([guests])
+  @@index([cabins])
+  @@index([basePrice])
+  @@index([isAvailable])
   @@index([slug])
+}
+
+model Destination {
+  id              String    @id @default(cuid())
+  
+  name            String
+  slug            String    @unique
+  country         String?
+  region          String?
+  continent       String?
+  
+  description     String?   @db.Text
+  highlights      String[]
+  
+  image           String?
+  
+  departurePorts  String[]
+  
+  nearbyIslands   String[]
+  
+  bestTimeToVisit String[]
+ avgTemperature  Float?
+  
+  latitude        Float?
+  longitude       Float?
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  vessels         Vessel[]
+  departures      Departure[]
+  
+  @@index([region])
+  @@index([country])
+  @@index([continent])
 }
 
 model Departure {
   id              String    @id @default(cuid())
   vesselId        String
   vessel          Vessel    @relation(fields: [vesselId], references: [id], onDelete: Cascade)
+  destinationId   String?
+  destination     Destination? @relation(fields: [destinationId], references: [id])
   
   externalId      String
   departureDate   DateTime
   arrivalDate     DateTime?
+  
+  departurePort   String?
+  arrivalPort     String?
+  route           String?
+  itinerary       String?   @db.Text
   
   totalCabins     Int?
   availableCabins Int?
   status          String    @default("available")
   
   cabinPrices     Json?
-  itinerary       String?   @db.Text
-  route           String?
+  fullPrice       Decimal?  @db.Decimal(12,2)
+  
+  notes           String?
   
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
@@ -98,6 +222,7 @@ model Departure {
   
   @@index([vesselId, departureDate])
   @@index([departureDate])
+  @@index([destinationId])
 }
 
 model SourceRule {
@@ -180,4 +305,53 @@ model ScrapingLog {
   createdAt       DateTime  @default(now())
   
   @@index([source, createdAt])
+}
+
+model Wallet {
+  id              String    @id @default(cuid())
+  
+  chain           String    @db.Text // ETH, TRX, BTC, SOL, etc.
+  address         String    @db.Text
+  label           String?   @db.Text
+  isActive        Boolean   @default(true)
+  rotationIndex   Int       @default(0)
+  
+  totalReceived   Int       @default(0)
+  lastUsedAt      DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  status          String    @default("active") // active, pending, failed
+  
+  transactions    CryptoTransaction[]
+  
+  @@unique([chain, address])
+  @@index([chain, isActive])
+}
+
+model CryptoTransaction {
+  id              String    @id @default(cuid())
+  walletId        String
+  wallet          Wallet    @relation(fields: [walletId], references: [id])
+  
+  txHash          String    @unique
+  fromAddress     String    @db.Text
+  amount          String    @db.Text
+  currency        String    // USDT, USDC, ETH, BTC, etc.
+  chain           String
+  
+  status          String    @default("pending") // pending, confirmed, failed
+  
+  confirmations   Int       @default(0)
+  blockNumber     Int?
+  blockTimestamp  DateTime?
+  
+  bookingId       String?   @db.Text
+  booking         Booking?  @relation(fields: [bookingId], references: [id])
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  @@index([walletId, status])
+  @@index([bookingId])
 }
