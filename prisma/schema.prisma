@@ -1,0 +1,183 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Source {
+  BURGESS
+  ZIZOO
+  NAUTAL
+  GLOBESAILOR
+  CLICKANDBOAT
+  YACHTWORLD
+  BOAT24
+  DREAM_YACHT
+  SEVEN_STARS
+  GLOBALCHARTER
+}
+
+enum ServiceType {
+  CABIN_CHAPTER
+  FULL_CHARTER
+  SALE
+}
+
+enum BookingStatus {
+  PENDING_CRYPTO
+  AWAITING_CARD
+  CONFIRMED
+  CANCELLED
+  REFUNDED
+}
+
+model Vessel {
+  id              String      @id @default(cuid())
+  type            ServiceType
+  source          Source
+  externalId      String
+  
+  title           String      @db.Text
+  slug            String      @unique
+  description     String      @db.Text
+  shortDescription String?    @db.Text
+  
+  specs           Json?
+  
+  location        String?
+  region          String?
+  departurePort   String?
+  arrivalPort     String?
+  
+  images          String[]
+  videos          String[]
+  
+  basePrice       Decimal     @db.Decimal(12,2)
+  currency        String      @default("EUR")
+  
+  urlOriginal     String
+  lastChecked     DateTime    @default(now())
+  
+  metaTitle       String?
+  metaDescription String?
+  
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  
+  departures      Departure[]
+  bookings        Booking[]
+  
+  @@index([type, source])
+  @@index([slug])
+}
+
+model Departure {
+  id              String    @id @default(cuid())
+  vesselId        String
+  vessel          Vessel    @relation(fields: [vesselId], references: [id], onDelete: Cascade)
+  
+  externalId      String
+  departureDate   DateTime
+  arrivalDate     DateTime?
+  
+  totalCabins     Int?
+  availableCabins Int?
+  status          String    @default("available")
+  
+  cabinPrices     Json?
+  itinerary       String?   @db.Text
+  route           String?
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  bookings        Booking[]
+  
+  @@index([vesselId, departureDate])
+  @@index([departureDate])
+}
+
+model SourceRule {
+  id                String    @id @default(cuid())
+  source            Source    @unique
+  
+  depositPercentage Decimal   @db.Decimal(5,2)
+  paymentTiming     String
+  requiresCard      Boolean   @default(true)
+  
+  cancellationPolicy String?  @db.Text
+  termsUrl          String?
+  formFields        Json?
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model Booking {
+  id              String        @id @default(cuid())
+  vesselId        String
+  vessel          Vessel        @relation(fields: [vesselId], references: [id])
+  departureId     String?
+  departure       Departure?    @relation(fields: [departureId], references: [id])
+  
+  status          BookingStatus @default(PENDING_CRYPTO)
+  
+  depositAmount   Decimal       @db.Decimal(12,2)
+  depositCurrency String        @default("USDT")
+  cryptoTxHash    String?
+  paidAt          DateTime?
+  
+  customerData    Json
+  
+  sourceBookingId String?
+  sourceConfirmedAt DateTime?
+  
+  checkoutExpires  DateTime?
+  
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  @@index([status])
+  @@index([checkoutExpires])
+}
+
+model SiteConfig {
+  id              String    @id @default(cuid())
+  
+  siteName        String    @default("Neptune Marine")
+  tagline         String?
+  logoUrl         String?
+  
+  email           String?
+  phone           String?
+  whatsapp        String?
+  
+  instagram       String?
+  facebook        String?
+  youtube         String?
+  
+  cryptoGateway   String?
+  walletAddress   String?
+  
+  maintenanceMode Boolean   @default(false)
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model ScrapingLog {
+  id              String    @id @default(cuid())
+  source          Source
+  vesselExternalId String?
+  action          String
+  status          String
+  details         Json?
+  errorMessage    String?
+  
+  createdAt       DateTime  @default(now())
+  
+  @@index([source, createdAt])
+}
