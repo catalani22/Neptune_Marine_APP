@@ -1,11 +1,23 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://uhmzdrpetrgwuxfodiaf.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+// For client-side (Vite): use import.meta.env
+// For server-side (Node.js scripts): use process.env
+const getSupabaseUrl = () => {
+  if (typeof import.meta !== 'undefined' && import.meta.env) {
+    return import.meta.env.VITE_SUPABASE_URL || 'https://uhmzdrpetrgwuxfodiaf.supabase.co';
+  }
+  return process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || 'https://uhmzdrpetrgwuxfodiaf.supabase.co';
+};
 
-if (!supabaseAnonKey) {
-  console.warn('⚠️ Supabase anon key not configured');
-}
+const getSupabaseKey = () => {
+  if (typeof import.meta !== 'undefined' && import.meta.env) {
+    return import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+  }
+  return process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || '';
+};
+
+const supabaseUrl = getSupabaseUrl();
+const supabaseAnonKey = getSupabaseKey();
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
