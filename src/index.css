@@ -54,6 +54,31 @@ body {
   font-size: 16px;
   line-height: 1.625;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+main {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure all major containers are constrained */
+.s-head,
+.h-bann__cont,
+.fls,
+.fifty-fifty,
+.yacht-grid,
+.html-area,
+.hl-panel,
+.search-section,
+.filters,
+.filters__inner,
+.page-header,
+.s-foot__grid,
+.s-foot__bottom {
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -270,6 +295,7 @@ a:hover {
   grid-template-columns: 1fr;
   gap: 2px;
   background: #ccc;
+  max-width: 100%;
 }
 
 @media (min-width: 750px) {
@@ -373,6 +399,7 @@ a:hover {
 .fifty-fifty {
   display: grid;
   grid-template-columns: 1fr;
+  max-width: 100%;
 }
 
 @media (min-width: 750px) {
