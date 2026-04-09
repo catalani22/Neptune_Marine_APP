@@ -470,8 +470,10 @@ function CharterPage() {
   
   return (
     <div>
-      {/* Hero Section */}
-      <section className="h-bann theme-aqua">
+      {/* Hero Section - Lady Jorgia Banner */}
+      <section className="h-bann theme-orange">
+        <div className="h-bann__bg" style={{ backgroundImage: 'url(/assets/images/burgess/charter/lady_jorgia.jpg)' }}></div>
+        <div className="h-bann__overlay"></div>
         <div className="h-bann__cont theme-border">
           <span></span>
           <div>
@@ -494,7 +496,7 @@ function CharterPage() {
       <div className="fls">
         <div className="fls__item fls__item--double">
           <Link to="/charter" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=400&rmode=crop&q=80" alt="Yacht Charter" className="media-fit content-pod__img" />
+            <img src="/assets/images/burgess/charter/excellence.jpg" alt="Yacht Charter" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>Charter a yacht</span></div>
@@ -509,7 +511,7 @@ function CharterPage() {
         </div>
         <div className="fls__item">
           <Link to="/charter/inspiration" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=400&rmode=crop&q=80" alt="Inspiration" className="media-fit content-pod__img" />
+            <img src="/assets/images/burgess/charter/seanna.jpg" alt="Inspiration" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>YACHT CHARTER INSPIRATION</span></div>
@@ -524,10 +526,10 @@ function CharterPage() {
         </div>
       </div>
 
-      {/* Destinations Section */}
+      {/* Destinations Section - Excellence International */}
       <div className="hl-panel theme-blue">
         <picture className="hl-panel__img">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&h=900&rmode=crop&q=60" alt="" />
+          <img src="/assets/images/burgess/charter/excellence_int.jpg" alt="" />
         </picture>
         <div className="hl-panel__contents">
           <h2 className="hl-panel__title">Yacht charter destinations</h2>

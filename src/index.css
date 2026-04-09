@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;600;700&display=swap');
+
 @theme {
   --color-burgess-navy: #27292e;
   --color-burgess-aqua: #18c0d6;
@@ -18,22 +20,40 @@
   --gradient-purple-start: #cd5550;
   --gradient-purple-end: #7f558d;
   
+  /* Theme colors */
+  --theme-blue: #4a71a6;
+  --theme-aqua: #4ab0b8;
+  --theme-orange: #d46f46;
+  --theme-purple: #a84661;
+  --theme-green: #55b29b;
+  
   --font-burgess: "FF Mark", "Helvetica Neue", Arial, sans-serif;
-  --font-display: "Quador", "Times New Roman", serif;
-  --font-bodoni: "BauerBodniBTWXX-Bold", "Bodoni", "Times New Roman", serif;
+  --font-display: "Playfair Display", "Times New Roman", serif;
+  --font-bodoni: "Cormorant Garamond", "Bodoni", "Times New Roman", serif;
 }
 
 :root {
-  --bgColor: #fff;
+  --bgColor: #ffffff;
   --text-colour: #27292e;
-  --theme-color: #4a71a6;
-  --highlight-color: rgba(74, 113, 166, 0.5);
-  --theme-grad-start: #4a6fa5;
-  --theme-grad-end: #33aabe;
   --btnColor: #18c0d6;
   --btnHover: #15a9bd;
+  
+  /* Theme Orange-Purple (default for Charter) */
+  --theme-grad-start: #d46f46;
+  --theme-grad-end: #a84661;
+  --theme-color: #a84661;
+  --theme-hover-start: #f6e2da;
+  --theme-hover-end: #efd9df;
+  
+  /* Theme variations */
+  --theme-blue: #4a71a6;
+  --theme-aqua: #4ab0b8;
+  --theme-green: #55b29b;
+  --theme-orange: #d46f46;
+  --theme-purple: #a84661;
+  
   --ff-mark: "FF Mark", "Helvetica Neue", Arial, sans-serif;
-  --quador: quador, "Times New Roman", serif;
+  --quador: "Playfair Display", "Times New Roman", serif;
 }
 
 * {
@@ -194,6 +214,33 @@ a:hover {
   min-height: 450px;
   position: relative;
   margin-top: 70px;
+  overflow: hidden;
+}
+
+.h-bann__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  animation: heroZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+.h-bann__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(204.86deg, rgba(0, 0, 0, 0.1) 52.4%, rgba(0, 0, 0, 0.4) 69.53%);
 }
 
 @media (min-width: 1200px) {
