@@ -680,8 +680,10 @@ function BuyPage() {
 
   return (
     <div>
-      {/* Hero Section */}
+      {/* Hero Section - My Legacy Banner */}
       <section className="h-bann theme-purple">
+        <div className="h-bann__bg" style={{ backgroundImage: 'url(/assets/images/burgess/buy/my_legacy.jpg)' }}></div>
+        <div className="h-bann__overlay"></div>
         <div className="h-bann__cont theme-border">
           <span></span>
           <div>
@@ -703,7 +705,7 @@ function BuyPage() {
       <div className="fls">
         <div className="fls__item fls__item--double">
           <Link to="/sale" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=400&rmode=crop&q=80" alt="All Yachts" className="media-fit content-pod__img" />
+            <img src="/assets/images/burgess/buy/my_legacy.jpg" alt="All Yachts" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>buy a yacht</span></div>
@@ -718,7 +720,7 @@ function BuyPage() {
         </div>
         <div className="fls__item">
           <Link to="/sale?size=over200" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&h=400&rmode=crop&q=80" alt="Over 200ft" className="media-fit content-pod__img" />
+            <img src="/assets/images/burgess/buy/my_legacy.jpg" alt="Over 200ft" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>buy a yacht</span></div>
@@ -736,7 +738,7 @@ function BuyPage() {
       <div className="fls">
         <div className="fls__item">
           <Link to="/sale?size=150-200" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=400&rmode=crop&q=80" alt="150-200ft" className="media-fit content-pod__img" />
+            <img src="/assets/images/burgess/buy/my_legacy.jpg" alt="150-200ft" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>buy a yacht</span></div>
@@ -751,7 +753,7 @@ function BuyPage() {
         </div>
         <div className="fls__item">
           <Link to="/sale?size=under150" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&h=400&rmode=crop&q=80" alt="Under 150ft" className="media-fit content-pod__img" />
+            <img src="/assets/images/burgess/buy/my_legacy.jpg" alt="Under 150ft" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>BUY A YACHT</span></div>
