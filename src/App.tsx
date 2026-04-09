@@ -870,153 +870,184 @@ function BuyPage() {
 // ============= SELL PAGE - FULL BURGESS STRUCTURE =============
 function SalePage() {
   const soldYachts = [
-    { name: 'HERE COMES THE SUN', length: '89m (292ft)', year: '2017', builder: 'Amels, The Netherlands' },
-    { name: 'STELLA MI', length: '60.1m (197.2ft)', year: '2021', builder: 'Amels, The Netherlands' },
-    { name: 'W', length: '57.6m (189ft)', year: '2013', builder: 'Feadship, De Vries, The Netherlands' },
-    { name: 'AMANTI', length: '51.8m (169.9ft)', year: '2003', builder: 'Feadship, Royal Van Lent, The Netherlands' },
-    { name: 'BIJIN', length: '49.9m (163.7ft)', year: '2015', builder: 'Heesen, The Netherlands' },
-    { name: 'FOCUS', length: '46.6m (152.9ft)', year: '2002', builder: 'North American Shipbuilding, Italy' },
+    { name: 'HERE COMES THE SUN', length: '89m (292ft)', year: '2017', builder: 'Amels, The Netherlands', image: 'here_comes_the_sun' },
+    { name: 'CONFIDENTIAL', length: '80m (262.5ft)', year: '', builder: 'Confidential', image: 'placeholder' },
+    { name: 'CONFIDENTIAL', length: '75m (246.1ft)', year: '2027', builder: 'Confidential', image: 'placeholder' },
+    { name: 'CONFIDENTIAL', length: '70m (229.7ft)', year: '', builder: 'Confidential', image: 'placeholder' },
+    { name: 'STELLA MI', length: '60.1m (197.2ft)', year: '2021', builder: 'Amels, The Netherlands', image: 'stella_mi' },
+    { name: 'W', length: '57.6m (189ft)', year: '2013', builder: 'Feadship, De Vries, The Netherlands', image: 'w' },
+    { name: 'AMANTI', length: '51.8m (169.9ft)', year: '2003', builder: 'Feadship, Royal Van Lent, The Netherlands', image: 'amanti' },
+    { name: 'BIJIN', length: '49.9m (163.7ft)', year: '2015', builder: 'Heesen, The Netherlands', image: 'bijin' },
+    { name: 'FOCUS', length: '46.6m (152.9ft)', year: '2002', builder: 'North American Shipbuilding, Italy', image: 'focus' },
+    { name: 'NANA II', length: '45.3m (148.6ft)', year: '2023', builder: 'Overmarine, Italy', image: 'nana_ii' },
+  ];
+
+  const editorialArticles = [
+    { title: 'Behind the build: bringing RUYA to life', image: 'ruya' },
+    { title: 'SPACECAT sold', image: 'spacecat' },
+    { title: 'Support yacht PLAYA for sale', image: 'playa' },
+    { title: 'BEOWULF for sale', image: 'beowulf' },
+    { title: '30m EBYSHINE for sale', image: 'ebyshine' },
+    { title: 'ODYSSEY for sale', image: 'odyssey' },
+    { title: '72m Feadship VANISH for sale', image: 'vanish' },
+    { title: 'A strong start to March: Three yachts sold', image: 'royale_x' },
+    { title: 'CONSTANCE for sale', image: 'constance' },
   ];
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="h-bann theme-orange">
-        <div className="h-bann__cont theme-border">
-          <span></span>
-          <div>
-            <p className="h-bann__title" style={{ fontSize: '2.5rem', fontWeight: '300' }}>Your perfect buyer.</p>
-            <p style={{ fontSize: '1.5rem', fontWeight: '700', marginTop: '20px', color: '#fff' }}>Our exclusive audience.</p>
-          </div>
+      {/* Hero Section - Palm Beach */}
+      <section className="h-bann theme-purple-yellow">
+        <div className="h-bann__bg" style={{ backgroundImage: 'url(/assets/images/burgess/sell/palm_beach.jpg)' }}></div>
+        <div className="h-bann__overlay"></div>
+        
+        {/* Breadcrumbs */}
+        <div className="breadcrumbs breadcrumbs--inline">
+          <Link to="/" className="breadcrumbs__link">Home</Link>
+          <span className="breadcrumbs__current">Sell a yacht</span>
+        </div>
+        
+        <div className="i-bann__ta theme-border">
+          <span className="i-bann__t theme-text">Your perfect buyer.</span>
+          <span className="i-bann__t i-bann__t--r theme-text">Our exclusive audience.</span>
         </div>
       </section>
 
-      {/* Introduction */}
+      {/* Title Area */}
+      <div className="i-bann__ti-a">
+        <h1 className="i-bann__ti und-title und-title--center">Why choose Neptune Marine to sell your yacht?</h1>
+      </div>
+
+      {/* Summary */}
+      <div className="i-bann__summary">
+        Quite simply because you want to sell it. We have the expertise to maximise market exposure, the knowledge and networks to find the right buyer and the experience to create maximum value on the sale of your asset. Every year, sales statistics confirm that Neptune Marine is the world's number one broker for 40m+ yachts. Over half the yachts we sell every year are 50m (165ft) or under too so the message is: we sell yachts like yours.
+      </div>
+
+      {/* Discover the Burgess difference - dtd section */}
+      <div className="dtd">
+        <div className="dtd__inner">
+          <div className="dtd__content">
+            <h2 className="dtd__title">Sell a yacht</h2>
+            <p className="dtd__subtitle und-title und-title--center und-title--inherit">Discover the Neptune Marine difference</p>
+            <p>Neptune Marine is a globally renowned leader in the yachting industry. We pride ourselves on achieving the best results in everything that we do. When it comes to superyacht sales this equates to on-point marketing and identifying qualified buyers. While synonymous with superyachts, our dynamic sales programme has enabled us to market and consistently sell some of the largest yachts in the world as well as luxury yachts under 40m (130ft). Speak to our expert team today.</p>
+          </div>
+
+          <div className="dtd__grid">
+            <div className="dtd__section">
+              <h3 className="dtd__section-title">A global player in an international market place</h3>
+              <p>It takes an extensive network and accurate market intelligence to secure the best results in the global yachting market. That's why appointing us as exclusive agents is a wise decision if you want to maximise your opportunities and achieve successful yacht sales.</p>
+            </div>
+            <div className="dtd__section">
+              <h3 className="dtd__section-title">Highly experienced brokers with your needs in mind</h3>
+              <p>Our dynamic team of international brokers have the confidence of the entire superyacht market — an assurance that is founded upon and intrinsically linked to the trust of individual clients. Balancing the realism of the market and client discretion is where we excel.</p>
+            </div>
+            <div className="dtd__section">
+              <h3 className="dtd__section-title">The most dynamic and successful sales programme</h3>
+              <p>We consistently sell the most impressive superyachts on the market, dominating yacht sales in the UK and further afield. In-depth market knowledge, honest and transparent advice and unparalleled teamwork all contribute to optimising a successful and timely sale.</p>
+            </div>
+          </div>
+
+          <div className="dtd__buts">
+            <Link to="/meet-the-team/brokerage" className="dtd__but btn btn--primary btn--white btn--white-grad dtd__but">Meet the Brokerage team</Link>
+            <Link to="/enquire" className="dtd__but btn btn--white btn--hollow btn--white-grad dtd__but">Contact us</Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Sold Yachts Grid */}
+      <div className="y-grid-wrap" id="sold-yachts">
+        <h2 className="gh-title y-grid__title und-title und-title--center">Sold yachts</h2>
+        <div className="gh-cont y-grid__cont">Year after year, we deliver the most successful sales programme in the world of superyachting, selling many of the most impressive yachts in the global fleet.</div>
+        
+        <div className="y-sort">
+          <div className="y-sort__sel">
+            <label className="inline-sel">
+              Sort:
+              <select id="sort" name="sort" className="inline-sel__sel">
+                <option value="">Default</option>
+                <option value="name-asc">Name (A - Z)</option>
+                <option value="name-desc">Name (Z - A)</option>
+                <option value="length-asc">Length (low - high)</option>
+                <option value="length-desc">Length (high - low)</option>
+                <option value="date-desc">Sold date (desc)</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        
+        <div className="y-grid">
+          {soldYachts.map((yacht, i) => (
+            <Link key={i} to={`/sell-a-yacht/sold-yachts/${yacht.name.toLowerCase().replace(/ /g, '-')}`} className="yp">
+              <div className="yp__visual">
+                <div className="yp__placeholder" style={{ backgroundColor: '#f4f5f5', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ color: '#666', fontSize: '0.875rem' }}>{yacht.name}</span>
+                </div>
+                <div className="yp__flags">
+                  <span className="yp__flag theme-orange-purple">Sold</span>
+                </div>
+              </div>
+              <h2 className="yp__title yp__title--sold">{yacht.name}</h2>
+              <ul className="yp__ms">
+                <li className="yp__msi">Length: {yacht.length}</li>
+                {yacht.year && <li className="yp__msi">Built: {yacht.year}</li>}
+                <li className="yp__msi">{yacht.builder}</li>
+              </ul>
+            </Link>
+          ))}
+        </div>
+
+        <div className="lm-pag">
+          <p className="lm-pag__text">You've viewed <span>10</span> of <span>582</span></p>
+          <progress className="lm-pag__prog" max="582" value="10"></progress>
+          <Link to="/sell?page=2" className="btn lm-pag--hidden">Load more</Link>
+        </div>
+      </div>
+
+      {/* Effective Marketing Section */}
       <div className="html-area">
-        <h2 className="html-area__title">Why choose Neptune Marine to sell your yacht?</h2>
-        <div className="html-area__standfirst" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-          <p>Quite simply because you want to sell it. We have the expertise to maximise market exposure, the knowledge and networks to find the right buyer and the experience to create maximum value on the sale of your asset.</p>
+        <h2 className="html-area__title und-title und-title--center">Effective marketing for your yacht</h2>
+        <div className="html-area__standfirst">
+          <p>Whether you're planning to make your yacht available for charter or find a new buyer, Neptune Marine is experienced in all aspects of yacht marketing. Our Marketing team will showcase your yacht effectively via multi-channel, global campaigns designed to drive sales and charter interest.</p>
+        </div>
+        <div className="rich-text">
+          <p><Link to="/yacht-owner-services/yacht-marketing"><strong>Yacht Marketing</strong></Link></p>
         </div>
       </div>
 
-      {/* Services Grid */}
-      <div className="fifty-fifty fifty-fifty--margins">
-        <div className="hwcc">
-          <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=600&rmode=crop&q=80" alt="Charter Management" className="media-fit hwcc__img" />
-          <div className="hwcc__main">
-            <h2 className="hwcc__title">Charter Management</h2>
-            <p className="hwcc__summary">We optimise your yacht's charter potential, and take complexity out of the equation.</p>
-            <Link to="/enquire" className="btn btn--primary btn--white">Charter for you</Link>
+      {/* Editorial Section */}
+      <div className="u-ed bg bg--grey">
+        <h2 className="u-ed__title und-title und-title--center">Editorial</h2>
+        <div className="u-ed__grid">
+          <Link to="/editorial/news/behind-the-build-ruya" className="content-pod content-pod--fw">
+            <div className="yp__placeholder" style={{ backgroundColor: '#f4f5f5', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ color: '#666' }}>RUYA</span>
+            </div>
+            <div className="content-pod__cont content-pod__cont--grad">
+              <div className="content-pod__cont-inner">
+                <h2 className="content-pod__title">Behind the build: bringing RUYA to life</h2>
+                <span className="a-link a-link--inherit">
+                  <span className="a-link__text">Read more</span>
+                  <ArrowRight className="a-link__icon" />
+                </span>
+              </div>
+            </div>
+          </Link>
+
+          <div className="u-ed__art">
+            {editorialArticles.slice(0, 8).map((article, i) => (
+              <article key={i} className="e-card">
+                <div className="e-card__img-placeholder" style={{ backgroundColor: '#f4f5f5', height: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ color: '#666', fontSize: '0.75rem' }}>{article.title.substring(0, 20)}...</span>
+                </div>
+                <h3 className="e-card__title">{article.title}</h3>
+                <Link to={`/editorial/news/${article.title.toLowerCase().replace(/ /g, '-')}`} className="a-link">
+                  <span className="a-link__text">Read more</span>
+                  <ArrowRight className="a-link__icon" />
+                </Link>
+              </article>
+            ))}
           </div>
         </div>
-        <div className="hwcc">
-          <img src="https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&h=600&rmode=crop&q=80" alt="Sales Management" className="media-fit hwcc__img" />
-          <div className="hwcc__main">
-            <h2 className="hwcc__title">Sales Management</h2>
-            <p className="hwcc__summary">Your yacht, our global network and track record. Expect the best possible outcome.</p>
-            <Link to="/enquire" className="btn btn--primary btn--white">Working together</Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="fls">
-        <div className="fls__item">
-          <Link to="/enquire" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=400&rmode=crop&q=80" alt="Insurance" className="media-fit content-pod__img" />
-            <div className="content-pod__cont content-pod__cont--grad">
-              <div className="content-pod__cont-inner">
-                <div className="content-pod__info"><span>Yacht Insurance</span></div>
-                <h2 className="content-pod__title">We provide competitive premiums</h2>
-                <span className="a-link">
-                  <span className="a-link__text">Your trusted provider</span>
-                  <ArrowRight className="a-link__icon" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        </div>
-        <div className="fls__item">
-          <Link to="/enquire" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&h=400&rmode=crop&q=80" alt="Marketing" className="media-fit content-pod__img" />
-            <div className="content-pod__cont content-pod__cont--grad">
-              <div className="content-pod__cont-inner">
-                <div className="content-pod__info"><span>Yacht Marketing</span></div>
-                <h2 className="content-pod__title">From professional photography</h2>
-                <span className="a-link">
-                  <span className="a-link__text">Showcase your yacht</span>
-                  <ArrowRight className="a-link__icon" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </div>
-
-      <div className="fls">
-        <div className="fls__item">
-          <Link to="/enquire" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&rmode=crop&q=80" alt="Berths" className="media-fit content-pod__img" />
-            <div className="content-pod__cont content-pod__cont--grad">
-              <div className="content-pod__cont-inner">
-                <div className="content-pod__info"><span>Berths for sale</span></div>
-                <h2 className="content-pod__title">We negotiate prime berths</h2>
-                <span className="a-link">
-                  <span className="a-link__text">Find your space</span>
-                  <ArrowRight className="a-link__icon" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        </div>
-        <div className="fls__item">
-          <Link to="/enquire" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=400&rmode=crop&q=80" alt="Procurement" className="media-fit content-pod__img" />
-            <div className="content-pod__cont content-pod__cont--grad">
-              <div className="content-pod__cont-inner">
-                <div className="content-pod__info"><span>Procurement</span></div>
-                <h2 className="content-pod__title">Leverage our global purchasing power</h2>
-                <span className="a-link">
-                  <span className="a-link__text">Save time and money</span>
-                  <ArrowRight className="a-link__icon" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </div>
-
-      {/* Marketing Section */}
-      <div className="hl-panel theme-aqua">
-        <picture className="hl-panel__img">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&h=900&rmode=crop&q=60" alt="" />
-        </picture>
-        <div className="hl-panel__contents">
-          <h2 className="hl-panel__title">Effective marketing for your yacht</h2>
-          <p className="hl-panel__mt">Whether you're planning to make your yacht available for charter or find a new buyer</p>
-          <p>Neptune Marine is experienced in all aspects of yacht marketing. Our Marketing team will showcase your yacht effectively via multi-channel, global campaigns.</p>
-          <Link to="/enquire" className="btn btn--solid-grad hl-panel__btn">Yacht Marketing</Link>
-        </div>
-        <div className="hl-panel__border theme-border"></div>
-      </div>
-
-      {/* Sold Yachts Section */}
-      <div className="html-area">
-        <h2 className="html-area__title">Sold yachts</h2>
-        <div className="html-area__standfirst" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-          <p>Year after year, we deliver the most successful sales programme in the world of superyachting.</p>
-        </div>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', padding: '0 40px 40px', maxWidth: '1400px', margin: '0 auto' }}>
-        {soldYachts.map((yacht, i) => (
-          <div key={i} style={{ border: '1px solid #ddd', padding: '20px', textAlign: 'center' }}>
-            <p style={{ color: '#d4af37', fontWeight: '700', fontSize: '0.75rem', marginBottom: '10px' }}>SOLD</p>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '10px' }}>{yacht.name}</h3>
-            <p style={{ color: '#666', fontSize: '0.875rem' }}>Length: {yacht.length}</p>
-            <p style={{ color: '#666', fontSize: '0.875rem' }}>Built: {yacht.year}</p>
-            <p style={{ color: '#666', fontSize: '0.875rem' }}>{yacht.builder}</p>
-          </div>
-        ))}
       </div>
     </div>
   );
