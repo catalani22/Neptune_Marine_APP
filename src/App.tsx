@@ -1,649 +1,784 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { useState } from 'react';
-import { Menu, X, Search, ChevronDown, Star, Globe, Shield, CreditCard, Bitcoin, MapPin, Ship, Users, Calendar, ArrowRight } from 'lucide-react';
-import { Footer } from './components/layout/Header';
-import { SearchPage } from './pages/SearchPage';
-import { YachtDetailPage } from './pages/YachtDetailPage';
+import { useState, useEffect } from 'react';
+import { Search, ArrowRight, Shield, CreditCard } from 'lucide-react';
+import { supabase } from './lib/supabase';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000,
-      retry: 1,
-    },
-  },
-});
+interface Yacht {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  short_description: string;
+  location: string;
+  region: string;
+  base_price: number;
+  currency: string;
+  type: string;
+  source: string;
+}
 
-// ============= HERO SECTION =============
-function Hero() {
-  const destinations = [
-    { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80' },
-    { name: 'Caribbean', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80' },
-    { name: 'Maldives', image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80' },
-    { name: 'South East Asia', image: 'https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&q=80' },
-  ];
-
+// ============= HEADER BURGESS STYLE =============
+function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  
   return (
-    <section className="relative h-screen">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img 
-          src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1920&q=80" 
-          alt="Luxury Yacht"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 hero-gradient" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-center items-center text-white px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-2 mb-4 animate-fade-in-up">
-            <span className="px-3 py-1 bg-[#c9a227] text-xs uppercase tracking-widest">
-              Luxury Yacht Charter
+    <>
+      <header className="s-head">
+        <nav className="s-head-nav">
+          <button 
+            className="s-head-nav__link s-head-nav__link--i" 
+            aria-label="Open main navigation"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <span className="menu-i">
+              <span className="menu-i__line"></span>
+              <span className="menu-i__line"></span>
+              <span className="menu-i__line"></span>
             </span>
+          </button>
+          <button 
+            className="s-head-nav__link s-head-nav__link--i s-head__hd" 
+            aria-label="Open the search panel"
+            onClick={() => setSearchOpen(!searchOpen)}
+          >
+            <Search size={20} />
+          </button>
+
+          <Link to="/charter" className="s-head-nav__link s-head__sd">Charter</Link>
+          <Link to="/sale" className="s-head-nav__link s-head__sd">Buy</Link>
+          <Link to="/sell" className="s-head-nav__link s-head__sd">Sell</Link>
+          <Link to="/build" className="s-head-nav__link s-head__sd">Build</Link>
+          <Link to="/manage" className="s-head-nav__link s-head__sd">Manage</Link>
+        </nav>
+        
+        <Link to="/" className="s-head__logo" aria-label="Navigate to the home page">
+          <svg width="164" height="27" viewBox="0 0 164 27" fill="currentColor">
+            <text x="0" y="22" fontFamily="serif" fontSize="24" fontWeight="bold">NEPTUNE</text>
+            <text x="95" y="22" fontFamily="serif" fontSize="24" fontWeight="bold" fill="#18c0d6">MARINE</text>
+          </svg>
+        </Link>
+        
+        <nav className="s-head-nav s-head-nav--right">
+          <Link className="s-head-nav__link s-head-nav__link--i s-head__hd" to="/account">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </Link>
+          <Link className="s-head-nav__link s-head-nav__link--i s-head__hd" to="/enquire">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </Link>
+          <button className="s-head-nav__link s-head-nav__link--i s-head__sd" onClick={() => setSearchOpen(!searchOpen)}>
+            <Search size={20} />
+          </button>
+          <Link to="/account" className="s-head-nav__link s-head__sd">My account</Link>
+          <Link to="/enquire" className="s-head-nav__link s-head__sd">Contact Us</Link>
+        </nav>
+      </header>
+      <div className="s-head__container"></div>
+
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${mobileMenuOpen ? 'mobile-menu--open' : ''}`}>
+        <Link to="/charter" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Charter</Link>
+        <Link to="/sale" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Buy</Link>
+        <Link to="/sell" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Sell</Link>
+        <Link to="/build" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Build</Link>
+        <Link to="/manage" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Manage</Link>
+        <Link to="/account" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>My account</Link>
+        <Link to="/enquire" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Contact Us</Link>
+      </div>
+    </>
+  );
+}
+
+// ============= HERO BURGESS STYLE =============
+function Hero() {
+  const [isMuted, setIsMuted] = useState(true);
+  
+  return (
+    <section className="h-bann theme-aqua">
+      <video 
+        playsInline 
+        autoPlay 
+        loop 
+        muted={isMuted}
+        controlsList="nodownload"
+        className="media-fit h-bann__media"
+      >
+        <source src="https://player.vimeo.com/progressive_redirect/playback/1115412116/rendition/240p/file.mp4?loc=external" type="video/mp4" />
+      </video>
+      
+      <picture>
+        <source media="(max-width: 1199px)" srcSet="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&h=900&rmode=crop&q=80" />
+        <img 
+          src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1920&h=900&rmode=crop&q=80" 
+          alt="Luxury Yacht"
+          className="media-fit"
+          style={{ display: 'none' }}
+        />
+      </picture>
+      
+      <div className="h-ban__grad"></div>
+      
+      <div className="h-bann__cont theme-border">
+        <span></span>
+        <div>
+          <button 
+            className="h-bann__mute"
+            onClick={() => setIsMuted(!isMuted)}
+            style={{ display: 'flex' }}
+          >
+            {isMuted ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+              </svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              </svg>
+            )}
+          </button>
+          
+          <p className="h-bann__title">When it comes to luxury yachting, Neptune Marine is all you need to know</p>
+          <div>
+            <span className="h-bann__sub-title h-bann__sub-title--outline">Discover the</span>
+            <span className="h-bann__sub-title theme-text">Difference</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-serif font-medium mb-6 animate-fade-in-up delay-100">
-            Experience the <span className="gold-text">Extraordinary</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto animate-fade-in-up delay-200">
-            From the sun-drenched Mediterranean to the pristine waters of the Maldives. 
-            Your luxury yachting adventure awaits.
-          </p>
-
-          {/* Crypto Payment Badge - Global Charter style */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in-up delay-300">
-            <div className="crypto-badge">
-              <Bitcoin className="w-4 h-4" />
+          {/* Crypto Badge */}
+          <div style={{ marginTop: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <div className="crypto-badge-burgess">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
               Pay with Crypto
             </div>
-            <div className="crypto-badge">
-              <Shield className="w-4 h-4" />
+            <div className="crypto-badge-burgess">
+              <Shield size={16} />
               Secure Booking
             </div>
-            <div className="crypto-badge">
-              <CreditCard className="w-4 h-4" />
+            <div className="crypto-badge-burgess">
+              <CreditCard size={16} />
               10% Pre-reserve
             </div>
           </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-400">
-            <Link to="/charter" className="btn-gold text-lg px-8 py-4">
-              Explore Yachts
-            </Link>
-            <Link to="/cabin-cruise" className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-[#1a1a1a]">
-              Cabin Cruises
-            </Link>
-          </div>
-        </div>
-
-        {/* Destination Pills - Global Charter style */}
-        <div className="absolute bottom-8 left-0 right-0">
-          <div className="flex flex-wrap justify-center gap-4">
-            {destinations.map((dest, i) => (
-              <Link 
-                key={i} 
-                to={`/charter/destinations/${dest.name.toLowerCase().replace(' ', '-')}`}
-                className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm hover:bg-white/20 transition-all"
-              >
-                <MapPin className="w-4 h-4" />
-                {dest.name}
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
     </section>
   );
 }
 
-// ============= SERVICES SECTION =============
-function Services() {
-  const services = [
+// ============= CONTENT PODS =============
+function ContentPods() {
+  const pods = [
     {
-      icon: <Ship className="w-10 h-10" />,
-      title: 'Full Charter',
-      description: 'Exclusive use of the entire yacht with professional crew',
+      image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=800&rmode=crop&q=80',
+      category: 'Yacht charters',
+      title: 'Last-minute availability',
       link: '/charter',
-      cta: 'View Yachts'
+      cta: 'Book now'
     },
     {
-      icon: <Users className="w-10 h-10" />,
-      title: 'Cabin Cruises',
-      description: 'Luxury cabin charter - experience yachting from €1,800/week',
-      link: '/cabin-cruise',
-      cta: 'View Cruises'
+      image: 'https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&h=800&rmode=crop&q=80',
+      category: 'Unbeatable holidays',
+      title: 'Yachts for charter',
+      link: '/charter',
+      cta: 'Find your favourite'
     },
     {
-      icon: <Star className="w-10 h-10" />,
-      title: 'Yacht Sales',
-      description: 'Curated selection of the finest superyachts for sale',
+      image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=800&rmode=crop&q=80',
+      category: 'Buy a yacht',
+      title: 'Yachts for sale',
       link: '/sale',
-      cta: 'View Collection'
+      cta: 'Yours to own',
+      double: true
+    }
+  ];
+
+  return (
+    <div className="fls">
+      {pods.map((pod, i) => (
+        <div key={i} className={`fls__item ${pod.double ? 'fls__item--double' : ''}`}>
+          <Link to={pod.link} className="content-pod">
+            <img src={pod.image} alt={pod.title} className="media-fit content-pod__img" />
+            <div className="content-pod__cont content-pod__cont--grad">
+              <div className="content-pod__cont-inner">
+                <div className="content-pod__info">
+                  <span>{pod.category}</span>
+                </div>
+                <h2 className="content-pod__title">{pod.title}</h2>
+                <span className="a-link">
+                  <span className="a-link__text">{pod.cta}</span>
+                  <ArrowRight className="a-link__icon" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ============= DESTINATIONS PODS =============
+function DestinationPods() {
+  const destinations = [
+    {
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&rmode=crop&q=80',
+      category: 'Destinations',
+      title: 'Breathtaking Balearics',
+      link: '/destinations/balearics',
+      cta: 'Take me there'
     },
+    {
+      image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=400&rmode=crop&q=80',
+      category: 'Sustainability',
+      title: 'Marine Foundation in 2025',
+      link: '/sustainability',
+      cta: 'Read the report'
+    },
+    {
+      image: 'https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&h=400&rmode=crop&q=80',
+      category: 'Yacht management',
+      title: 'Let us take care of everything',
+      link: '/manage',
+      cta: 'Maximum owner enjoyment',
+      gradient: true,
+      theme: 'theme-aqua'
+    }
   ];
 
   return (
-    <section className="py-24 bg-[#f5f5f0]">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="section-title">Our Services</h2>
-          <p className="section-subtitle mx-auto">
-            Whether you seek the ultimate privacy of a full charter, the adventure of a cabin cruise, 
-            or investing in a piece of maritime excellence - we deliver unparalleled luxury.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((service, i) => (
-            <div key={i} className="bg-white p-8 shadow-lg hover:shadow-2xl transition-all group">
-              <div className="text-[#c9a227] mb-6">{service.icon}</div>
-              <h3 className="text-2xl font-serif mb-4">{service.title}</h3>
-              <p className="text-gray-600 mb-6">{service.description}</p>
-              <Link 
-                to={service.link} 
-                className="inline-flex items-center gap-2 text-[#c9a227] font-medium group-hover:gap-3 transition-all"
-              >
-                {service.cta} <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============= FEATURED YACHTS =============
-function FeaturedYachts() {
-  const yachts = [
-    { name: 'AQUILA', location: 'Mediterranean', price: '€150,000', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80', specs: '60m • 12 Guests' },
-    { name: 'OCTAVE', location: 'South East Asia', price: '€120,000', image: 'https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&q=80', specs: '55m • 10 Guests' },
-    { name: 'GALAXY', location: 'West Mediterranean', price: '€180,000', image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80', specs: '72m • 14 Guests' },
-  ];
-
-  return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-end mb-12">
-          <div>
-            <h2 className="section-title">Featured Yachts</h2>
-            <p className="section-subtitle">Handpicked selection of the finest vessels</p>
-          </div>
-          <Link to="/charter" className="hidden md:flex items-center gap-2 text-[#c9a227] font-medium hover:underline">
-            View All <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {yachts.map((yacht, i) => (
-            <Link key={i} to={`/yacht/${yacht.name.toLowerCase()}`} className="yacht-card img-zoom-hover group">
-              <div className="relative h-72">
-                <img src={yacht.image} alt={yacht.name} className="w-full h-full object-cover" />
-                <div className="absolute top-4 left-4 bg-[#c9a227] text-white text-xs px-3 py-1 uppercase">
-                  Available
+    <div className="fls">
+      {destinations.map((dest, i) => (
+        <div key={i} className={`fls__item ${i === 0 ? 'fls__item--double' : ''}`}>
+          <Link to={dest.link} className={`content-pod ${dest.gradient ? `content-pod--grad ${dest.theme || ''}` : ''}`}>
+            {!dest.gradient && <img src={dest.image} alt={dest.title} className="media-fit content-pod__img" />}
+            <div className={`content-pod__cont ${!dest.gradient ? 'content-pod__cont--grad' : ''}`}>
+              <div className="content-pod__cont-inner">
+                <div className="content-pod__info">
+                  <span>{dest.category}</span>
                 </div>
+                <h2 className="content-pod__title">{dest.title}</h2>
+                <span className="a-link">
+                  <span className="a-link__text">{dest.cta}</span>
+                  <ArrowRight className="a-link__icon" />
+                </span>
               </div>
-              <div className="p-6">
-                <p className="text-sm text-[#c9a227] mb-2 flex items-center gap-1">
-                  <MapPin className="w-3 h-3" /> {yacht.location}
-                </p>
-                <h3 className="text-xl font-serif font-medium mb-2 group-hover:text-[#c9a227] transition-colors">
-                  {yacht.name}
-                </h3>
-                <p className="text-gray-500 text-sm mb-4">{yacht.specs}</p>
-                <div className="flex justify-between items-center border-t pt-4">
-                  <span className="text-gray-500 text-sm">Weekly Rate</span>
-                  <span className="text-lg font-semibold">{yacht.price}</span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div className="text-center mt-12 md:hidden">
-          <Link to="/charter" className="btn-navy">
-            View All Yachts
+            </div>
           </Link>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
   );
 }
 
-// ============= CABIN CRUISES PREVIEW =============
-function CabinCruises() {
-  const cruises = [
-    { route: 'Mediterranean Adventure', duration: '7 days', price: '€1,800', ports: 'Athens → Dubrovnik', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80' },
-    { route: 'Caribbean Paradise', duration: '7 days', price: '€2,200', ports: 'St. Martin → Antigua', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80' },
-    { route: 'Maldives Escape', duration: '10 days', price: '€2,800', ports: 'Male → Baa Atoll', image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80' },
-    { route: 'Greek Islands', duration: '7 days', price: '€1,900', ports: 'Mykonos → Santorini', image: 'https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&q=80' },
-  ];
-
+// ============= HTML AREA SECTION =============
+function HtmlArea() {
   return (
-    <section className="py-24 bg-[#1a1a1a] text-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <span className="text-[#c9a227] uppercase tracking-widest text-sm">From €1,800/person</span>
-          <h2 className="text-4xl md:text-5xl font-serif mt-4 mb-6">Cabin Cruises</h2>
-          <p className="text-white/70 max-w-2xl mx-auto">
-            Experience the luxury of superyachting without the cost of a private charter. 
-            Share unforgettable moments with fellow travelers on curated itineraries.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {cruises.map((cruise, i) => (
-            <Link key={i} to={`/cabin/${cruise.route.toLowerCase().replace(' ', '-')}`} className="group">
-              <div className="relative h-64 mb-4 overflow-hidden">
-                <img src={cruise.image} alt={cruise.route} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                  <p className="text-sm text-white/80">{cruise.duration}</p>
-                </div>
-              </div>
-              <h3 className="text-lg font-serif mb-2 group-hover:text-[#c9a227] transition-colors">{cruise.route}</h3>
-              <div className="flex justify-between text-sm text-white/60">
-                <span>{cruise.ports}</span>
-                <span className="text-[#c9a227]">From {cruise.price}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <Link to="/cabin-cruise" className="btn-gold-outline border-white text-white hover:bg-white hover:text-[#1a1a1a]">
-            View All Cruises
-          </Link>
-        </div>
+    <div className="html-area">
+      <div className="html-area__subtitle">BOLD. BRAVE. BRIGHT. BRILLIANT. BETTER.</div>
+      <h2 className="html-area__title">Discover the difference</h2>
+      <div className="html-area__standfirst">
+        <p style={{ textAlign: 'center' }}>As a Neptune Marine client, you always come first, whether that's charter, sale and purchase, build, refit or any aspect of yacht ownership. That's the Neptune Marine difference.</p>
       </div>
-    </section>
+    </div>
   );
 }
 
-// ============= WHY CHOOSE US =============
-function WhyChooseUs() {
-  const features = [
-    { icon: <Shield className="w-8 h-8" />, title: 'Secure Payments', desc: 'Blockchain-secured crypto transactions with instant confirmation' },
-    { icon: <Globe className="w-8 h-8" />, title: 'Global Fleet', desc: 'Access to 1000+ yachts from world-leading operators' },
-    { icon: <Star className="w-8 h-8" />, title: 'Best Prices', desc: 'Curated selection with exclusive preferential rates' },
-    { icon: <Calendar className="w-8 h-8" />, title: 'Instant Booking', desc: 'Pre-reserve with crypto, confirm within minutes' },
-    { icon: <CreditCard className="w-8 h-8" />, title: 'Flexible Payment', desc: 'Crypto (10%) or Card (full) - you choose' },
-    { icon: <Users className="w-8 h-8" />, title: 'Concierge Service', desc: '24/7 support in multiple languages' },
-  ];
-
+// ============= FIFTY FIFTY SECTIONS =============
+function FiftyFifty() {
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="section-title">Why Choose Neptune Marine</h2>
-          <p className="section-subtitle mx-auto">
-            We combine the prestige of Burgess with the innovation of crypto payments
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, i) => (
-            <div key={i} className="flex gap-4 p-6 hover:bg-gray-50 transition-colors">
-              <div className="text-[#c9a227] flex-shrink-0">{feature.icon}</div>
-              <div>
-                <h3 className="font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm">{feature.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============= CTA SECTION =============
-function CTASection() {
-  return (
-    <section className="py-24 bg-[#1a1a1a] text-white">
-      <div className="max-w-4xl mx-auto px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-serif mb-6">
-          Ready for Your Next Adventure?
-        </h2>
-        <p className="text-white/70 text-lg mb-8">
-          Join the future of yacht chartering. Pay with crypto, travel with style.
-          <br />
-          <span className="text-[#c9a227]">Pre-reserve with just 10%</span> and secure your dream voyage.
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/charter" className="btn-gold text-lg">
-            Start Searching
-          </Link>
-          <Link to="/enquire" className="btn-outline text-lg">
-            Contact Us
-          </Link>
-        </div>
-
-        {/* Payment Methods */}
-        <div className="mt-12 pt-8 border-t border-white/10">
-          <p className="text-sm text-white/50 mb-4">We accept</p>
-          <div className="flex justify-center gap-6">
-            <div className="flex items-center gap-2 text-white/60">
-              <Bitcoin className="w-6 h-6" />
-              <span>Bitcoin</span>
-            </div>
-            <div className="flex items-center gap-2 text-white/60">
-              <CreditCard className="w-6 h-6" />
-              <span>Card</span>
-            </div>
-            <div className="flex items-center gap-2 text-white/60">
-              <Globe className="w-6 h-6" />
-              <span>Bank Transfer</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============= NAVBAR =============
-function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#1a1a1a]/95 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl font-serif font-bold tracking-wider text-white">
-              NEPTUNE <span className="text-[#c9a227]">MARINE</span>
-            </span>
-          </Link>
-          
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-6">
-            <div className="relative group">
-              <button className="nav-link flex items-center gap-1">
-                Charter <ChevronDown className="w-4 h-4" />
-              </button>
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                <Link to="/charter" className="block px-4 py-3 text-sm hover:bg-gray-50 border-b">Yachts for Charter</Link>
-                <Link to="/charter/destinations" className="block px-4 py-3 text-sm hover:bg-gray-50 border-b">Destinations</Link>
-                <Link to="/charter/new-to-charter" className="block px-4 py-3 text-sm hover:bg-gray-50">New to Charter</Link>
-              </div>
-            </div>
-            
-            <div className="relative group">
-              <button className="nav-link flex items-center gap-1">
-                Cabin Cruises <ChevronDown className="w-4 h-4" />
-              </button>
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                <Link to="/cabin-cruise/mediterranean" className="block px-4 py-3 text-sm hover:bg-gray-50 border-b">Mediterranean</Link>
-                <Link to="/cabin-cruise/caribbean" className="block px-4 py-3 text-sm hover:bg-gray-50 border-b">Caribbean</Link>
-                <Link to="/cabin-cruise/maldives" className="block px-4 py-3 text-sm hover:bg-gray-50">Maldives</Link>
-              </div>
-            </div>
-            
-            <div className="relative group">
-              <button className="nav-link flex items-center gap-1">
-                Buy <ChevronDown className="w-4 h-4" />
-              </button>
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                <Link to="/sale" className="block px-4 py-3 text-sm hover:bg-gray-50 border-b">Yachts for Sale</Link>
-                <Link to="/sale/new-builds" className="block px-4 py-3 text-sm hover:bg-gray-50">New Builds</Link>
-              </div>
-            </div>
-            
-            <Link to="/sale" className="nav-link">Sell</Link>
-            <Link to="/destinations" className="nav-link">Destinations</Link>
-          </nav>
-          
-          {/* CTA */}
-          <div className="hidden lg:flex items-center gap-4">
-            <button className="p-2 hover:text-[#c9a227] text-white">
-              <Search className="w-5 h-5" />
-            </button>
-            <Link to="/enquire" className="btn-gold text-sm">
-              Enquire Now
-            </Link>
-          </div>
-          
-          {/* Mobile Menu Button */}
-          <button className="lg:hidden p-2 text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X /> : <Menu />}
-          </button>
+    <div className="fifty-fifty fifty-fifty--margins">
+      <div className="hwcc">
+        <img 
+          src="https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&h=1200&rmode=crop&q=80" 
+          alt="Charter"
+          className="media-fit hwcc__img"
+        />
+        <div className="hwcc__main">
+          <h2 className="hwcc__title">charter a yacht</h2>
+          <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your great escape. Tailored by Neptune Marine.</p>
+          <p className="hwcc__summary">Cruise in inimitable style and experience real freedom. The adventure of a lifetime awaits aboard the world's greatest superyachts, all curated by your own professional broker.</p>
+          <Link to="/charter" className="btn btn--primary btn--white">Charter a yacht</Link>
         </div>
       </div>
       
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#1a1a1a] border-t border-white/10">
-          <nav className="flex flex-col p-4 gap-2">
-            <Link to="/charter" className="text-base font-medium text-white py-3 border-b border-white/10">Charter</Link>
-            <Link to="/cabin-cruise" className="text-base font-medium text-white py-3 border-b border-white/10">Cabin Cruises</Link>
-            <Link to="/sale" className="text-base font-medium text-white py-3 border-b border-white/10">Buy</Link>
-            <Link to="/sale" className="text-base font-medium text-white py-3 border-b border-white/10">Sell</Link>
-            <Link to="/destinations" className="text-base font-medium text-white py-3">Destinations</Link>
-            <Link to="/enquire" className="btn-gold text-sm mt-4 text-center">Enquire Now</Link>
-          </nav>
+      <div className="hwcc">
+        <img 
+          src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=1200&rmode=crop&q=80" 
+          alt="Buy"
+          className="media-fit hwcc__img"
+        />
+        <div className="hwcc__main">
+          <h2 className="hwcc__title">BUY A Yacht</h2>
+          <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your life. Spent wisely.</p>
+          <p className="hwcc__summary">From the global fleet of mega yachts offered for sale, we hand-pick the best opportunities and share our expert knowledge, so that you can make the best decisions.</p>
+          <Link to="/sale" className="btn btn--primary btn--white">Yachts for sale</Link>
         </div>
-      )}
-    </header>
-  );
-}
-
-// ============= PAGES =============
-
-function CharterPage() {
-  return (
-    <div className="pt-32 pb-20 min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <h1 className="section-title">Luxury Yacht Charter</h1>
-        <p className="section-subtitle">Experience the world's most exclusive superyachts</p>
-        
-        <div className="flex flex-wrap gap-3 mb-8">
-          <button className="filter-btn filter-btn-active">All</button>
-          <button className="filter-btn">Motor</button>
-          <button className="filter-btn">Sailing</button>
-          <button className="filter-btn">Available Now</button>
-        </div>
-        
-        <FeaturedYachts />
       </div>
     </div>
   );
 }
 
-function CabinCruisePage() {
-  const cruises = [
-    { route: 'Mediterranean', duration: '7 days', price: 1800, image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80' },
-    { route: 'Caribbean', duration: '7 days', price: 2200, image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80' },
-    { route: 'Maldives', duration: '10 days', price: 2800, image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80' },
-    { route: 'Greek Islands', duration: '7 days', price: 1900, image: 'https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&q=80' },
-  ];
-
+// ============= HIGHLIGHT PANEL =============
+function HighlightPanel() {
   return (
-    <div className="pt-32 pb-20 min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <h1 className="section-title">Cabin Cruises</h1>
-        <p className="section-subtitle">Luxury cabin charters - your gateway to exclusive yacht experiences</p>
+    <div className="hl-panel theme-orange">
+      <picture className="hl-panel__img">
+        <img 
+          src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1600&h=900&rmode=crop&q=60" 
+          alt=""
+        />
+      </picture>
+      <div className="hl-panel__contents">
+        <h2 className="hl-panel__title">About us</h2>
+        <p className="hl-panel__mt">Your wish. Our world.</p>
+        <p>Our reputation is your recommendation. Since 1975 all our knowledge has been distilled into one goal, making sure you enjoy the best yachting experience. If it involves yachts, we've got you covered.</p>
+        <Link to="/about" className="btn btn--solid-grad hl-panel__btn">About us</Link>
+      </div>
+      <div className="hl-panel__border theme-border"></div>
+    </div>
+  );
+}
+
+// ============= SECOND FIFTY FIFTY =============
+function SecondFiftyFifty() {
+  return (
+    <div className="fifty-fifty fifty-fifty--margins fifty-fifty--mb-0">
+      <div className="hwcc hwcc--gradient theme-purple-yellow">
+        <div className="hwcc__main">
+          <h2 className="hwcc__title">sell a yacht</h2>
+          <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your perfect buyer. Our exclusive audience.</p>
+          <p className="hwcc__summary">Our directly employed brokers share market-leading intelligence and powerful client database insights with our experienced global team to ensure the best outcome for you.</p>
+          <Link to="/sell" className="btn btn--primary btn--white btn--white-grad">Sell a yacht</Link>
+        </div>
+      </div>
+      
+      <div className="hwcc">
+        <img 
+          src="https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&h=1200&rmode=crop&q=80" 
+          alt="Build"
+          className="media-fit hwcc__img"
+        />
+        <div className="hwcc__main">
+          <h2 className="hwcc__title">BUILD A Yacht</h2>
+          <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your vision. Our expertise.</p>
+          <p className="hwcc__summary">From concept to launch, our new build team will guide you through every step of the construction process, ensuring your dream yacht becomes a reality.</p>
+          <Link to="/build" className="btn btn--primary btn--white">Start building</Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============= FOOTER BURGESS STYLE =============
+function Footer() {
+  return (
+    <footer className="s-foot">
+      <div className="s-foot__grid">
+        <div>
+          <h3 className="s-foot__title">Charter</h3>
+          <ul className="s-foot__links">
+            <li><Link to="/charter">Yachts for Charter</Link></li>
+            <li><Link to="/charter/destinations">Destinations</Link></li>
+            <li><Link to="/charter/new-to-charter">New to Charter</Link></li>
+            <li><Link to="/charter/special-offers">Special Offers</Link></li>
+          </ul>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {cruises.map((cruise, i) => (
-            <Link key={i} to={`/cabin/${cruise.route.toLowerCase()}`} className="yacht-card img-zoom-hover flex">
-              <div className="w-2/5">
-                <img src={cruise.image} alt={cruise.route} className="w-full h-full object-cover" />
-              </div>
-              <div className="w-3/5 p-6">
-                <h3 className="text-xl font-serif">{cruise.route}</h3>
-                <p className="text-gray-500 text-sm">{cruise.duration}</p>
-                <div className="flex justify-between items-end mt-4">
-                  <div>
-                    <span className="text-xs text-gray-500 block">From</span>
-                    <span className="text-xl text-[#c9a227] font-semibold">€{cruise.price}/person</span>
-                  </div>
-                  <Link to={`/cabin/${cruise.route.toLowerCase()}`} className="btn-gold text-sm">Details</Link>
+        <div>
+          <h3 className="s-foot__title">Buy</h3>
+          <ul className="s-foot__links">
+            <li><Link to="/sale">Yachts for Sale</Link></li>
+            <li><Link to="/sale/new-builds">New Builds</Link></li>
+            <li><Link to="/sale/projects">Projects</Link></li>
+            <li><Link to="/sale/buying-guide">Buying Guide</Link></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 className="s-foot__title">Sell</h3>
+          <ul className="s-foot__links">
+            <li><Link to="/sell">Sell Your Yacht</Link></li>
+            <li><Link to="/sell/valuation">Valuation</Link></li>
+            <li><Link to="/sell/marketing">Marketing</Link></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 className="s-foot__title">Contact</h3>
+          <ul className="s-foot__links">
+            <li><a href="tel:+442076964500">+44 20 7696 4500</a></li>
+            <li><a href="mailto:info@neptunemarine.com">info@neptunemarine.com</a></li>
+            <li><Link to="/enquire">Enquire Now</Link></li>
+            <li><Link to="/offices">Our Offices</Link></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div className="s-foot__bottom">
+        <p>© 2025 Neptune Marine. All rights reserved. | <Link to="/privacy">Privacy Policy</Link> | <Link to="/terms">Terms of Use</Link></p>
+      </div>
+    </footer>
+  );
+}
+
+// ============= CHARTER PAGE =============
+function CharterPage() {
+  const [filter, setFilter] = useState('all');
+  const [yachts, setYachts] = useState<Yacht[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    async function fetchYachts() {
+      const { data, error } = await supabase
+        .from('vessels')
+        .select('id, title, slug, description, short_description, location, region, base_price, currency, type, source')
+        .eq('type', 'FULL_CHARTER')
+        .order('base_price', { ascending: true })
+        .limit(50);
+      
+      if (!error && data) {
+        setYachts(data);
+      }
+      setLoading(false);
+    }
+    fetchYachts();
+  }, []);
+  
+  const filters = [
+    { id: 'all', label: 'All' },
+    { id: 'motor', label: 'Motor' },
+    { id: 'sailing', label: 'Sailing' },
+    { id: 'available', label: 'Available Now' },
+    { id: 'below-50m', label: 'Below 50m' },
+    { id: 'above-50m', label: 'Above 50m' }
+  ];
+  
+  const yachtImages: Record<string, string> = {
+    'AQUILA': 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80',
+    'OCTOPUS': 'https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&q=80',
+    'MALTESE FALCON': 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80',
+    'SEA EAGLE': 'https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&q=80',
+    'RENAISSANCE': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    'WHISPER': 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80',
+    'GIGIA': 'https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&q=80',
+    'SOPHIA': 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80',
+    'O PTASIA': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    'OCEAN NOVA': 'https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&q=80',
+    'BARBARA': 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80',
+    'ECLIPSE': 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80',
+  };
+  
+  return (
+    <div>
+      <div className="page-header theme-aqua">
+        <h1 className="page-header__title">Yachts for Charter</h1>
+        <p className="page-header__subtitle">Cruise in style aboard the world's most extraordinary superyachts</p>
+      </div>
+      
+      <div className="filters">
+        <div className="filters__inner">
+          {filters.map(f => (
+            <button 
+              key={f.id}
+              className={`filter-btn-burgess ${filter === f.id ? 'filter-btn-burgess--active' : ''}`}
+              onClick={() => setFilter(f.id)}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      <div className="yacht-grid">
+        {loading ? (
+          <p style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px' }}>Loading yachts...</p>
+        ) : yachts.length === 0 ? (
+          <p style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px' }}>No yachts found</p>
+        ) : (
+          yachts.map(yacht => (
+            <Link key={yacht.id} to={`/yacht/${yacht.slug}`} className="yacht-card-burgess">
+              <img 
+                src={yachtImages[yacht.title] || 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80'} 
+                alt={yacht.title}
+                className="yacht-card-burgess__img"
+              />
+              <div className="yacht-card-burgess__content">
+                <p className="yacht-card-burgess__type">{yacht.source}</p>
+                <h3 className="yacht-card-burgess__name">{yacht.title}</h3>
+                <p className="yacht-card-burgess__specs">{yacht.short_description || yacht.description?.substring(0, 80)}</p>
+                <p className="yacht-card-burgess__location">{yacht.location} • {yacht.region}</p>
+                <div className="yacht-card-burgess__price">
+                  {yacht.type === 'SALE' ? 'Price on request' : `€${yacht.base_price?.toLocaleString()}/week`}
                 </div>
               </div>
             </Link>
-          ))}
-        </div>
+          ))
+        )}
       </div>
     </div>
   );
 }
 
+// ============= SALE PAGE =============
 function SalePage() {
+  const [yachts, setYachts] = useState<Yacht[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    async function fetchYachts() {
+      const { data, error } = await supabase
+        .from('vessels')
+        .select('id, title, slug, description, short_description, location, region, base_price, currency, type, source')
+        .eq('type', 'SALE')
+        .order('base_price', { ascending: false })
+        .limit(50);
+      
+      if (!error && data) {
+        setYachts(data);
+      }
+      setLoading(false);
+    }
+    fetchYachts();
+  }, []);
+  
+  const yachtImages: Record<string, string> = {
+    'ECLIPSE': 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80',
+    'AQUILA': 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80',
+    'OCTOPUS': 'https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&q=80',
+  };
+  
   return (
-    <div className="pt-32 pb-20 min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <h1 className="section-title">Yachts for Sale</h1>
-        <p className="section-subtitle">Curated selection of the finest superyachts</p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[1, 2, 3, 4, 5, 6].map(i => (
-            <div key={i} className="yacht-card img-zoom-hover">
-              <div className="h-64 bg-gray-200">
-                <img src={`https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&q=80`} alt="Yacht" className="w-full h-full object-cover" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-serif mb-2">Motor Yacht {i}</h3>
-                <p className="text-gray-500 text-sm mb-4">{80 + i}m • 2022 • 12 Cabins</p>
-                <div className="border-t pt-4">
-                  <span className="text-gray-500 text-sm">Price on request</span>
+    <div>
+      <div className="page-header theme-purple">
+        <h1 className="page-header__title">Yachts for Sale</h1>
+        <p className="page-header__subtitle">Discover the finest superyachts available on the global market</p>
+      </div>
+      
+      <div className="filters">
+        <div className="filters__inner">
+          <button className="filter-btn-burgess filter-btn-burgess--active">All</button>
+          <button className="filter-btn-burgess">Motor</button>
+          <button className="filter-btn-burgess">Sailing</button>
+          <button className="filter-btn-burgess">New Builds</button>
+        </div>
+      </div>
+      
+      <div className="yacht-grid">
+        {loading ? (
+          <p style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px' }}>Loading yachts...</p>
+        ) : yachts.length === 0 ? (
+          <p style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px' }}>No yachts for sale currently</p>
+        ) : (
+          yachts.map(yacht => (
+            <Link key={yacht.id} to={`/yacht/${yacht.slug}`} className="yacht-card-burgess">
+              <img 
+                src={yachtImages[yacht.title] || 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80'} 
+                alt={yacht.title}
+                className="yacht-card-burgess__img"
+              />
+              <div className="yacht-card-burgess__content">
+                <p className="yacht-card-burgess__type">{yacht.source}</p>
+                <h3 className="yacht-card-burgess__name">{yacht.title}</h3>
+                <p className="yacht-card-burgess__specs">{yacht.short_description || yacht.description?.substring(0, 80)}</p>
+                <p className="yacht-card-burgess__location">{yacht.location} • {yacht.region}</p>
+                <div className="yacht-card-burgess__price">
+                  €{yacht.base_price?.toLocaleString()}
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            </Link>
+          ))
+        )}
       </div>
     </div>
   );
 }
 
+// ============= ENQUIRE PAGE =============
 function EnquirePage() {
   return (
-    <div className="pt-32 pb-20 min-h-screen bg-white">
-      <div className="max-w-3xl mx-auto px-4">
-        <h1 className="section-title text-center">Enquire Now</h1>
-        <p className="section-subtitle text-center">Tell us about your dream yachting experience</p>
-        
-        <form className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <div className="page-header theme-aqua">
+        <h1 className="page-header__title">Contact Us</h1>
+        <p className="page-header__subtitle">Tell us about your dream yachting experience</p>
+      </div>
+      
+      <div style={{ padding: '60px 20px', maxWidth: '800px', margin: '0 auto' }}>
+        <form style={{ display: 'grid', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
             <div>
-              <label className="block text-sm font-medium mb-2">First Name *</label>
-              <input type="text" className="w-full px-4 py-3 border border-gray-300 focus:border-[#c9a227] focus:outline-none" required />
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>First Name *</label>
+              <input type="text" required style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }} />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Last Name *</label>
-              <input type="text" className="w-full px-4 py-3 border border-gray-300 focus:border-[#c9a227] focus:outline-none" required />
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium mb-2">Email *</label>
-              <input type="email" className="w-full px-4 py-3 border border-gray-300 focus:border-[#c9a227] focus:outline-none" required />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-2">Phone</label>
-              <input type="tel" className="w-full px-4 py-3 border border-gray-300 focus:border-[#c9a227] focus:outline-none" />
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>Last Name *</label>
+              <input type="text" required style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }} />
             </div>
           </div>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>Email *</label>
+              <input type="email" required style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }} />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>Phone</label>
+              <input type="tel" style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }} />
+            </div>
+          </div>
+          
           <div>
-            <label className="block text-sm font-medium mb-2">Interest *</label>
-            <select className="w-full px-4 py-3 border border-gray-300 focus:border-[#c9a227] focus:outline-none">
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>Interest *</label>
+            <select style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }}>
               <option>Charter</option>
               <option>Cabin Cruise</option>
               <option>Buy</option>
               <option>Sell</option>
+              <option>Build</option>
+              <option>Management</option>
             </select>
           </div>
+          
           <div>
-            <label className="block text-sm font-medium mb-2">Message</label>
-            <textarea rows={5} className="w-full px-4 py-3 border border-gray-300 focus:border-[#c9a227] focus:outline-none"></textarea>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>Message</label>
+            <textarea rows={6} style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }}></textarea>
           </div>
-          <button type="submit" className="btn-gold w-full">Send Enquiry</button>
+          
+          <button type="submit" className="btn btn--primary" style={{ justifySelf: 'start' }}>Send Enquiry</button>
         </form>
       </div>
     </div>
   );
 }
 
+// ============= DESTINATIONS PAGE =============
 function DestinationsPage() {
   const destinations = [
-    { name: 'Mediterranean', count: 450, image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80' },
-    { name: 'Caribbean', count: 320, image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80' },
-    { name: 'Maldives', count: 180, image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80' },
-    { name: 'South East Asia', count: 250, image: 'https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&q=80' },
+    { name: 'The Balearics', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&rmode=crop&q=80', count: 85 },
+    { name: 'The Caribbean', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=600&rmode=crop&q=80', count: 120 },
+    { name: 'The Mediterranean', image: 'https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&h=600&rmode=crop&q=80', count: 200 },
+    { name: 'The Maldives', image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=600&rmode=crop&q=80', count: 45 },
+    { name: 'South East Asia', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&rmode=crop&q=80', count: 60 },
+    { name: 'Indian Ocean', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=600&rmode=crop&q=80', count: 35 }
   ];
-
+  
   return (
-    <div className="pt-32 pb-20 min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <h1 className="section-title">Destinations</h1>
-        <p className="section-subtitle">Explore luxury yacht charters in the world's most beautiful destinations</p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {destinations.map((dest, i) => (
-            <Link key={i} to={`/charter/destinations/${dest.name.toLowerCase().replace(' ', '-')}`} className="relative h-64 group overflow-hidden">
-              <img src={dest.image} alt={dest.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors" />
-              <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-2xl font-serif">{dest.name}</h3>
-                <p className="text-white/80">{dest.count} yachts available</p>
-              </div>
+    <div>
+      <div className="page-header theme-blue">
+        <h1 className="page-header__title">Destinations</h1>
+        <p className="page-header__subtitle">Explore the world's most beautiful cruising grounds</p>
+      </div>
+      
+      <div className="fifty-fifty">
+        {destinations.map((dest, i) => (
+          <div key={i} className="hwcc">
+            <img src={dest.image} alt={dest.name} className="media-fit hwcc__img" />
+            <Link to={`/charter/destinations/${dest.name.toLowerCase().replace(/ /g, '-')}`} className="hwcc__main">
+              <h2 className="hwcc__title" style={{ color: '#fff' }}>{dest.name}</h2>
+              <p style={{ color: '#fff', fontSize: '1.25rem', fontWeight: '700' }}>{dest.count} yachts available</p>
             </Link>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-// ============= MAIN APP =============
+// ============= SEARCH PAGE =============
+function SearchPage() {
+  return (
+    <div>
+      <div className="page-header theme-aqua">
+        <h1 className="page-header__title">Search Yachts</h1>
+        <p className="page-header__subtitle">Find your perfect yacht from our global fleet</p>
+      </div>
+      
+      <div className="search-section">
+        <form className="search-form">
+          <select className="search-input">
+            <option value="">Destination</option>
+            <option>Mediterranean</option>
+            <option>Caribbean</option>
+            <option>Maldives</option>
+            <option>South East Asia</option>
+          </select>
+          
+          <select className="search-input">
+            <option value="">Yacht Type</option>
+            <option>Motor</option>
+            <option>Sailing</option>
+            <option>Catamaran</option>
+            <option>Gulet</option>
+          </select>
+          
+          <select className="search-input">
+            <option value="">Length</option>
+            <option>0-30m</option>
+            <option>30-50m</option>
+            <option>50-80m</option>
+            <option>80m+</option>
+          </select>
+          
+          <button type="submit" className="search-btn">Search</button>
+        </form>
+      </div>
+      
+      <div className="yacht-grid">
+        {/* Results from database */}
+      </div>
+    </div>
+  );
+}
+
+// ============= HOME PAGE =============
 function Home() {
   return (
     <>
       <Hero />
-      <Services />
-      <FeaturedYachts />
-      <CabinCruises />
-      <WhyChooseUs />
-      <CTASection />
+      <ContentPods />
+      <DestinationPods />
+      <HtmlArea />
+      <FiftyFifty />
+      <HighlightPanel />
+      <SecondFiftyFifty />
     </>
   );
 }
 
+// ============= MAIN APP =============
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <div className="min-h-screen flex flex-col">
-          <Navbar />
-          <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/charter" element={<CharterPage />} />
-              <Route path="/charter/*" element={<CharterPage />} />
-              <Route path="/cabin-cruise" element={<CabinCruisePage />} />
-              <Route path="/cabin-cruise/*" element={<CabinCruisePage />} />
-              <Route path="/sale" element={<SalePage />} />
-              <Route path="/buy" element={<SalePage />} />
-              <Route path="/sell" element={<SalePage />} />
-              <Route path="/destinations" element={<DestinationsPage />} />
-              <Route path="/enquire" element={<EnquirePage />} />
-              <Route path="/contact" element={<EnquirePage />} />
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="/yacht/:slug" element={<YachtDetailPage />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <BrowserRouter>
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <Header />
+        <main style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/charter" element={<CharterPage />} />
+            <Route path="/charter/*" element={<CharterPage />} />
+            <Route path="/sale" element={<SalePage />} />
+            <Route path="/buy" element={<SalePage />} />
+            <Route path="/sell" element={<SalePage />} />
+            <Route path="/build" element={<SalePage />} />
+            <Route path="/manage" element={<SalePage />} />
+            <Route path="/destinations" element={<DestinationsPage />} />
+            <Route path="/enquire" element={<EnquirePage />} />
+            <Route path="/contact" element={<EnquirePage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/account" element={<EnquirePage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
