@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Menu, X, Search, ChevronDown, Star, Globe, Shield, CreditCard, Bitcoin, MapPin, Ship, Users, Calendar, ArrowRight } from 'lucide-react';
 import { Footer } from './components/layout/Header';
+import { SearchPage } from './pages/SearchPage';
+import { YachtDetailPage } from './pages/YachtDetailPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -634,6 +636,8 @@ function App() {
               <Route path="/destinations" element={<DestinationsPage />} />
               <Route path="/enquire" element={<EnquirePage />} />
               <Route path="/contact" element={<EnquirePage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/yacht/:slug" element={<YachtDetailPage />} />
             </Routes>
           </main>
           <Footer />

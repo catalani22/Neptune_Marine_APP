@@ -1,4 +1,4 @@
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js';
 
 // For client-side (Vite): use import.meta.env
 // For server-side (Node.js scripts): use process.env
