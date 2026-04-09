@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Search, ArrowRight, Shield, CreditCard } from 'lucide-react';
 import { supabase } from './lib/supabase';
+import { YachtDetailPage } from './pages/YachtDetailPage';
 
 interface Yacht {
   id: string;
@@ -652,216 +653,277 @@ function CharterPage() {
 
 // ============= BUY PAGE - FULL BURGESS STRUCTURE =============
 function BuyPage() {
-  const [yachts, setYachts] = useState<Yacht[]>([]);
-  const [loading, setLoading] = useState(true);
-  
-  useEffect(() => {
-    async function fetchYachts() {
-      const { data, error } = await supabase
-        .from('vessels')
-        .select('id, title, slug, description, short_description, location, region, base_price, currency, type, source')
-        .eq('type', 'SALE')
-        .order('base_price', { ascending: false })
-        .limit(50);
-      
-      if (!error && data) {
-        setYachts(data);
-      }
-      setLoading(false);
-    }
-    fetchYachts();
-  }, []);
-  
-  const yachtImages: Record<string, string> = {
-    'ECLIPSE': 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80',
-    'AQUILA': 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80',
-    'OCTOPUS': 'https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&q=80',
-  };
-
   return (
     <div>
-      {/* Hero Section - My Legacy Banner */}
-      <section className="h-bann theme-purple">
-        <div className="h-bann__bg" style={{ backgroundImage: 'url(/assets/images/burgess/buy/my_legacy.jpg)' }}></div>
-        <div className="h-bann__overlay"></div>
-        <div className="h-bann__cont theme-border">
-          <span></span>
-          <div>
-            <p className="h-bann__title" style={{ fontSize: '2.5rem', fontWeight: '300' }}>Own your<br/>space.</p>
-            <p style={{ fontSize: '1.5rem', fontWeight: '700', marginTop: '20px', color: '#fff' }}>Find your sanctuary.</p>
+      {/* Hero Section - Lady Jorgia Banner */}
+      <section className="i-bann theme-orange-purple">
+        <div className="i-bann__main">
+          <picture>
+            <img 
+              src="/assets/images/burgess/buy/lady_jorgia.jpg" 
+              alt="" 
+              className="media-fit" 
+              style={{ objectPosition: 'top' }}
+            />
+          </picture>
+          <div className="i-bann__c">
+            <nav className="breadcrumbs breadcrumbs--inline">
+              <Link to="/" className="breadcrumbs__link">Home</Link>
+              <span className="breadcrumbs__current">Buy a yacht</span>
+            </nav>
+            <div className="theme-border i-bann__ta">
+              <span className="i-bann__t theme-text">Own your<br/>space.</span>
+              <span className="i-bann__t i-bann__t--r theme-text">Find your<br/>sanctuary.</span>
+            </div>
           </div>
         </div>
+        <div className="i-bann__ti-a">
+          <h1 className="i-bann__ti und-title und-title--center">Why choose Neptune Marine as your broker when buying a yacht?</h1>
+        </div>
+        <div className="i-bann__summary">Because we make sure you get the yacht you want to own and avoid the many pitfalls of the yacht purchase process. We have the global network, commercial insights and all-round expertise to find the right yacht and the right price, even if it is not on the open market. These transactions can be extremely complex and may take months to finalise. We take away all of the complexity and present you with straightforward decisions to make.</div>
       </section>
 
-      {/* Introduction */}
-      <div className="html-area">
-        <h2 className="html-area__title">Why choose Neptune Marine as your broker when buying a yacht?</h2>
-        <div className="html-area__standfirst" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-          <p>Because we make sure you get the yacht you want to own and avoid the many pitfalls of the yacht purchase process. We have the global network, commercial insights and all-round expertise to find the right yacht and the right price.</p>
-        </div>
-      </div>
-
-      {/* Content Pods - Size Categories */}
-      <div className="fls">
-        <div className="fls__item fls__item--double">
-          <Link to="/sale" className="content-pod">
-            <img src="/assets/images/burgess/buy/my_legacy.jpg" alt="All Yachts" className="media-fit content-pod__img" />
-            <div className="content-pod__cont content-pod__cont--grad">
-              <div className="content-pod__cont-inner">
-                <div className="content-pod__info"><span>buy a yacht</span></div>
-                <h2 className="content-pod__title">All yachts for sale</h2>
-                <span className="a-link">
-                  <span className="a-link__text">Find your next yacht</span>
-                  <ArrowRight className="a-link__icon" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        </div>
-        <div className="fls__item">
-          <Link to="/sale?size=over200" className="content-pod">
-            <img src="/assets/images/burgess/buy/my_legacy.jpg" alt="Over 200ft" className="media-fit content-pod__img" />
-            <div className="content-pod__cont content-pod__cont--grad">
-              <div className="content-pod__cont-inner">
-                <div className="content-pod__info"><span>buy a yacht</span></div>
-                <h2 className="content-pod__title">Yachts for sale over 200ft</h2>
-                <span className="a-link">
-                  <span className="a-link__text">See what's available</span>
-                  <ArrowRight className="a-link__icon" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </div>
-
-      <div className="fls">
-        <div className="fls__item">
-          <Link to="/sale?size=150-200" className="content-pod">
-            <img src="/assets/images/burgess/buy/my_legacy.jpg" alt="150-200ft" className="media-fit content-pod__img" />
-            <div className="content-pod__cont content-pod__cont--grad">
-              <div className="content-pod__cont-inner">
-                <div className="content-pod__info"><span>buy a yacht</span></div>
-                <h2 className="content-pod__title">Yachts for sale from 150-200ft</h2>
-                <span className="a-link">
-                  <span className="a-link__text">Explore your options</span>
-                  <ArrowRight className="a-link__icon" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        </div>
-        <div className="fls__item">
-          <Link to="/sale?size=under150" className="content-pod">
-            <img src="/assets/images/burgess/buy/my_legacy.jpg" alt="Under 150ft" className="media-fit content-pod__img" />
-            <div className="content-pod__cont content-pod__cont--grad">
-              <div className="content-pod__cont-inner">
-                <div className="content-pod__info"><span>BUY A YACHT</span></div>
-                <h2 className="content-pod__title">Yachts for sale under 150ft</h2>
-                <span className="a-link">
-                  <span className="a-link__text">Check your choices</span>
-                  <ArrowRight className="a-link__icon" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        </div>
-      </div>
-
-      {/* Virtual Tours & Videos */}
+      {/* First fifty-fifty - Size Categories */}
       <div className="fifty-fifty fifty-fifty--margins">
         <div className="hwcc">
-          <div className="hwcc__main" style={{ padding: '40px' }}>
-            <h2 className="hwcc__title">360° yacht tours</h2>
-            <p className="hwcc__summary">Explore dozens of superyachts as you walk the decks without taking a step.</p>
-            <Link to="/virtual-tours" className="btn btn--primary btn--white">Get on board</Link>
+          <img src="/assets/images/burgess/buy/joy.jpg" alt="All Yachts" className="hwcc__img media-fit" />
+          <div className="hwcc__main">
+            <h2 className="hwcc__title">buy a yacht</h2>
+            <p className="und-title und-title--center und-title--inherit hwcc__subtitle">All yachts for sale</p>
+            <p className="hwcc__summary">When it comes to buying a yacht we'll understand your requirements and handpick the best opportunities for you.</p>
+            <Link to="/sale" className="btn btn--primary btn--white">Find your next yacht</Link>
           </div>
         </div>
         <div className="hwcc">
-          <div className="hwcc__main" style={{ padding: '40px' }}>
-            <h2 className="hwcc__title">Superyacht videos</h2>
-            <p className="hwcc__summary">From inspiring aerial shots to underwater camera action, our bespoke films capture the essence of on board adventure.</p>
-            <Link to="/videos" className="btn btn--primary btn--white">Lights, camera, action</Link>
+          <img src="/assets/images/burgess/buy/phoenix_2.jpg" alt="Over 200ft" className="hwcc__img media-fit" />
+          <div className="hwcc__main">
+            <h2 className="hwcc__title">buy a yacht</h2>
+            <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Yachts for sale over 200ft</p>
+            <p className="hwcc__summary">More volume means more guests, more toys, more crew and more space inside and out.</p>
+            <Link to="/sale?size=over200" className="btn btn--primary btn--white">See what's available</Link>
           </div>
         </div>
       </div>
 
-      {/* New Builds Section */}
-      <div className="hl-panel theme-blue">
-        <picture className="hl-panel__img">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&h=900&rmode=crop&q=60" alt="" />
-        </picture>
-        <div className="hl-panel__contents">
-          <h2 className="hl-panel__title">Yachts under construction</h2>
-          <p className="hl-panel__mt">Save time by buying a yacht already in build.</p>
-          <p>Neptune Marine will represent you and your interests on site.</p>
-          <Link to="/build" className="btn btn--solid-grad hl-panel__btn">Discover dreams in build</Link>
-        </div>
-        <div className="hl-panel__border theme-border"></div>
-      </div>
-
-      {/* Why Buy Section */}
-      <div className="html-area">
-        <h2 className="html-area__title">Why buy a superyacht?</h2>
-        <div className="html-area__standfirst" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-          <p>Superyacht ownership gives you year-round access to the superyacht lifestyle; the opportunity to design a custom charter vacation for family and friends; to work from the privacy of your on board office base; explore new countries and cultures around the globe.</p>
-        </div>
-      </div>
-
-      {/* Motor vs Sailing */}
-      <div className="fifty-fifty fifty-fifty--margins fifty-fifty--mb-0">
+      {/* Second fifty-fifty - Medium & Small */}
+      <div className="fifty-fifty fifty-fifty--margins fifty-fifty--mt-0">
         <div className="hwcc">
-          <div className="hwcc__main" style={{ padding: '40px' }}>
-            <h2 className="hwcc__title">Motor yachts for sale</h2>
-            <p className="hwcc__summary">Explore our unrivalled fleet of luxurious motor yachts for sale and discover the finest selection afloat.</p>
-            <Link to="/sale?type=motor" className="btn btn--primary btn--white">Buying a motor yacht</Link>
+          <img src="/assets/images/burgess/buy/my_legacy.jpg" alt="150-200ft" className="hwcc__img media-fit" />
+          <div className="hwcc__main">
+            <h2 className="hwcc__title">buy a yacht</h2>
+            <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Yachts for sale from 150-200ft</p>
+            <p className="hwcc__summary">Buy a yacht with plenty of room for family and friends to relax and entertain, and for business to be done.</p>
+            <Link to="/sale?size=150-200" className="btn btn--primary btn--white">Explore your options</Link>
           </div>
         </div>
         <div className="hwcc">
-          <div className="hwcc__main" style={{ padding: '40px' }}>
-            <h2 className="hwcc__title">Sailing yachts for sale</h2>
-            <p className="hwcc__summary">Browse the world's most distinguished fleet of luxury sailing yachts for sale. From performance cruisers to motor sailers.</p>
-            <Link to="/sale?type=sailing" className="btn btn--primary btn--white">Buying a sailing yacht</Link>
+          <img src="/assets/images/burgess/buy/muchos_mas.jpg" alt="Under 150ft" className="hwcc__img media-fit" />
+          <div className="hwcc__main">
+            <h2 className="hwcc__title">BUY A YACHT</h2>
+            <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Yachts for sale under 150ft</p>
+            <p className="hwcc__summary">The most popular sector of the superyacht market where you'll find all you need for your yachting experience.</p>
+            <Link to="/sale?size=under150" className="btn btn--primary btn--white">Check your choices</Link>
           </div>
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="filters">
-        <div className="filters__inner">
-          <button className="filter-btn-burgess filter-btn-burgess--active">All</button>
-          <button className="filter-btn-burgess">Motor</button>
-          <button className="filter-btn-burgess">Sailing</button>
-          <button className="filter-btn-burgess">New Builds</button>
+      {/* fwcp - Register Account */}
+      <div className="fwcp fwcp--themed fwcp--mt-0 fwcp--mb-0 theme-green">
+        <div className="fwcp__inner">
+          <div className="fwcp__main">
+            <div className="fwcp__subtitle">personalise</div>
+            <h2 className="fwcp__title">Register for an account today</h2>
+            <p>Curate your own yachting space and find more of what's important to you.</p>
+          </div>
+          <div className="fwcp__footer">
+            <Link className="btn btn--primary btn--white btn--white-grad fwcp__footer-btn" to="/account">Sign up now</Link>
+          </div>
         </div>
       </div>
-      
-      {/* Yacht Grid */}
-      <div className="yacht-grid">
-        {loading ? (
-          <p style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px' }}>Loading yachts...</p>
-        ) : yachts.length === 0 ? (
-          <p style={{ gridColumn: '1/-1', textAlign: 'center', padding: '40px' }}>No yachts for sale currently</p>
-        ) : (
-          yachts.map(yacht => (
-            <Link key={yacht.id} to={`/yacht/${yacht.slug}`} className="yacht-card-burgess">
-              <img 
-                src={yachtImages[yacht.title] || 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80'} 
-                alt={yacht.title}
-                className="yacht-card-burgess__img"
-              />
-              <div className="yacht-card-burgess__content">
-                <p className="yacht-card-burgess__type">{yacht.source}</p>
-                <h3 className="yacht-card-burgess__name">{yacht.title}</h3>
-                <p className="yacht-card-burgess__specs">{yacht.short_description || yacht.description?.substring(0, 80)}</p>
-                <p className="yacht-card-burgess__location">{yacht.location} • {yacht.region}</p>
-                <div className="yacht-card-burgess__price">
-                  €{yacht.base_price?.toLocaleString()}
-                </div>
+
+      {/* ccg cards - Virtual Tours, Videos, New Builds */}
+      <div className="bg">
+        <div className="rel-cont">
+          <div className="ccg">
+            <div className="ccg__item">
+              <Link className="cc" to="/build">
+                <picture className="cc__pic">
+                  <img className="cc__img" src="/assets/images/burgess/buy/majesty_175.jpg" alt="" loading="lazy" />
+                </picture>
+                <span className="cc__cat">buy a yacht</span>
+                <h3 className="cc__title und-title und-title--theme">Yachts under construction</h3>
+                <div className="cc__sum">Save time by buying a yacht already in build. Neptune Marine will represent you and your interests on site.</div>
+                <span className="a-link a-link--theme">
+                  <span className="a-link__text">Discover dreams in build</span>
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                </span>
+              </Link>
+            </div>
+            <div className="ccg__item">
+              <Link className="cc" to="/virtual-tours">
+                <picture className="cc__pic">
+                  <img className="cc__img" src="/assets/images/burgess/buy/anna-i.jpg" alt="" loading="lazy" />
+                </picture>
+                <span className="cc__cat">BUY A YACHT</span>
+                <h3 className="cc__title und-title und-title--theme">360° yacht tours</h3>
+                <div className="cc__sum">Explore dozens of superyachts as you walk the decks without taking a step.</div>
+                <span className="a-link a-link--theme">
+                  <span className="a-link__text">Get on board</span>
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                </span>
+              </Link>
+            </div>
+            <div className="ccg__item">
+              <Link className="cc" to="/videos">
+                <picture className="cc__pic">
+                  <img className="cc__img" src="/assets/images/burgess/buy/areti.jpg" alt="" loading="lazy" />
+                </picture>
+                <span className="cc__cat">BUY A YACHT</span>
+                <h3 className="cc__title und-title und-title--theme">Superyacht videos</h3>
+                <div className="cc__sum">From inspiring aerial shots to underwater camera action, our bespoke films capture the essence of on board adventure.</div>
+                <span className="a-link a-link--theme">
+                  <span className="a-link__text">Lights, camera, action</span>
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* dtd - Discover the Neptune Marine difference */}
+      <div className="dtd loading">
+        <div className="dtd__inner">
+          <div className="dtd__content">
+            <h2 className="dtd__title">Buy a yacht</h2>
+            <p className="dtd__subtitle und-title und-title--center und-title--inherit">Discover the Neptune Marine difference</p>
+            <p>At Neptune Marine, we always go the extra mile to find your perfect yacht and are here to guide you every step of the way during the process of buying a yacht. From securing private viewings to sourcing the best luxury yachts for sale from around the world, our expertise is your guarantee.</p>
+          </div>
+          <div className="dtd__grid">
+            <div className="dtd__section">
+              <h3 className="dtd__section-title">Access to luxury yachts unavailable on the open market</h3>
+              <p>We don't just have access to the largest public inventory of new and pre-owned luxury yachts to buy on the market, we shortlist your selection from a wide-reaching network of yacht owners to ensure you only ever get the yacht that you truly want.</p>
+            </div>
+            <div className="dtd__section">
+              <h3 className="dtd__section-title">Highly experienced yacht brokers with your needs in mind</h3>
+              <p>Working together to deliver the best results is integral to the Neptune Marine DNA, so all Neptune Marine brokers share information globally to guarantee unrivalled market insight and ensure client requirements are always met. There is nothing more important than customer satisfaction.</p>
+            </div>
+            <div className="dtd__section">
+              <h3 className="dtd__section-title">Unrivalled view of prevailing market opportunities</h3>
+              <p>The market moves quickly in the superyacht world, which is why we have positioned ourselves to gain the best vantage point, with access to the most attractive yachts to buy, to ensure you have a tailored selection wherever you are in the world.</p>
+            </div>
+          </div>
+          <div className="dtd__buts">
+            <Link to="/enquire" className="dtd__but btn btn--primary btn--white btn--white-grad dtd__but">Meet the Brokerage team</Link>
+            <Link to="/enquire" className="dtd__but btn btn--white btn--hollow btn--white-grad dtd__but">Contact us</Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Motor vs Sailing - Grey background */}
+      <div className="bg bg--grey theme-green">
+        <div className="rel-cont">
+          <div className="ccg">
+            <div className="ccg__item ccg__item--double">
+              <Link className="cc" to="/sale?type=motor">
+                <picture className="cc__pic">
+                  <img className="cc__img" src="/assets/images/burgess/buy/vanish.jpg" alt="" loading="lazy" />
+                </picture>
+                <h3 className="cc__title und-title und-title--theme">Motor yachts for sale</h3>
+                <div className="cc__sum">Explore our unrivalled fleet of luxurious motor yachts for sale and discover the finest and most varied selection afloat. Your next motor yacht is just a click away.</div>
+                <span className="a-link a-link--theme">
+                  <span className="a-link__text">Buying a motor yacht</span>
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                </span>
+              </Link>
+            </div>
+            <div className="ccg__item ccg__item--double">
+              <Link className="cc" to="/sale?type=sailing">
+                <picture className="cc__pic">
+                  <img className="cc__img" src="/assets/images/burgess/buy/magic.jpg" alt="" loading="lazy" />
+                </picture>
+                <h3 className="cc__title und-title und-title--theme">Sailing yachts for sale</h3>
+                <div className="cc__sum">Browse the world's most distinguished fleet of luxury sailing yachts for sale. From performance cruisers to motor sailers, discover your next sailing superyacht here.</div>
+                <span className="a-link a-link--theme">
+                  <span className="a-link__text">Buying a sailing yacht</span>
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Rich text - Why buy a superyacht? */}
+      <div className="cws">
+        <div className="cws__inner">
+          <div className="rich-text loading">
+            <h2>Why buy a superyacht? It is a question that can only be answered by you.</h2>
+            <p>At Neptune Marine, we know that superyacht ownership gives you year-round access to the superyacht lifestyle; the opportunity to design a custom charter vacation for family and friends; to work from the privacy of your on board office base; explore new countries and cultures around the globe and more... The question is, why will <em>you</em> buy a superyacht?</p>
+            <p>When it comes to how to buy a luxury superyacht, the 360-degree view offered by the Neptune Marine in-house team of expert brokers is invaluable. Our brokers are available to guide you through the entire yacht buying process. Whether you are a first-time buyer or a seasoned yacht owner, we will navigate the superyacht market for you.</p>
+            <p>Be it a stunning <Link to="/sale?type=motor" target="_blank">motor yacht</Link> or a luxury <Link to="/sale?type=sailing" target="_blank">sailing yacht</Link>, we have the experience within our team to guide you through the process from negotiations to surveys to completion. Neptune Marine will protect your interests at every stage of the yacht buying process. We can even support you through <Link to="/build">building a custom yacht</Link> through our long-standing relationships with many of <Link to="/build">the world's leading shipyards</Link>.</p>
+            <p>Or, if you're looking to purchase berths or tenders, our experienced brokers are on hand to meet your precise requirements.</p>
+            <p>From finding The One to stepping aboard as the owner, the Neptune Marine brokerage team has your back.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Editorial Section */}
+      <div className="u-ed bg bg--grey loading">
+        <h2 className="u-ed__title und-title und-title--center">Editorial</h2>
+        <div className="u-ed__grid">
+          <Link to="/editorial" className="loading content-pod content-pod--fw">
+            <img src="/assets/images/burgess/buy/ruya.jpg" alt="" className="media-fit content-pod__img" sizes="100vw" loading="lazy" />
+            <div className="content-pod__cont content-pod__cont--grad">
+              <div className="content-pod__cont-inner">
+                <h2 className="content-pod__title">Behind the build: bringing RUYA to life</h2>
+                <span className="a-link a-link--inherit"><span className="a-link__text">Read more</span><svg className="a-link__icon"><use href="#svg-arrow-right" /></svg></span>
               </div>
-            </Link>
-          ))
-        )}
+            </div>
+          </Link>
+          <div className="u-ed__art" data-scroll>
+            <article className="e-card">
+              <img className="e-card__img media-fit" src="/assets/images/burgess/buy/surama.jpg" alt="" loading="lazy" />
+              <h3 className="e-card__title">SURAMA for auction</h3>
+              <Link to="/editorial" className="a-link"><span className="a-link__text">Read more</span><svg className="a-link__icon"><use href="#svg-arrow-right" /></svg></Link>
+            </article>
+            <article className="e-card">
+              <img className="e-card__img media-fit" src="/assets/images/burgess/buy/spacecat.jpg" alt="" loading="lazy" />
+              <h3 className="e-card__title">SPACECAT sold</h3>
+              <Link to="/editorial" className="a-link"><span className="a-link__text">Read more</span><svg className="a-link__icon"><use href="#svg-arrow-right" /></svg></Link>
+            </article>
+            <article className="e-card">
+              <img className="e-card__img media-fit" src="/assets/images/burgess/buy/playa.jpg" alt="" loading="lazy" />
+              <h3 className="e-card__title">Support yacht PLAYA for sale</h3>
+              <Link to="/editorial" className="a-link"><span className="a-link__text">Read more</span><svg className="a-link__icon"><use href="#svg-arrow-right" /></svg></Link>
+            </article>
+            <article className="e-card">
+              <img className="e-card__img media-fit" src="/assets/images/burgess/buy/beowulf.jpg" alt="" loading="lazy" />
+              <h3 className="e-card__title">BEOWULF for sale</h3>
+              <Link to="/editorial" className="a-link"><span className="a-link__text">Read more</span><svg className="a-link__icon"><use href="#svg-arrow-right" /></svg></Link>
+            </article>
+            <article className="e-card">
+              <img className="e-card__img media-fit" src="/assets/images/burgess/buy/sayonara.jpg" alt="" loading="lazy" />
+              <h3 className="e-card__title">SAYONARA price reduction</h3>
+              <Link to="/editorial" className="a-link"><span className="a-link__text">Read more</span><svg className="a-link__icon"><use href="#svg-arrow-right" /></svg></Link>
+            </article>
+            <article className="e-card">
+              <img className="e-card__img media-fit" src="/assets/images/burgess/buy/ebyshine.jpg" alt="" loading="lazy" />
+              <h3 className="e-card__title">30m EBYSHINE for sale</h3>
+              <Link to="/editorial" className="a-link"><span className="a-link__text">Read more</span><svg className="a-link__icon"><use href="#svg-arrow-right" /></svg></Link>
+            </article>
+            <article className="e-card">
+              <img className="e-card__img media-fit" src="/assets/images/burgess/buy/byond_47.jpg" alt="" loading="lazy" />
+              <h3 className="e-card__title">Fast-track to ownership: New builds nearing completion</h3>
+              <Link to="/editorial" className="a-link"><span className="a-link__text">Read more</span><svg className="a-link__icon"><use href="#svg-arrow-right" /></svg></Link>
+            </article>
+            <article className="e-card">
+              <img className="e-card__img media-fit" src="/assets/images/burgess/buy/odyssey.jpg" alt="" loading="lazy" />
+              <h3 className="e-card__title">ODYSSEY for sale</h3>
+              <Link to="/editorial" className="a-link"><span className="a-link__text">Read more</span><svg className="a-link__icon"><use href="#svg-arrow-right" /></svg></Link>
+            </article>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -923,7 +985,7 @@ function SalePage() {
         Quite simply because you want to sell it. We have the expertise to maximise market exposure, the knowledge and networks to find the right buyer and the experience to create maximum value on the sale of your asset. Every year, sales statistics confirm that Neptune Marine is the world's number one broker for 40m+ yachts. Over half the yachts we sell every year are 50m (165ft) or under too so the message is: we sell yachts like yours.
       </div>
 
-      {/* Discover the Burgess difference - dtd section */}
+      {/* Discover the Neptune Marine difference - dtd section */}
       <div className="dtd">
         <div className="dtd__inner">
           <div className="dtd__content">
@@ -1763,6 +1825,10 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPage />} />
             <Route path="/terms-of-use" element={<TermsPage />} />
             <Route path="/sitemap" element={<SitemapPage />} />
+            
+            <Route path="/charter/yachts-for-charter/:slug" element={<YachtDetailPage />} />
+            <Route path="/buy/yachts-for-sale/:slug" element={<YachtDetailPage />} />
+            <Route path="/yacht/:slug" element={<YachtDetailPage />} />
           </Routes>
         </main>
         <Footer />
