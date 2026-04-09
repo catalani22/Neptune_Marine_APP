@@ -107,19 +107,10 @@ function Hero() {
         muted={isMuted}
         controlsList="nodownload"
         className="media-fit h-bann__media"
+        poster="/assets/images/samar-hero.jpg"
       >
-        <source src="https://player.vimeo.com/progressive_redirect/playback/1115412116/rendition/240p/file.mp4?loc=external" type="video/mp4" />
+        <source src="/assets/videos/hero-1080p.mp4" type="video/mp4" />
       </video>
-      
-      <picture>
-        <source media="(max-width: 1199px)" srcSet="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&h=900&rmode=crop&q=80" />
-        <img 
-          src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1920&h=900&rmode=crop&q=80" 
-          alt="Luxury Yacht"
-          className="media-fit"
-          style={{ display: 'none' }}
-        />
-      </picture>
       
       <div className="h-ban__grad"></div>
       
@@ -178,21 +169,21 @@ function Hero() {
 function ContentPods() {
   const pods = [
     {
-      image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=800&rmode=crop&q=80',
+      image: '/assets/images/aquila-content.jpg',
       category: 'Yacht charters',
       title: 'Last-minute availability',
       link: '/charter',
       cta: 'Book now'
     },
     {
-      image: 'https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&h=800&rmode=crop&q=80',
+      image: '/assets/images/santosha-content.jpg',
       category: 'Unbeatable holidays',
       title: 'Yachts for charter',
       link: '/charter',
       cta: 'Find your favourite'
     },
     {
-      image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=800&rmode=crop&q=80',
+      image: '/assets/images/samar-hero.jpg',
       category: 'Buy a yacht',
       title: 'Yachts for sale',
       link: '/sale',
