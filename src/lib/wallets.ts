@@ -1,7 +1,7 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://uhmzdrpetrgwuxfodiaf.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVobXpkcnBldHJnd3V4Zm9kaWFmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTY3NjkyOCwiZXhwIjoyMDkxMjUyOTI4fQ.0XPLbJhe-JWRVpkXg1xVxXdnT808t_Og7JonYD2y9LA';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://uhmzdrpetrgwuxfodiaf.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
@@ -77,12 +77,20 @@ export const SUPPORTED_CHAINS: Record<string, ChainConfig> = {
     explorerUrl: 'https://snowtrace.io',
     isActive: true,
   },
-  TRX: {
-    id: 'TRX',
-    name: 'Tron',
-    symbol: 'TRX',
-    decimals: 6,
-    explorerUrl: 'https://tronscan.io',
+  BASE: {
+    id: 'BASE',
+    name: 'Base',
+    symbol: 'ETH',
+    decimals: 18,
+    explorerUrl: 'https://basescan.org',
+    isActive: true,
+  },
+  SUI: {
+    id: 'SUI',
+    name: 'Sui',
+    symbol: 'SUI',
+    decimals: 9,
+    explorerUrl: 'https://suiscan.xyz',
     isActive: true,
   },
   BTC: {
@@ -103,21 +111,54 @@ export const SUPPORTED_CHAINS: Record<string, ChainConfig> = {
   },
 };
 
-// Default wallet rotation from environment
+// ============= WALLET CONFIGURATION =============
+// SECURITY: These addresses are hardcoded and cannot be changed through the application
+// Only the owner can modify these by updating the source code
+// These wallets are used for crypto payments with automatic rotation/fallback
+
+const WALLET_ADDRESSES = {
+  // EVM chains (ETH, BSC, POL, ARB, AVAX, BASE) - all use the same 3 wallets in rotation
+  ETH: [
+    '0xB86065255D3e94aCAD3cF627092EaC745b6aB81D',
+    '0xEb85043b4b3f08964C0fDF00d76Ca354Aed467C8',
+    '0x6C9cA01cdC692fE92f2F6b3ad33d2C4034c9B32c',
+  ],
+  // Solana - 3 wallets in rotation
+  SOL: [
+    'AsKFa7SrCXgeExV6wTwPD1waX6W1sKCrfveaWQjWRe7T',
+    'AH9aZN3QyCfNeyxDQZwvk9KeiKSBGx6ZShMZpEmXxWH1',
+    'DZSowZNgwgExUsdJyG6fhNN2J4A4uiLVc8tvo8M6EoLe',
+  ],
+  // Sui - 3 wallets in rotation
+  SUI: [
+    '0xe1adce87dd8dee1d6755187a7e4f9efe52c16785c0c063cadecb45770283412a',
+    '0x4b9a9e387cde9edcee4e47ed4a42190f90a0853572bb0f1a1921805851e2272e',
+    '0xf3916f9dd6b27b4632f3f969046cf7895e168ed72b80a6c40e2e4c568a6cb6f5',
+  ],
+  // Bitcoin - only 1 wallet for now (more coming soon)
+  BTC: [
+    'bc1qhq3vkydx43rtjlkuxk2ag53gac4lhnugweu870',
+  ],
+} as const;
+
+// ============= END WALLET CONFIG =============
+
+// Default wallet rotation from hardcoded config
 function getDefaultWallets(): WalletRotation[] {
   const wallets: WalletRotation[] = [];
   
-  // ETH wallets
-  const ethWallets = process.env.ETH_WALLETS?.split(',').map((w) => w.trim()).filter(Boolean) || [];
-  if (ethWallets.length > 0) {
+  // EVM chains (ETH, BSC, POL, ARB, AVAX, BASE) - share same wallets
+  const evmChains = ['ETH', 'BSC', 'POL', 'ARB', 'AVAX', 'BASE'];
+  
+  for (const chain of evmChains) {
     wallets.push({
-      chain: 'ETH',
+      chain,
       currentIndex: 0,
-      addresses: ethWallets.map((address, i) => ({
-        id: `eth-${i}`,
-        chain: 'ETH',
+      addresses: WALLET_ADDRESSES.ETH.map((address, i) => ({
+        id: `${chain.toLowerCase()}-${i}`,
+        chain,
         address,
-        label: `ETH Wallet ${i + 1}`,
+        label: `${chain} Wallet ${i + 1}`,
         isActive: true,
         rotationIndex: i,
         createdAt: new Date().toISOString(),
@@ -128,69 +169,59 @@ function getDefaultWallets(): WalletRotation[] {
     });
   }
   
-  // TRX wallets
-  const trxWallets = process.env.TRX_WALLETS?.split(',').map((w) => w.trim()).filter(Boolean) || [];
-  if (trxWallets.length > 0) {
-    wallets.push({
-      chain: 'TRX',
-      currentIndex: 0,
-      addresses: trxWallets.map((address, i) => ({
-        id: `trx-${i}`,
-        chain: 'TRX',
-        address,
-        label: `TRX Wallet ${i + 1}`,
-        isActive: true,
-        rotationIndex: i,
-        createdAt: new Date().toISOString(),
-        lastUsedAt: null,
-        totalReceived: '0',
-        status: 'active',
-      })),
-    });
-  }
-  
-  // BTC wallet
-  const btcWallet = process.env.BTC_WALLET;
-  if (btcWallet) {
-    wallets.push({
-      chain: 'BTC',
-      currentIndex: 0,
-      addresses: [{
-        id: 'btc-0',
-        chain: 'BTC',
-        address: btcWallet,
-        label: 'BTC Wallet 1',
-        isActive: true,
-        rotationIndex: 0,
-        createdAt: new Date().toISOString(),
-        lastUsedAt: null,
-        totalReceived: '0',
-        status: 'active',
-      }],
-    });
-  }
-  
-  // SOL wallet
-  const solWallets = process.env.SOL_WALLETS?.split(',').map((w) => w.trim()).filter(Boolean) || [];
-  if (solWallets.length > 0) {
-    wallets.push({
+  // Solana
+  wallets.push({
+    chain: 'SOL',
+    currentIndex: 0,
+    addresses: WALLET_ADDRESSES.SOL.map((address, i) => ({
+      id: `sol-${i}`,
       chain: 'SOL',
-      currentIndex: 0,
-      addresses: solWallets.map((address, i) => ({
-        id: `sol-${i}`,
-        chain: 'SOL',
-        address,
-        label: `SOL Wallet ${i + 1}`,
-        isActive: true,
-        rotationIndex: i,
-        createdAt: new Date().toISOString(),
-        lastUsedAt: null,
-        totalReceived: '0',
-        status: 'active',
-      })),
-    });
-  }
+      address,
+      label: `SOL Wallet ${i + 1}`,
+      isActive: true,
+      rotationIndex: i,
+      createdAt: new Date().toISOString(),
+      lastUsedAt: null,
+      totalReceived: '0',
+      status: 'active',
+    })),
+  });
   
+  // Sui
+  wallets.push({
+    chain: 'SUI',
+    currentIndex: 0,
+    addresses: WALLET_ADDRESSES.SUI.map((address, i) => ({
+      id: `sui-${i}`,
+      chain: 'SUI',
+      address,
+      label: `SUI Wallet ${i + 1}`,
+      isActive: true,
+      rotationIndex: i,
+      createdAt: new Date().toISOString(),
+      lastUsedAt: null,
+      totalReceived: '0',
+      status: 'active',
+    })),
+  });
+  
+  // Bitcoin
+  wallets.push({
+    chain: 'BTC',
+    currentIndex: 0,
+    addresses: WALLET_ADDRESSES.BTC.map((address, i) => ({
+      id: `btc-${i}`,
+      chain: 'BTC',
+      address,
+      label: `BTC Wallet ${i + 1}`,
+      isActive: true,
+      rotationIndex: i,
+      createdAt: new Date().toISOString(),
+      lastUsedAt: null,
+      totalReceived: '0',
+      status: 'active',
+    })),
+  });
   return wallets;
 }
 

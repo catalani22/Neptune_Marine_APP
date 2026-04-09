@@ -4,8 +4,9 @@
   /* Primary Colors - Navy */
   --color-primary: #0f172a;
   --color-primary-light: #1e293b;
+  --color-primary-foreground: #ffffff;
   
-  /* Brand/Aquamarine */
+  /* Brand/Aquamarine - Neptune signature */
   --color-brand: #0ea5e9;
   --color-brand-dark: #0284c7;
   --color-brand-foreground: #ffffff;
@@ -13,8 +14,19 @@
   /* Gold (from Burgess) */
   --color-gold: #c9a227;
   --color-gold-dark: #b8921f;
+  --color-gold-foreground: #ffffff;
+  
+  /* Secondary */
+  --color-secondary: #f8fafc;
+  --color-secondary-foreground: #0f172a;
+  
+  /* Accent - Terracotta for Charter */
+  --color-accent: #e55d4a;
+  --color-accent-foreground: #ffffff;
   
   /* Neutrals */
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
   --color-cream: #fafaf9;
   --color-slate: #2d2d2d;
   
@@ -22,6 +34,82 @@
   --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-display: 'Playfair Display', Georgia, serif;
+}
+
+/* Theme Variables for Tailwind - Burgess luxury palette */
+:root {
+  /* Primary (Navy) - rich deep blue */
+  --primary: 222 47% 11%;
+  --primary-foreground: 0 0% 100%;
+  
+  /* Brand (Aquamarine/Cyan) */
+  --brand: 187 90% 48%;
+  --brand-foreground: 222 47% 11%;
+  --hero-overlay: 240 100% 10% / 0.45;
+  
+  /* Gold (Burgess signature) */
+  --gold: 45 60% 45%;
+  --gold-foreground: 0 0% 100%;
+  
+  /* Secondary */
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
+  
+  /* Accent */
+  --accent: 192 95% 43%;
+  --accent-foreground: 0 0% 100%;
+  
+  /* Muted */
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  
+  /* Destructive */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  
+  /* Border */
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 240 100% 25%;
+  
+  /* Radius */
+  --radius: 0.75rem;
+  
+  /* Card */
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  
+  /* Popover */
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  
+  /* Chart colors */
+  --chart-1: 222 47% 11%;
+  --chart-2: 192 95% 43%;
+  --chart-3: 45 60% 45%;
+  --chart-4: 187 90% 48%;
+  --chart-5: 0 84% 60%;
+}
+
+/* Dark mode (if needed) */
+.dark {
+  --background: 222 47% 11%;
+  --foreground: 0 0% 100%;
+  --card: 217 33% 17%;
+  --card-foreground: 0 0% 100%;
+  --primary: 210 40% 96%;
+  --primary-foreground: 222 47% 11%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 192 95% 43%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 63% 31%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 217 33% 17%;
+  --input: 217 33% 17%;
+  --ring: 192 95% 43%;
 }
 
 * {
@@ -34,206 +122,280 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: #fff;
-  color: var(--color-primary);
+  background: #ffffff;
+  color: hsl(var(--foreground));
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Theme Variables for Tailwind */
-:root {
-  /* Primary (Navy) */
-  --primary: 240 100% 25%;
-  --primary-foreground: 0 0% 100%;
-  
-  /* Brand (Aquamarine/Cyan) */
-  --brand: 187 90% 48%;
-  --brand-foreground: 222 47% 11%;
-  --hero-overlay: 240 100% 10% / 0.45;
-  
-  /* Gold (Burgess inspired) */
-  --gold: 45 60% 45%;
-  --gold-foreground: 0 0% 100%;
-  
-  /* Secondary */
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222 47% 11%;
-  
-  /* Accent */
-  --accent: 192 95% 43%;
-  --accent-foreground: 0 0% 100%;
-  
-  /* Charter accent (terracotta) */
-  --charter-accent: 10 63% 52%;
-  --charter-foreground: 0 0% 100%;
-  
-  --radius: 0.75rem;
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
 }
 
-/* Force identical palette regardless of dark mode */
-.dark {
-  --background: 0 0% 100%;
-  --foreground: 224 71% 4%;
-  --primary: 240 100% 25%;
-  --primary-foreground: 0 0% 100%;
-  --brand: 187 90% 48%;
-  --brand-foreground: 222 47% 11%;
-  --gold: 45 60% 45%;
-  --gold-foreground: 0 0% 100%;
-  --charter-accent: 10 63% 52%;
+/* ============= LUXURY BUTTON STYLES ============= */
+
+/* Gold Button - Burgess signature */
+.btn-gold {
+  background-color: hsl(var(--gold)) !important;
+  color: hsl(var(--gold-foreground)) !important;
+  border-color: transparent !important;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.btn-gold:hover {
+  background-color: hsl(var(--gold)) !important;
+  filter: brightness(1.1);
+  transform: translateY(-1px);
 }
 
-@layer components {
-  /* Gold Button (Burgess style) */
-  .btn-gold {
-    @apply bg-[#c9a227] text-white px-6 py-3 font-medium tracking-wide hover:bg-[#b8921f] transition-all duration-300 uppercase text-sm;
-  }
-  
-  .btn-gold-outline {
-    @apply border-2 border-[#c9a227] text-[#c9a227] px-6 py-3 font-medium tracking-wide hover:bg-[#c9a227] hover:text-white transition-all duration-300 uppercase text-sm;
-  }
-  
-  /* Navy Button */
-  .btn-navy {
-    @apply bg-[#0f172a] text-white px-6 py-3 font-medium tracking-wide hover:bg-[#1e293b] transition-all duration-300 uppercase text-sm;
-  }
-  
-  /* Brand Button (Aquamarine) */
-  .btn-brand {
-    background-color: hsl(var(--brand)) !important;
-    color: hsl(var(--brand-foreground)) !important;
-    border-color: transparent !important;
-  }
-  .btn-brand:hover {
-    filter: brightness(0.95);
-  }
-  
-  /* Light Button */
-  .btn-light {
-    background-color: hsl(var(--secondary)) !important;
-    color: hsl(var(--secondary-foreground)) !important;
-    border-color: transparent !important;
-  }
-  .btn-light:hover {
-    filter: brightness(0.97);
-  }
-  
-  /* Hero Button */
+.btn-gold-outline {
+  border: 2px solid hsl(var(--gold)) !important;
+  color: hsl(var(--gold)) !important;
+  background: transparent !important;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.btn-gold-outline:hover {
+  background-color: hsl(var(--gold)) !important;
+  color: hsl(var(--gold-foreground)) !important;
+}
+
+/* Navy Button */
+.btn-navy {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+  border-color: transparent !important;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.btn-navy:hover {
+  filter: brightness(1.2);
+}
+
+/* Brand Button (Aquamarine) */
+.btn-brand {
+  background-color: hsl(var(--brand)) !important;
+  color: hsl(var(--brand-foreground)) !important;
+  border-color: transparent !important;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.btn-brand:hover {
+  filter: brightness(1.1);
+}
+
+/* Light Button */
+.btn-light {
+  background-color: hsl(var(--secondary)) !important;
+  color: hsl(var(--secondary-foreground)) !important;
+  border-color: transparent !important;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.btn-light:hover {
+  filter: brightness(0.95);
+}
+
+/* Hero Button - Large CTA */
+.btn-hero {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+}
+@media (min-width: 768px) {
   .btn-hero {
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-  }
-  @media (min-width: 768px) {
-    .btn-hero {
-      letter-spacing: 0.25em;
-    }
-  }
-  
-  /* Section Styles */
-  .section-title {
-    @apply text-4xl md:text-5xl font-serif font-medium text-[#0f172a] mb-4;
-  }
-  
-  .section-subtitle {
-    @apply text-lg md:text-xl text-gray-600 mb-8 max-w-2xl;
-  }
-  
-  /* Navigation */
-  .nav-link {
-    @apply text-sm uppercase tracking-wider text-white/80 hover:text-[#c9a227] transition-colors;
-  }
-  
-  .nav-link-dark {
-    @apply text-sm uppercase tracking-wider text-gray-700 hover:text-[#c9a227] transition-colors;
-  }
-  
-  /* Yacht Card */
-  .yacht-card {
-    @apply bg-white shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden;
-  }
-  
-  /* Gold Text */
-  .gold-text {
-    @apply text-[#c9a227];
-  }
-  
-  /* Filter Buttons */
-  .filter-btn {
-    @apply px-4 py-2 border border-gray-300 text-sm uppercase tracking-wider hover:border-[#c9a227] hover:text-[#c9a227] transition-all bg-white;
-  }
-  
-  .filter-btn-active {
-    @apply bg-[#c9a227] text-white border-[#c9a227] hover:bg-[#b8921f] hover:text-white;
-  }
-  
-  /* Crypto Badge */
-  .crypto-badge {
-    @apply inline-flex items-center gap-2 bg-green-900/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium;
-  }
-  
-  /* Hero Frame (Aquamarine border) */
-  .hero-frame {
-    border-color: hsl(var(--brand));
-  }
-  .hero-frame-large {
-    border-color: hsl(var(--brand));
-    border-width: 3px;
-  }
-  @media (min-width: 768px) {
-    .hero-frame-large {
-      border-width: 4px;
-    }
-  }
-  
-  /* Charter Hero Frame (Terracotta) */
-  .charter-frame-large {
-    border-color: hsl(var(--charter-accent));
-    border-width: 3px;
-  }
-  @media (min-width: 768px) {
-    .charter-frame-large {
-      border-width: 4px;
-    }
-  }
-  .charter-hero-text {
-    color: hsl(var(--charter-accent));
-  }
-  .charter-hero-kicker {
-    color: hsl(var(--charter-accent));
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-  
-  /* Hero Overlay */
-  .hero-overlay {
-    background: linear-gradient(to bottom, hsl(var(--hero-overlay)), transparent 40%, hsl(var(--hero-overlay)));
-  }
-  
-  /* Text Outline (Burgess style) */
-  .text-outline {
-    -webkit-text-stroke: 2px hsl(var(--primary-foreground));
-    color: transparent;
-  }
-  
-  /* Responsive outline for hero */
-  .text-outline-hero {
-    -webkit-text-stroke: 2px hsl(var(--primary-foreground));
-    color: transparent;
-  }
-  @media (min-width: 768px) {
-    .text-outline-hero {
-      -webkit-text-stroke: 4px hsl(var(--primary-foreground));
-    }
-  }
-  
-  /* Brand Text */
-  .brand-text {
-    color: hsl(var(--brand));
+    letter-spacing: 0.25em;
   }
 }
 
-/* Animations */
+/* ============= HERO STYLES ============= */
+
+/* Hero Frame - Aquamarine border */
+.hero-frame {
+  border-color: hsl(var(--brand));
+}
+
+.hero-frame-large {
+  border-color: hsl(var(--brand));
+  border-width: 3px;
+}
+@media (min-width: 768px) {
+  .hero-frame-large {
+    border-width: 4px;
+  }
+}
+
+/* Charter Hero Frame - Terracotta */
+.charter-frame-large {
+  border-color: hsl(var(--accent));
+  border-width: 3px;
+}
+@media (min-width: 768px) {
+  .charter-frame-large {
+    border-width: 4px;
+  }
+}
+
+.charter-hero-text {
+  color: hsl(var(--accent));
+}
+
+.charter-hero-kicker {
+  color: hsl(var(--accent));
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+/* Hero Overlay - Gradient for text legibility */
+.hero-overlay {
+  background: linear-gradient(
+    to bottom, 
+    hsl(var(--hero-overlay)), 
+    transparent 30%, 
+    transparent 70%,
+    hsl(var(--hero-overlay))
+  );
+}
+
+/* ============= TEXT STYLES ============= */
+
+/* Text Outline - Burgess style for headlines */
+.text-outline {
+  -webkit-text-stroke: 1px hsl(var(--primary-foreground));
+  color: transparent;
+}
+
+.text-outline-hero {
+  -webkit-text-stroke: 2px hsl(var(--primary-foreground));
+  color: transparent;
+}
+@media (min-width: 768px) {
+  .text-outline-hero {
+    -webkit-text-stroke: 3px hsl(var(--primary-foreground));
+  }
+}
+
+/* Brand Text */
+.brand-text {
+  color: hsl(var(--brand));
+}
+
+/* Gold Text */
+.gold-text {
+  color: hsl(var(--gold));
+}
+
+/* Section Titles */
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: hsl(var(--primary));
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: hsl(var(--muted-foreground));
+  max-width: 42rem;
+}
+
+/* ============= NAVIGATION ============= */
+
+.nav-link {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  color: hsl(var(--primary-foreground) / 0.8);
+  transition: color 0.2s ease;
+}
+.nav-link:hover {
+  color: hsl(var(--gold));
+}
+
+.nav-link-dark {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  color: hsl(var(--foreground) / 0.7);
+  transition: color 0.2s ease;
+}
+.nav-link-dark:hover {
+  color: hsl(var(--gold));
+}
+
+/* ============= CARDS ============= */
+
+.yacht-card {
+  background: white;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  transition: all 0.5s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+.yacht-card:hover {
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  transform: translateY(-4px);
+}
+
+/* ============= FILTERS ============= */
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid hsl(var(--border));
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: white;
+  transition: all 0.2s ease;
+}
+.filter-btn:hover {
+  border-color: hsl(var(--gold));
+  color: hsl(var(--gold));
+}
+
+.filter-btn-active {
+  background-color: hsl(var(--gold)) !important;
+  color: white !important;
+  border-color: hsl(var(--gold)) !important;
+}
+
+/* ============= CRYPTO BADGE ============= */
+
+.crypto-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: hsla(145, 38%, 10%, 0.8);
+  color: #10b981;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  backdrop-filter: blur(8px);
+}
+
+/* ============= ANIMATIONS ============= */
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -245,10 +407,41 @@ body {
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Image zoom on hover */
 .img-zoom-hover {
   overflow: hidden;
 }
@@ -261,6 +454,8 @@ body {
   transform: scale(1.05);
 }
 
+/* ============= UTILITIES ============= */
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -271,12 +466,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c9a227;
+  background: hsl(var(--gold));
+  border-radius: 4px;
 }
 
-/* Hero gradient overlay */
-.hero-gradient {
-  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%);
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--gold-dark));
 }
 
 /* Gold underline effect */
@@ -291,13 +486,62 @@ body {
   left: 0;
   width: 60px;
   height: 2px;
-  background: #c9a227;
+  background: hsl(var(--gold));
 }
 
 /* Grid pattern background */
 .grid-pattern {
   background-image: 
-    linear-gradient(rgba(201,162,39,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,162,39,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(201, 162, 39, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 162, 39, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--brand)) 0%, hsl(var(--gold)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Full bleed sections */
+.full-bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+/* Aspect ratios for media */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+/* Line clamp utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
