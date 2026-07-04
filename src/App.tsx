@@ -53,11 +53,12 @@ function Header() {
           <Link to="/manage" className="s-head-nav__link s-head__sd">Manage</Link>
         </nav>
         
-        <Link to="/" className="s-head__logo" aria-label="Navigate to the home page">
-          <svg width="164" height="27" viewBox="0 0 164 27" fill="currentColor">
-            <text x="0" y="22" fontFamily="serif" fontSize="24" fontWeight="bold">NEPTUNE</text>
-            <text x="95" y="22" fontFamily="serif" fontSize="24" fontWeight="bold" fill="#18c0d6">MARINE</text>
-          </svg>
+        <Link to="/" className="s-head__logo" aria-label="Navigate to the home page" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+          <img 
+            src="/assets/images/brand/neptunebw.png" 
+            alt="Neptune Marine" 
+            style={{ height: '40px', width: 'auto', maxWidth: '164px' }}
+          />
         </Link>
         
         <nav className="s-head-nav s-head-nav--right">
@@ -79,7 +80,7 @@ function Header() {
           <Link to="/enquire" className="s-head-nav__link s-head__sd">Contact Us</Link>
         </nav>
       </header>
-      <div className="s-head__container"></div>
+      <div className="s-head__container" style={{ height: '70px' }}></div>
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${mobileMenuOpen ? 'mobile-menu--open' : ''}`}>
@@ -479,14 +480,14 @@ function CharterPage() {
           <span></span>
           <div>
             <p className="h-bann__title" style={{ fontSize: '2.5rem', fontWeight: '300' }}>Your great yacht<br/>charter escape.</p>
-            <p style={{ fontSize: '1.5rem', fontWeight: '700', marginTop: '20px', color: '#fff' }}>Tailored by Neptune Marine.</p>
+            <p className="h-bann__sub-title" style={{ fontSize: '1.5rem', fontWeight: '700', marginTop: '20px', color: '#fff' }}>Tailored by Neptune Marine.</p>
           </div>
         </div>
       </section>
 
       {/* Introduction Text */}
-      <div className="html-area">
-        <h2 className="html-area__title" style={{ fontSize: '2.5rem' }}>Ready for an extraordinary yacht charter experience?</h2>
+      <div className="html-area html-area__center">
+        <h2 className="html-area__title">Ready for an extraordinary yacht charter experience?</h2>
         <div className="html-area__standfirst" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
           <p>When you charter a yacht with Neptune Marine, you'll be working with a team committed to delivering the best on board experience possible. Our team of world-class experts know the yachts, the crews and the destinations better than anyone else.</p>
         </div>
@@ -553,14 +554,14 @@ function CharterPage() {
       {/* Corporate & New to Charter Cards */}
       <div className="fifty-fifty fifty-fifty--margins">
         <div className="hwcc">
-          <div className="hwcc__main" style={{ padding: '40px' }}>
+          <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">Corporate yacht charter</h2>
             <p className="hwcc__summary">Give your brand the lustre of luxury and host an unforgettable event on board a superyacht.</p>
             <Link to="/enquire" className="btn btn--primary btn--white">Make your mark</Link>
           </div>
         </div>
         <div className="hwcc">
-          <div className="hwcc__main" style={{ padding: '40px' }}>
+          <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">New to private yacht rental?</h2>
             <p className="hwcc__summary">You can only experience your first luxury yacht charter once, so let us create a unique experience you'll love.</p>
             <Link to="/enquire" className="btn btn--primary btn--white">Make it happen</Link>
@@ -571,14 +572,14 @@ function CharterPage() {
       {/* Motor vs Sailing */}
       <div className="fifty-fifty fifty-fifty--margins fifty-fifty--mb-0">
         <div className="hwcc">
-          <div className="hwcc__main" style={{ padding: '40px' }}>
+          <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">Motor yachts for charter</h2>
             <p className="hwcc__summary">For larger spaces inside and out, a bigger crew, more watertoys and better stability, choose a luxury motor yacht for your charter.</p>
             <Link to="/charter?type=motor" className="btn btn--primary btn--white">Choose a motor yacht</Link>
           </div>
         </div>
         <div className="hwcc">
-          <div className="hwcc__main" style={{ padding: '40px' }}>
+          <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">Sailing yachts for charter</h2>
             <p className="hwcc__summary">For lower fuel consumption, fewer emissions and the sheer exhilaration of surging through the seas powered only by nature, charter a luxury sailing yacht.</p>
             <Link to="/charter?type=sailing" className="btn btn--primary btn--white">Choose a sailing yacht</Link>
@@ -630,20 +631,20 @@ function CharterPage() {
       </div>
 
       {/* FAQ Section */}
-      <div className="html-area">
+      <div className="html-area html-area__center">
         <h2 className="html-area__title">Frequently asked questions</h2>
         <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'left' }}>
-          <details style={{ marginBottom: '20px', padding: '20px', border: '1px solid #ddd' }}>
-            <summary style={{ fontWeight: '700', cursor: 'pointer' }}>I've never chartered before, where do I start?</summary>
-            <p style={{ marginTop: '10px' }}>To get started, one of our brokers will ask you questions, like how many people you want to bring aboard, whether you know where you want to go and what you want to do. We'll shortlist yachts of a style, size and capability that match your preferences.</p>
+          <details className="faq-item">
+            <summary>I've never chartered before, where do I start?</summary>
+            <p>To get started, one of our brokers will ask you questions, like how many people you want to bring aboard, whether you know where you want to go and what you want to do. We'll shortlist yachts of a style, size and capability that match your preferences.</p>
           </details>
-          <details style={{ marginBottom: '20px', padding: '20px', border: '1px solid #ddd' }}>
-            <summary style={{ fontWeight: '700', cursor: 'pointer' }}>How many guests can be on board?</summary>
-            <p style={{ marginTop: '10px' }}>The majority of yachts can cruise with 8-12 guests, depending on their length. For bigger parties, some yachts built to the Passenger Yacht Code (PYC) can carry up to 36 guests.</p>
+          <details className="faq-item">
+            <summary>How many guests can be on board?</summary>
+            <p>The majority of yachts can cruise with 8-12 guests, depending on their length. For bigger parties, some yachts built to the Passenger Yacht Code (PYC) can carry up to 36 guests.</p>
           </details>
-          <details style={{ marginBottom: '20px', padding: '20px', border: '1px solid #ddd' }}>
-            <summary style={{ fontWeight: '700', cursor: 'pointer' }}>Why do I need a charter broker?</summary>
-            <p style={{ marginTop: '10px' }}>Planning the perfect charter requires specialist knowledge, trusted contacts on board and on the ground, as well as first-hand knowledge of yachts, crews and locations. Creating the unforgettable is what we do at Neptune Marine.</p>
+          <details className="faq-item">
+            <summary>Why do I need a charter broker?</summary>
+            <p>Planning the perfect charter requires specialist knowledge, trusted contacts on board and on the ground, as well as first-hand knowledge of yachts, crews and locations. Creating the unforgettable is what we do at Neptune Marine.</p>
           </details>
         </div>
       </div>
@@ -687,7 +688,7 @@ function BuyPage() {
       <div className="fifty-fifty fifty-fifty--margins">
         <div className="hwcc">
           <img src="/assets/images/burgess/buy/joy.jpg" alt="All Yachts" className="hwcc__img media-fit" />
-          <div className="hwcc__main">
+          <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">buy a yacht</h2>
             <p className="und-title und-title--center und-title--inherit hwcc__subtitle">All yachts for sale</p>
             <p className="hwcc__summary">When it comes to buying a yacht we'll understand your requirements and handpick the best opportunities for you.</p>
@@ -696,7 +697,7 @@ function BuyPage() {
         </div>
         <div className="hwcc">
           <img src="/assets/images/burgess/buy/phoenix_2.jpg" alt="Over 200ft" className="hwcc__img media-fit" />
-          <div className="hwcc__main">
+          <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">buy a yacht</h2>
             <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Yachts for sale over 200ft</p>
             <p className="hwcc__summary">More volume means more guests, more toys, more crew and more space inside and out.</p>
@@ -709,7 +710,7 @@ function BuyPage() {
       <div className="fifty-fifty fifty-fifty--margins fifty-fifty--mt-0">
         <div className="hwcc">
           <img src="/assets/images/burgess/buy/my_legacy.jpg" alt="150-200ft" className="hwcc__img media-fit" />
-          <div className="hwcc__main">
+          <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">buy a yacht</h2>
             <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Yachts for sale from 150-200ft</p>
             <p className="hwcc__summary">Buy a yacht with plenty of room for family and friends to relax and entertain, and for business to be done.</p>
@@ -718,7 +719,7 @@ function BuyPage() {
         </div>
         <div className="hwcc">
           <img src="/assets/images/burgess/buy/muchos_mas.jpg" alt="Under 150ft" className="hwcc__img media-fit" />
-          <div className="hwcc__main">
+          <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">BUY A YACHT</h2>
             <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Yachts for sale under 150ft</p>
             <p className="hwcc__summary">The most popular sector of the superyacht market where you'll find all you need for your yachting experience.</p>
@@ -1098,8 +1099,8 @@ function SalePage() {
           <div className="u-ed__art">
             {editorialArticles.slice(0, 8).map((article, i) => (
               <article key={i} className="e-card">
-                <div className="e-card__img-placeholder" style={{ backgroundColor: '#f4f5f5', height: '150px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ color: '#666', fontSize: '0.75rem' }}>{article.title.substring(0, 20)}...</span>
+                <div className="e-card__img-placeholder">
+                  <span>{article.title.substring(0, 20)}...</span>
                 </div>
                 <h3 className="e-card__title">{article.title}</h3>
                 <Link to={`/editorial/news/${article.title.toLowerCase().replace(/ /g, '-')}`} className="a-link">
@@ -1124,33 +1125,33 @@ function EnquirePage() {
         <p className="page-header__subtitle">Tell us about your dream yachting experience</p>
       </div>
       
-      <div style={{ padding: '60px 20px', maxWidth: '800px', margin: '0 auto' }}>
-        <form style={{ display: 'grid', gap: '20px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>First Name *</label>
-              <input type="text" required style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }} />
+      <div className="container">
+        <form className="enquire-form">
+          <div className="form-row">
+            <div className="form-group">
+              <label className="form-label">First Name *</label>
+              <input type="text" required className="form-input" />
             </div>
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>Last Name *</label>
-              <input type="text" required style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }} />
-            </div>
-          </div>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>Email *</label>
-              <input type="email" required style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }} />
-            </div>
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>Phone</label>
-              <input type="tel" style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }} />
+            <div className="form-group">
+              <label className="form-label">Last Name *</label>
+              <input type="text" required className="form-input" />
             </div>
           </div>
           
-          <div>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>Interest *</label>
-            <select style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }}>
+          <div className="form-row">
+            <div className="form-group">
+              <label className="form-label">Email *</label>
+              <input type="email" required className="form-input" />
+            </div>
+            <div className="form-group">
+              <label className="form-label">Phone</label>
+              <input type="tel" className="form-input" />
+            </div>
+          </div>
+          
+          <div className="form-group">
+            <label className="form-label">Interest *</label>
+            <select className="form-input">
               <option>Charter</option>
               <option>Cabin Cruise</option>
               <option>Buy</option>
@@ -1160,12 +1161,12 @@ function EnquirePage() {
             </select>
           </div>
           
-          <div>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '700', fontSize: '0.875rem', textTransform: 'uppercase' }}>Message</label>
-            <textarea rows={6} style={{ width: '100%', padding: '16px', border: '1px solid #ccc', fontSize: '1rem' }}></textarea>
+          <div className="form-group">
+            <label className="form-label">Message</label>
+            <textarea rows={6} className="form-input"></textarea>
           </div>
           
-          <button type="submit" className="btn btn--primary" style={{ justifySelf: 'start' }}>Send Enquiry</button>
+          <button type="submit" className="btn btn--primary">Send Enquiry</button>
         </form>
       </div>
     </div>
@@ -1191,13 +1192,13 @@ function DestinationsPage() {
           <span></span>
           <div>
             <p className="h-bann__title" style={{ fontSize: '2.5rem', fontWeight: '300' }}>Yacht charter destinations</p>
-            <p style={{ fontSize: '1.5rem', fontWeight: '700', marginTop: '20px', color: '#fff' }}>Start your adventure</p>
+            <p className="h-bann__sub-title" style={{ fontSize: '1.5rem', fontWeight: '700', marginTop: '20px', color: '#fff' }}>Start your adventure</p>
           </div>
         </div>
       </section>
 
       {/* Introduction */}
-      <div className="html-area">
+      <div className="html-area html-area__center">
         <h2 className="html-area__title">All regions</h2>
         <div className="html-area__standfirst" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
           <p>Charter a private yacht and discover a world where anything is possible, and everything is within reach.</p>
@@ -1216,7 +1217,7 @@ function DestinationsPage() {
       </div>
 
       {/* Destinations Grid */}
-      <div style={{ padding: '40px', maxWidth: '1400px', margin: '0 auto' }}>
+      <div className="container" style={{ paddingTop: '40px', paddingBottom: '40px' }}>
         {regions.map((region, i) => (
           <div key={i} style={{ marginBottom: '40px' }}>
             <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '20px', color: '#000' }}>{region.name}</h2>
@@ -1225,14 +1226,7 @@ function DestinationsPage() {
                 <Link 
                   key={j} 
                   to={`/charter/destinations/${dest.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
-                  style={{ 
-                    padding: '15px 25px', 
-                    border: '1px solid #ddd', 
-                    background: '#fff',
-                    color: '#000',
-                    textDecoration: 'none',
-                    fontSize: '0.875rem'
-                  }}
+                  className="dest-link"
                 >
                   {dest}
                 </Link>
@@ -1358,11 +1352,11 @@ function BuildPage() {
       </div>
 
       {/* Video Chapters */}
-      <div className="html-area" style={{ background: '#f5f5f5', padding: '60px 20px' }}>
+      <div className="html-area html-area__center" style={{ background: '#f5f5f5', padding: '60px 20px' }}>
         <h2 className="html-area__title">The fundamentals of superyacht new build</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px', maxWidth: '1200px', margin: '40px auto 0' }}>
+        <div className="chapter-grid">
           {chapters.map((chapter, i) => (
-            <div key={i} style={{ background: '#fff', padding: '20px', border: '1px solid #ddd' }}>
+            <div key={i} className="chapter-card">
               <p style={{ fontSize: '0.875rem', color: '#666', marginBottom: '10px' }}>{chapter.time}</p>
               <h3 style={{ fontSize: '1rem', fontWeight: '700', marginBottom: '10px' }}>{chapter.title}</h3>
               <p style={{ fontSize: '0.875rem', color: '#666' }}>{chapter.desc}</p>
@@ -1376,7 +1370,7 @@ function BuildPage() {
       <div className="fifty-fifty fifty-fifty--margins">
         <div className="hwcc">
           <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=600&rmode=crop&q=80" alt="Technical Services" className="media-fit hwcc__img" />
-          <div className="hwcc__main">
+          <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">Technical Services</h2>
             <p className="hwcc__summary">If the yacht you want to own doesn't exist, our expertise can help you realise your vision.</p>
             <Link to="/enquire" className="btn btn--primary btn--white">Your vision, our expertise</Link>
@@ -1384,7 +1378,7 @@ function BuildPage() {
         </div>
         <div className="hwcc">
           <img src="https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&h=600&rmode=crop&q=80" alt="Delivered Yachts" className="media-fit hwcc__img" />
-          <div className="hwcc__main">
+          <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">Delivered yachts</h2>
             <p className="hwcc__summary">We successfully deliver more 30-180m yachts than any other new-build yacht construction team.</p>
             <Link to="/enquire" className="btn btn--primary btn--white">Discover our deliveries</Link>
@@ -1496,18 +1490,18 @@ function ManagementPage() {
       </div>
 
       {/* Management Services Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', padding: '40px', maxWidth: '1400px', margin: '0 auto' }}>
+      <div className="mgmt-grid">
         {services.map((service, i) => (
-          <div key={i} style={{ padding: '30px', border: '1px solid #ddd', textAlign: 'center' }}>
-            <div style={{ fontSize: '2rem', marginBottom: '15px' }}>{service.icon}</div>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '15px' }}>{service.title}</h3>
-            <p style={{ fontSize: '0.875rem', color: '#666' }}>{service.desc}</p>
+          <div key={i} className="mgmt-card">
+            <div className="mgmt-card__icon">{service.icon}</div>
+            <h3 className="mgmt-card__title">{service.title}</h3>
+            <p className="mgmt-card__desc">{service.desc}</p>
           </div>
         ))}
       </div>
 
       {/* You live the dream section */}
-      <div className="html-area" style={{ background: '#f5f5f5' }}>
+      <div className="html-area html-area__center" style={{ background: '#f5f5f5' }}>
         <h2 className="html-area__title">You live the dream. We manage it.</h2>
       </div>
 
@@ -1515,7 +1509,7 @@ function ManagementPage() {
       <div className="fifty-fifty fifty-fifty--margins">
         {ownerServices.slice(0, 2).map((service, i) => (
           <div key={i} className="hwcc">
-            <div className="hwcc__main" style={{ padding: '40px' }}>
+            <div className="hwcc__main hwcc__main--pad">
               <h2 className="hwcc__title">{service.title}</h2>
               <p className="hwcc__summary">{service.desc}</p>
               <Link to={service.link} className="btn btn--primary btn--white">Learn more</Link>
