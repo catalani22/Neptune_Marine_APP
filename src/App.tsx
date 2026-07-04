@@ -223,21 +223,21 @@ function ContentPods() {
 function DestinationPods() {
   const destinations = [
     {
-      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&rmode=crop&q=80',
+      image: '/assets/images/aquila-content.jpg',
       category: 'Destinations',
       title: 'Breathtaking Balearics',
       link: '/destinations/balearics',
       cta: 'Take me there'
     },
     {
-      image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=400&rmode=crop&q=80',
+      image: '/assets/images/santosha-content.jpg',
       category: 'Sustainability',
       title: 'Marine Foundation in 2025',
       link: '/sustainability',
       cta: 'Read the report'
     },
     {
-      image: 'https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&h=400&rmode=crop&q=80',
+      image: '/assets/images/balearics-dest.jpg',
       category: 'Yacht management',
       title: 'Let us take care of everything',
       link: '/manage',
@@ -291,7 +291,7 @@ function FiftyFifty() {
     <div className="fifty-fifty fifty-fifty--margins">
       <div className="hwcc">
         <img 
-          src="https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&h=1200&rmode=crop&q=80" 
+          src="/assets/images/burgess/charter/excellence.jpg" 
           alt="Charter"
           className="media-fit hwcc__img"
         />
@@ -305,7 +305,7 @@ function FiftyFifty() {
       
       <div className="hwcc">
         <img 
-          src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=1200&rmode=crop&q=80" 
+          src="/assets/images/burgess/charter/odyssey.jpg" 
           alt="Buy"
           className="media-fit hwcc__img"
         />
@@ -326,7 +326,7 @@ function HighlightPanel() {
     <div className="hl-panel theme-orange">
       <picture className="hl-panel__img">
         <img 
-          src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1600&h=900&rmode=crop&q=60" 
+          src="/assets/images/burgess/charter/lady_jorgia.jpg" 
           alt=""
         />
       </picture>
@@ -356,7 +356,7 @@ function SecondFiftyFifty() {
       
       <div className="hwcc">
         <img 
-          src="https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&h=1200&rmode=crop&q=80" 
+          src="/assets/images/burgess/charter/excellence.jpg" 
           alt="Build"
           className="media-fit hwcc__img"
         />
@@ -1240,7 +1240,7 @@ function DestinationsPage() {
       <div className="fls">
         <div className="fls__item">
           <Link to="/charter/destinations/mediterranean" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&rmode=crop&q=80" alt="Mediterranean" className="media-fit content-pod__img" />
+            <img src="/assets/images/aquila-content.jpg" alt="Mediterranean" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>Mediterranean</span></div>
@@ -1255,7 +1255,7 @@ function DestinationsPage() {
         </div>
         <div className="fls__item">
           <Link to="/charter/destinations/caribbean" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=400&rmode=crop&q=80" alt="Caribbean" className="media-fit content-pod__img" />
+            <img src="/assets/images/santosha-content.jpg" alt="Caribbean" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>Caribbean</span></div>
@@ -1369,7 +1369,7 @@ function BuildPage() {
       {/* Service Cards */}
       <div className="fifty-fifty fifty-fifty--margins">
         <div className="hwcc">
-          <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=600&rmode=crop&q=80" alt="Technical Services" className="media-fit hwcc__img" />
+          <img src="/assets/images/burgess/buy/majesty_175.jpg" alt="Technical Services" className="media-fit hwcc__img" />
           <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">Technical Services</h2>
             <p className="hwcc__summary">If the yacht you want to own doesn't exist, our expertise can help you realise your vision.</p>
@@ -1377,7 +1377,7 @@ function BuildPage() {
           </div>
         </div>
         <div className="hwcc">
-          <img src="https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&h=600&rmode=crop&q=80" alt="Delivered Yachts" className="media-fit hwcc__img" />
+          <img src="/assets/images/burgess/buy/odyssey.jpg" alt="Delivered Yachts" className="media-fit hwcc__img" />
           <div className="hwcc__main hwcc__main--pad">
             <h2 className="hwcc__title">Delivered yachts</h2>
             <p className="hwcc__summary">We successfully deliver more 30-180m yachts than any other new-build yacht construction team.</p>
@@ -1389,7 +1389,7 @@ function BuildPage() {
       <div className="fls">
         <div className="fls__item">
           <Link to="/enquire" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=400&rmode=crop&q=80" alt="Custom Tenders" className="media-fit content-pod__img" />
+            <img src="/assets/images/burgess/buy/anna-i.jpg" alt="Custom Tenders" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>Custom tenders</span></div>
@@ -1404,7 +1404,7 @@ function BuildPage() {
         </div>
         <div className="fls__item">
           <Link to="/enquire" className="content-pod">
-            <img src="https://images.unsplash.com/photo-1533558701576-90c0f39f6762?w=800&h=400&rmode=crop&q=80" alt="Shipyards" className="media-fit content-pod__img" />
+            <img src="/assets/images/balearics-dest.jpg" alt="Shipyards" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>Shipyards</span></div>
@@ -1422,7 +1422,7 @@ function BuildPage() {
       {/* New to Yacht Construction */}
       <div className="hl-panel theme-purple">
         <picture className="hl-panel__img">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&h=900&rmode=crop&q=60" alt="" />
+          <img src="/assets/images/burgess/charter/excellence_int.jpg" alt="" />
         </picture>
         <div className="hl-panel__contents">
           <h2 className="hl-panel__title">NEW TO YACHT CONSTRUCTION</h2>
@@ -1522,7 +1522,7 @@ function ManagementPage() {
         {ownerServices.slice(2, 5).map((service, i) => (
           <div key={i} className="fls__item">
             <Link to={service.link} className="content-pod">
-              <img src={['https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&h=400&rmode=crop&q=80', 'https://images.unsplash.com/photo-1609825488888-3a766db05542?w=800&h=400&rmode=crop&q=80', 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&h=400&rmode=crop&q=80'][i]} alt={service.title} className="media-fit content-pod__img" />
+              <img src={['/assets/images/santosha-content.jpg', '/assets/images/burgess/buy/jet.jpg', '/assets/images/burgess/buy/anna-i.jpg'][i]} alt={service.title} className="media-fit content-pod__img" />
               <div className="content-pod__cont content-pod__cont--grad">
                 <div className="content-pod__cont-inner">
                   <div className="content-pod__info"><span>{service.title}</span></div>
@@ -1541,7 +1541,7 @@ function ManagementPage() {
       {/* Refits Section */}
       <div className="hl-panel theme-orange">
         <picture className="hl-panel__img">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&h=900&rmode=crop&q=60" alt="" />
+          <img src="/assets/images/burgess/charter/excellence_int.jpg" alt="" />
         </picture>
         <div className="hl-panel__contents">
           <h2 className="hl-panel__title">Refits, upgrades and design services</h2>
@@ -1622,7 +1622,7 @@ function PrivacyPage() {
       {/* Contact */}
       <div className="hl-panel theme-aqua">
         <picture className="hl-panel__img">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&h=900&rmode=crop&q=60" alt="" />
+          <img src="/assets/images/burgess/charter/excellence_int.jpg" alt="" />
         </picture>
         <div className="hl-panel__contents">
           <h2 className="hl-panel__title">ANY QUESTIONS?</h2>

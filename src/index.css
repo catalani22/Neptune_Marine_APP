@@ -698,7 +698,7 @@ a:hover {
   max-width: 100%;
 }
 
-@media (min-width: 750px) {
+@media (min-width: 768px) {
   .fls {
     grid-template-columns: 1fr 1fr;
   }
@@ -802,7 +802,7 @@ a:hover {
   max-width: 100%;
 }
 
-@media (min-width: 750px) {
+@media (min-width: 768px) {
   .fifty-fifty {
     grid-template-columns: 1fr 1fr;
   }
@@ -832,9 +832,19 @@ a:hover {
   min-height: 400px;
 }
 
-@media (min-width: 750px) {
+@media (min-width: 768px) {
   .hwcc__main {
     padding: 60px 40px;
+  }
+}
+
+.hwcc__main--pad {
+  padding: 30px 20px;
+}
+
+@media (min-width: 768px) {
+  .hwcc__main--pad {
+    padding: 50px 30px;
   }
 }
 
@@ -1098,13 +1108,13 @@ a:hover {
   background: #fff;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 768px) {
   .yacht-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .yacht-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
@@ -1689,7 +1699,7 @@ a:hover {
   grid-template-columns: 1fr;
 }
 
-@media (min-width: 750px) {
+@media (min-width: 768px) {
   .ccg {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1921,7 +1931,7 @@ a:hover {
   margin: 0 auto;
 }
 
-@media (min-width: 750px) {
+@media (min-width: 768px) {
   .u-ed__grid {
     grid-template-columns: repeat(2, 1fr);
   }
