@@ -1772,6 +1772,140 @@ function Home() {
   );
 }
 
+// ============= ABOUT PAGE =============
+function AboutPage() {
+  return (
+    <div>
+      {/* Hero Section */}
+      <section className="h-bann theme-blue">
+        <div className="h-bann__cont theme-border">
+          <span></span>
+          <div>
+            <p className="h-bann__title" style={{ fontSize: '2.5rem', fontWeight: '300' }}>About us</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Introduction */}
+      <div className="html-area html-area--center">
+        <div className="html-area__subtitle">OUR STORY</div>
+        <h2 className="html-area__title">About Neptune Marine</h2>
+        <div className="html-area__standfirst html-area__standfirst--center">
+          <p>Neptune Marine is a premier luxury yacht charter and sales brokerage, specializing in bespoke maritime experiences and exclusive yacht transactions worldwide.</p>
+        </div>
+      </div>
+
+      {/* Mission & Vision */}
+      <div className="html-area" style={{ background: '#f5f5f5', padding: '60px 20px' }}>
+        <h2 className="html-area__title">Our Mission & Vision</h2>
+        <div className="fifty-fifty fifty-fifty--margins">
+          <div className="hwcc">
+            <div className="hwcc__main hwcc__center">
+              <h3 className="hwcc__title">Mission</h3>
+              <p className="hwcc__summary">To provide unparalleled luxury yacht experiences through personalized service, expert knowledge, and access to the world's finest vessels.</p>
+            </div>
+          </div>
+          <div className="hwcc">
+            <div className="hwcc__main hwcc__center">
+              <h3 className="hwcc__title">Vision</h3>
+              <p className="hwcc__summary">To be the most trusted and innovative yacht brokerage, setting new standards for excellence in the global yachting industry.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Our Team */}
+      <div className="html-area html-area--center">
+        <h2 className="html-area__title">Our Expert Team</h2>
+        <p className="html-area__standfirst">Our team of seasoned yacht professionals brings decades of combined experience to every charter and transaction.</p>
+      </div>
+      <div className="mgmt-grid">
+        <div className="mgmt-card">
+          <div className="mgmt-card__icon">⚓</div>
+          <h3 className="mgmt-card__title">Charter Specialists</h3>
+          <p className="mgmt-card__desc">Experts in matching clients with their perfect yacht charter experiences worldwide.</p>
+        </div>
+        <div className="mgmt-card">
+          <div className="mgmt-card__icon">🏠</div>
+          <h3 className="mgmt-card__title">Sales & Brokerage</h3>
+          <p className="mgmt-card__desc">Specialists in yacht sales, acquisitions, and market analysis for buyers and sellers.</p>
+        </div>
+        <div className="mgmt-card">
+          <div className="mgmt-card__icon">🔧</div>
+          <h3 className="mgmt-card__title">Technical Services</h3>
+          <p className="mgmt-card__desc">Full-service yacht maintenance, refits, and technical support for optimal performance.</p>
+        </div>
+        <div className="mgmt-card">
+          <div className="mgmt-card__icon">📊</div>
+          <h3 className="mgmt-card__title">Operations & Logistics</h3>
+          <p className="mgmt-card__desc">Seamless coordination of itineraries, provisions, and on-water support for flawless execution.</p>
+        </div>
+      </div>
+
+      {/* Why Choose Us */}
+      <div className="html-area">
+        <h2 className="html-area__title">Why Choose Neptune Marine?</h2>
+        <div className="fifty-fifty fifty-fifty--margins">
+          <div className="hwcc">
+            <div className="hwcc__main hwcc__center">
+              <h3 className="hwcc__title">Global Network</h3>
+              <p className="hwcc__summary">Access to exclusive yachts and destinations through our worldwide partnerships and relationships.</p>
+            </div>
+          </div>
+          <div className="hwcc">
+            <div className="hwcc__main hwcc__center">
+              <h3 className="hwcc__title">Personalized Service</h3>
+              <p className="hwcc__summary">Tailored experiences from initial inquiry to post-charter follow-up, ensuring every detail exceeds expectations.</p>
+            </div>
+          </div>
+        </div>
+        <div className="fifty-fifty fifty-fifty--margins fifty-fifty--mt-0">
+          <div className="hwcc">
+            <div className="hwcc__main hwcc__center">
+              <h3 className="hwcc__title">Transparent Pricing</h3>
+              <p className="hwcc__summary">Clear, upfront pricing with no hidden fees. Our 10% markup is openly disclosed for complete transparency.</p>
+            </div>
+          </div>
+          <div className="hwcc">
+            <div className="hwcc__main hwcc__center">
+              <h3 className="hwcc__title">Crypto-Friendly</h3>
+              <p className="hwcc__summary">Seamless cryptocurrency payments for secure, fast, and private transactions worldwide.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Testimonials */}
+      <div className="html-area html-area--center" style={{ background: '#f5f5f5' }}>
+        <h2 className="html-area__title">Client Testimonials</h2>
+        <p className="html-area__standfirst">Hear from our satisfied clients about their Neptune Marine experiences.</p>
+      </div>
+      <div className="dtd">
+        <div className="dtd__inner">
+          <div className="dtd__content">
+            <h2 className="dtd__title">Exceptional Service</h2>
+            <p className="dtd__subtitle">"From the first contact to the final farewell, Neptune Marine delivered a flawless charter experience. The yacht was immaculate, the crew professional, and the itinerary perfectly tailored to our desires."</p>
+          </div>
+          <div className="dtd__grid">
+            <div className="dtd__section">
+              <h3 className="dtd__section-title">Charter Experience</h3>
+              <p>5-star ratings for service, vessel quality, and itinerary planning across all major yachting destinations.</p>
+            </div>
+            <div className="dtd__section">
+              <h3 className="dtd__section-title">Sales Expertise</h3>
+              <p>Proven track record in yacht sales with clients ranging from first-time buyers to seasoned yacht owners.</p>
+            </div>
+            <div className="dtd__section">
+              <h3 className="dtd__section-title">Technical Excellence</h3>
+              <p>Award-winning maintenance and refit services ensuring vessels are always in peak condition.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ============= MAIN APP =============
 function App() {
   return (
@@ -1779,9 +1913,10 @@ function App() {
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Header />
         <main style={{ flex: 1 }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/charter" element={<CharterPage />} />
+<Routes>
+             <Route path="/" element={<Home />} />
+             <Route path="/about" element={<AboutPage />} />
+             <Route path="/charter" element={<CharterPage />} />
             <Route path="/charter/yachts" element={<CharterPage />} />
             <Route path="/charter/yachts-for-charter" element={<CharterPage />} />
             <Route path="/charter/inspiration" element={<CharterInspirationPage />} />
