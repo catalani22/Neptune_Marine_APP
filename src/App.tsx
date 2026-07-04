@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Search, ArrowRight, Shield, CreditCard } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { supabase } from './lib/supabase';
 import { YachtDetailPage } from './pages/YachtDetailPage';
 
@@ -43,7 +43,10 @@ function Header() {
             aria-label="Open the search panel"
             onClick={() => setSearchOpen(!searchOpen)}
           >
-            <Search size={20} />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
           </button>
 
           <Link to="/charter" className="s-head-nav__link s-head__sd">Charter</Link>
@@ -53,7 +56,7 @@ function Header() {
           <Link to="/manage" className="s-head-nav__link s-head__sd">Manage</Link>
         </nav>
         
-        <Link to="/" className="s-head__logo" aria-label="Navigate to the home page" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+        <Link to="/" className="s-head__logo" aria-label="Navigate to the home page">
           <img 
             src="/assets/images/brand/neptunebw.png" 
             alt="Neptune Marine" 
@@ -62,25 +65,17 @@ function Header() {
         </Link>
         
         <nav className="s-head-nav s-head-nav--right">
-          <Link className="s-head-nav__link s-head-nav__link--i s-head__hd" to="/account">
+          <button className="s-head-nav__link s-head-nav__link--i s-head__sd" aria-label="Search" onClick={() => setSearchOpen(!searchOpen)}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-          </Link>
-          <Link className="s-head-nav__link s-head-nav__link--i s-head__hd" to="/enquire">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </Link>
-          <button className="s-head-nav__link s-head-nav__link--i s-head__sd" onClick={() => setSearchOpen(!searchOpen)}>
-            <Search size={20} />
           </button>
           <Link to="/account" className="s-head-nav__link s-head__sd">My account</Link>
           <Link to="/enquire" className="s-head-nav__link s-head__sd">Contact Us</Link>
         </nav>
       </header>
-      <div className="s-head__container" style={{ height: '70px' }}></div>
+      <div className="s-head__container"></div>
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${mobileMenuOpen ? 'mobile-menu--open' : ''}`}>
@@ -143,24 +138,6 @@ function Hero() {
             <span className="h-bann__sub-title h-bann__sub-title--outline">Discover the</span>
             <span className="h-bann__sub-title theme-text">Difference</span>
           </div>
-          
-          {/* Crypto Badge */}
-          <div style={{ marginTop: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-            <div className="crypto-badge-burgess">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-              </svg>
-              Pay with Crypto
-            </div>
-            <div className="crypto-badge-burgess">
-              <Shield size={16} />
-              Secure Booking
-            </div>
-            <div className="crypto-badge-burgess">
-              <CreditCard size={16} />
-              10% Pre-reserve
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -171,97 +148,50 @@ function Hero() {
 function ContentPods() {
   const pods = [
     {
-      image: '/assets/images/aquila-content.jpg',
+      image: '/assets/images/burgess/yachts/joy.jpg',
       category: 'Yacht charters',
       title: 'Last-minute availability',
       link: '/charter',
-      cta: 'Book now'
+      cta: 'View available yachts'
     },
     {
-      image: '/assets/images/santosha-content.jpg',
-      category: 'Unbeatable holidays',
+      image: '/assets/images/burgess/yachts/alvia.jpg',
+      category: 'Unforgettable journeys',
       title: 'Yachts for charter',
       link: '/charter',
-      cta: 'Find your favourite'
+      cta: 'Start your search'
     },
     {
-      image: '/assets/images/samar-hero.jpg',
+      video: '/assets/videos/sale-1080p.mp4',
       category: 'Buy a yacht',
       title: 'Yachts for sale',
       link: '/sale',
-      cta: 'Yours to own',
+      cta: 'Explore opportunities',
       double: true
     }
   ];
 
   return (
-    <div className="fls fls--home">
+    <div className="fls">
       {pods.map((pod, i) => (
         <div key={i} className={`fls__item ${pod.double ? 'fls__item--double' : ''}`}>
           <Link to={pod.link} className="content-pod">
-            <img src={pod.image} alt={pod.title} className="media-fit content-pod__img" />
-            <div className="content-pod__cont content-pod__cont--grad content-pod__cont--bottom">
+            {pod.video ? (
+              <video controlsList="nodownload" playsInline autoPlay loop muted disablePictureInPicture preload="none" className="media-fit content-pod__img" data-play-inline>
+                <source src={pod.video} type="video/mp4" />
+              </video>
+            ) : (
+              <img src={pod.image} alt={pod.title} className="media-fit content-pod__img" />
+            )}
+            <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info">
                   <span>{pod.category}</span>
                 </div>
                 <h2 className="content-pod__title">{pod.title}</h2>
-                <span className="a-link a-link--white">
+                <span className="a-link a-link--inherit">
                   <span className="a-link__text">{pod.cta}</span>
-                  <ArrowRight className="a-link__icon" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// ============= DESTINATIONS PODS =============
-function DestinationPods() {
-  const destinations = [
-    {
-      image: '/assets/images/aquila-content.jpg',
-      category: 'Destinations',
-      title: 'Breathtaking Balearics',
-      link: '/destinations/balearics',
-      cta: 'Take me there'
-    },
-    {
-      image: '/assets/images/santosha-content.jpg',
-      category: 'Sustainability',
-      title: 'Marine Foundation in 2025',
-      link: '/sustainability',
-      cta: 'Read the report'
-    },
-    {
-      image: '/assets/images/balearics-dest.jpg',
-      category: 'Yacht management',
-      title: 'Let us take care of everything',
-      link: '/manage',
-      cta: 'Maximum owner enjoyment',
-      gradient: true,
-      theme: 'theme-aqua'
-    }
-  ];
-
-  return (
-    <div className="fls">
-      {destinations.map((dest, i) => (
-        <div key={i} className={`fls__item ${i === 0 ? 'fls__item--double' : ''}`}>
-          <Link to={dest.link} className={`content-pod ${dest.gradient ? `content-pod--grad ${dest.theme || ''}` : ''}`}>
-            {!dest.gradient && <img src={dest.image} alt={dest.title} className="media-fit content-pod__img" />}
-            <div className={`content-pod__cont ${!dest.gradient ? 'content-pod__cont--grad' : ''}`}>
-              <div className="content-pod__cont-inner">
-                <div className="content-pod__info">
-                  <span>{dest.category}</span>
-                </div>
-                <h2 className="content-pod__title">{dest.title}</h2>
-                <span className="a-link">
-                  <span className="a-link__text">{dest.cta}</span>
-                  <ArrowRight className="a-link__icon" />
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
                 </span>
               </div>
             </div>
@@ -275,11 +205,15 @@ function DestinationPods() {
 // ============= HTML AREA SECTION =============
 function HtmlArea() {
   return (
-    <div className="html-area html-area--center">
-      <div className="html-area__subtitle">BOLD. BRAVE. BRIGHT. BRILLIANT. BETTER.</div>
-      <h2 className="html-area__title">Discover the difference</h2>
-      <div className="html-area__standfirst html-area__standfirst--center">
-        <p>As a Neptune Marine client, you always come first, whether that's charter, sale and purchase, build, refit or any aspect of yacht ownership. That's the Neptune Marine difference.</p>
+    <div className="cws">
+      <div className="cws__inner">
+        <div className="html-area loading">
+          <div className="html-area__subtitle">BOLD. BRAVE. BRIGHT. BRILLIANT. BETTER.</div>
+          <h2 className="html-area__title und-title und-title--center">Discover the difference</h2>
+          <div className="html-area__standfirst" style={{ textAlign: 'center' }}>
+            <p>As a Neptune Marine client, you always come first, whether that&rsquo;s charter, sale and purchase, build, refit or any aspect of yacht ownership. That&rsquo;s the Neptune Marine difference.</p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -289,27 +223,25 @@ function HtmlArea() {
 function FiftyFifty() {
   return (
     <div className="fifty-fifty fifty-fifty--margins">
-      <div className="hwcc">
-        <img 
-          src="/assets/images/burgess/charter/excellence.jpg" 
-          alt="Charter"
-          className="media-fit hwcc__img"
-        />
-        <div className="hwcc__main hwcc__center">
+      <div className="hwcc loading">
+        <picture>
+          <source srcSet="/assets/images/burgess/homepage/lady_jorgia_00004792_vb1459357_3840x2560.jpg?width=350&height=465&rmode=crop&format=webp&quality=60&v=202309141304 350w, /assets/images/burgess/homepage/lady_jorgia_00004792_vb1459357_3840x2560.jpg?width=500&height=465&rmode=crop&format=webp&quality=60&v=202309141304 500w, /assets/images/burgess/homepage/lady_jorgia_00004792_vb1459357_3840x2560.jpg?width=700&height=465&rmode=crop&format=webp&quality=60&v=202309141304 700w" sizes="100vw" media="(max-width: 750px)"/>
+          <img className="hwcc__img media-fit" src="/assets/images/burgess/homepage/lady_jorgia_00004792_vb1459357_3840x2560.jpg?width=1651&height=1297&rmode=crop&format=webp&quality=60&v=202309141304" loading="lazy" alt="" sizes="(max-width: 750px) 100vw, 50vw"/>
+        </picture>
+        <div className="hwcc__main">
           <h2 className="hwcc__title">charter a yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your great escape. Tailored by Neptune Marine.</p>
-          <p className="hwcc__summary">Cruise in inimitable style and experience real freedom. The adventure of a lifetime awaits aboard the world's greatest superyachts, all curated by your own professional broker.</p>
+          <p className="hwcc__summary">Cruise in inimitable style and experience real freedom.<br/>The adventure of a lifetime awaits aboard the world&rsquo;s greatest superyachts, all curated by your own professional broker.</p>
           <Link to="/charter" className="btn btn--primary btn--white">Charter a yacht</Link>
         </div>
       </div>
       
-      <div className="hwcc">
-        <img 
-          src="/assets/images/burgess/charter/odyssey.jpg" 
-          alt="Buy"
-          className="media-fit hwcc__img"
-        />
-        <div className="hwcc__main hwcc__center">
+      <div className="hwcc loading">
+        <picture>
+          <source srcSet="/assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=350&height=465&rmode=crop&format=webp&quality=60&v=202309141304 350w, /assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=500&height=465&rmode=crop&format=webp&quality=60&v=202309141304 500w, /assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=700&height=465&rmode=crop&format=webp&quality=60&v=202309141304 700w" sizes="100vw" media="(max-width: 750px)"/>
+          <img className="hwcc__img media-fit" src="/assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=1651&height=1297&rmode=crop&format=webp&quality=60&v=202309141304" loading="lazy" alt="" sizes="(max-width: 750px) 100vw, 50vw"/>
+        </picture>
+        <div className="hwcc__main">
           <h2 className="hwcc__title">BUY A Yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your life. Spent wisely.</p>
           <p className="hwcc__summary">From the global fleet of mega yachts offered for sale, we hand-pick the best opportunities and share our expert knowledge, so that you can make the best decisions.</p>
@@ -325,15 +257,13 @@ function HighlightPanel() {
   return (
     <div className="hl-panel theme-orange">
       <picture className="hl-panel__img">
-        <img 
-          src="/assets/images/burgess/charter/lady_jorgia.jpg" 
-          alt=""
-        />
+        <source srcSet="/assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=335&height=250&rmode=crop&format=webp&quality=60&v=202309141304 335w, /assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=670&height=500&rmode=crop&format=webp&quality=60&v=202309141304 670w, /assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=1005&height=750&rmode=crop&format=webp&quality=60&v=202309141304 1005w" media="(max-width: 750px)" sizes="100vw"/>
+        <img src="/assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=1330&height=807&rmode=crop&format=webp&quality=60&v=202309141304" srcSet="/assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=1330&height=807&rmode=crop&format=webp&quality=60&v=202309141304 1330w, /assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=2833&height=1217&rmode=crop&format=webp&quality=60&v=202309141304 2833w" alt="" loading="lazy" className="media-fit" sizes="70vw"/>
       </picture>
       <div className="hl-panel__contents">
         <h2 className="hl-panel__title">About us</h2>
         <p className="hl-panel__mt">Your wish. Our world.</p>
-        <p>Our reputation is your recommendation. Since 1975 all our knowledge has been distilled into one goal, making sure you enjoy the best yachting experience. If it involves yachts, we've got you covered.</p>
+        <p>Our reputation is your recommendation. Since 1975 all our knowledge has been distilled into one goal, making sure you enjoy the best yachting experience.<br/><br/>If it involves yachts, we&rsquo;ve got you covered.</p>
         <Link to="/about" className="btn btn--solid-grad hl-panel__btn">About us</Link>
       </div>
       <div className="hl-panel__border theme-border"></div>
@@ -345,22 +275,22 @@ function HighlightPanel() {
 function SecondFiftyFifty() {
   return (
     <div className="fifty-fifty fifty-fifty--margins fifty-fifty--mb-0">
-      <div className="hwcc hwcc--gradient theme-purple-yellow">
-        <div className="hwcc__main hwcc__center">
+      <div className="hwcc hwcc--gradient theme-orange-purple">
+        <div className="hwcc__main">
           <h2 className="hwcc__title">sell a yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your perfect buyer. Our exclusive audience.</p>
-          <p className="hwcc__summary">Our directly employed brokers share market-leading intelligence and powerful client database insights with our experienced global team to ensure the best outcome for you.</p>
+          <p className="hwcc__summary">Our directly employed brokers share market-leading intelligence and powerful client database insights
+with our experienced global team to ensure the best outcome for you.</p>
           <Link to="/sell" className="btn btn--primary btn--white btn--white-grad">Sell a yacht</Link>
         </div>
       </div>
       
-      <div className="hwcc">
-        <img 
-          src="/assets/images/burgess/charter/excellence.jpg" 
-          alt="Build"
-          className="media-fit hwcc__img"
-        />
-        <div className="hwcc__main hwcc__center">
+      <div className="hwcc loading">
+        <picture>
+          <source srcSet="/assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=350&height=465&rmode=crop&format=webp&quality=60&v=202309141304 350w, /assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=500&height=465&rmode=crop&format=webp&quality=60&v=202309141304 500w, /assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=700&height=465&rmode=crop&format=webp&quality=60&v=202309141304 700w" sizes="100vw" media="(max-width: 750px)"/>
+          <img className="hwcc__img media-fit" src="/assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=1651&height=1297&rmode=crop&format=webp&quality=60&v=202309141304" loading="lazy" alt="" sizes="(max-width: 750px) 100vw, 50vw"/>
+        </picture>
+        <div className="hwcc__main">
           <h2 className="hwcc__title">BUILD A Yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your vision. Our expertise.</p>
           <p className="hwcc__summary">From concept to launch, our new build team will guide you through every step of the construction process, ensuring your dream yacht becomes a reality.</p>
@@ -1757,13 +1687,120 @@ function SitemapPage() {
   );
 }
 
+// ============= EXTRA CONTENT PODS =============
+function ExtraContentPods() {
+  return (
+    <>
+      {/* Sardinia + Yacht Management */}
+      <div className="fls">
+        <div className="fls__item fls__item--double">
+          <Link to="/charter/destinations/corsica-and-sardinia" className="content-pod">
+            <img src="/assets/images/burgess/destinations/sardinia.jpg" alt="Sardinia" className="media-fit content-pod__img" />
+            <div className="content-pod__cont content-pod__cont--grad">
+              <div className="content-pod__cont-inner">
+                <div className="content-pod__info"><span>Destinations</span></div>
+                <h2 className="content-pod__title">Discover Sardinia</h2>
+                <span className="a-link">
+                  <span className="a-link__text">Plan your escape</span>
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                </span>
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div className="fls__item">
+          <Link to="/yacht-owner-services/yacht-management" className="content-pod content-pod--grad theme-aqua">
+            <div className="content-pod__cont">
+              <div className="content-pod__cont-inner">
+                <div className="content-pod__info"><span>Yacht management</span></div>
+                <h2 className="content-pod__title">Effortless ownership</h2>
+                <span className="a-link">
+                  <span className="a-link__text">Discover our services</span>
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                </span>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      {/* SYNTHESIS + Global boat shows */}
+      <div className="fls">
+        <div className="fls__item">
+          <Link to="/buy-a-yacht/yachts-for-sale" className="content-pod">
+            <img src="/assets/images/burgess/yachts/synthesis.jpg" alt="SYNTHESIS" className="media-fit content-pod__img" />
+            <div className="content-pod__cont content-pod__cont--grad">
+              <div className="content-pod__cont-inner">
+                <div className="content-pod__info"><span>Buy a yacht</span></div>
+                <h2 className="content-pod__title">74m Amels SYNTHESIS</h2>
+                <span className="a-link">
+                  <span className="a-link__text">Step on board</span>
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                </span>
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div className="fls__item">
+          <Link to="/editorial/boat-shows-events" className="content-pod content-pod--grad theme-blue">
+            <div className="content-pod__cont">
+              <div className="content-pod__cont-inner">
+                <div className="content-pod__info"><span>2026 events</span></div>
+                <h2 className="content-pod__title">Global boat shows</h2>
+                <span className="a-link">
+                  <span className="a-link__text">Plan your calendar</span>
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                </span>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </div>
+
+      {/* Extraordinary journeys + Italian shipyards */}
+      <div className="fls">
+        <div className="fls__item">
+          <Link to="/editorial/news/burgess-x-joro-the-partnership" className="content-pod">
+            <img src="/assets/images/burgess/editorial/joro.jpg" alt="Antarctica" className="media-fit content-pod__img" />
+            <div className="content-pod__cont content-pod__cont--grad">
+              <div className="content-pod__cont-inner">
+                <div className="content-pod__info"><span>Burgess | JORO</span></div>
+                <h2 className="content-pod__title">Extraordinary journeys, redefined</h2>
+                <span className="a-link">
+                  <span className="a-link__text">Begin your adventure</span>
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                </span>
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div className="fls__item fls__item--double">
+          <Link to="/editorial/news/italian-shipyards-new-build-market" className="content-pod">
+            <img src="/assets/images/burgess/editorial/riva.jpg" alt="Riva" className="media-fit content-pod__img" />
+            <div className="content-pod__cont content-pod__cont--grad">
+              <div className="content-pod__cont-inner">
+                <div className="content-pod__info"><span>Editorial</span></div>
+                <h2 className="content-pod__title">Italian shipyards: What&rsquo;s new in the new build market</h2>
+                <span className="a-link">
+                  <span className="a-link__text">Read the story</span>
+                  <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                </span>
+              </div>
+            </div>
+          </Link>
+        </div>
+      </div>
+    </>
+  );
+}
+
 // ============= HOME PAGE =============
 function Home() {
   return (
     <>
       <Hero />
       <ContentPods />
-      <DestinationPods />
+      <ExtraContentPods />
       <HtmlArea />
       <FiftyFifty />
       <HighlightPanel />
@@ -1913,55 +1950,55 @@ function App() {
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Header />
         <main style={{ flex: 1 }}>
-<Routes>
-             <Route path="/" element={<Home />} />
-             <Route path="/about" element={<AboutPage />} />
-             <Route path="/charter" element={<CharterPage />} />
-            <Route path="/charter/yachts" element={<CharterPage />} />
-            <Route path="/charter/yachts-for-charter" element={<CharterPage />} />
-            <Route path="/charter/inspiration" element={<CharterInspirationPage />} />
-            <Route path="/charter/destinations" element={<DestinationsPage />} />
-            <Route path="/charter/destinations/:region" element={<DestinationsPage />} />
-            <Route path="/charter/new-to-charter" element={<CharterPage />} />
-            <Route path="/charter/corporate-yacht-charter" element={<CharterPage />} />
-            <Route path="/charter/*" element={<CharterPage />} />
-            
-            <Route path="/buy" element={<BuyPage />} />
-            <Route path="/buy-a-yacht" element={<BuyPage />} />
-            <Route path="/buy-a-yacht/yachts-for-sale" element={<BuyPage />} />
-            <Route path="/sale" element={<SalePage />} />
-            <Route path="/sell" element={<SalePage />} />
-            <Route path="/sell-a-yacht" element={<SalePage />} />
-            
-            <Route path="/build" element={<BuildPage />} />
-            <Route path="/build-a-yacht" element={<BuildPage />} />
-            <Route path="/build-a-yacht/technical-services" element={<BuildPage />} />
-            <Route path="/build-a-yacht/shipyards" element={<BuildPage />} />
-            
-            <Route path="/manage" element={<ManagementPage />} />
-            <Route path="/management" element={<ManagementPage />} />
-            <Route path="/yacht-owner-services" element={<ManagementPage />} />
-            <Route path="/yacht-owner-services/yacht-management" element={<ManagementPage />} />
-            <Route path="/yacht-owner-services/charter-management" element={<ManagementPage />} />
-            
-            <Route path="/destinations" element={<DestinationsPage />} />
-            <Route path="/enquire" element={<EnquirePage />} />
-            <Route path="/contact" element={<EnquirePage />} />
-            <Route path="/contact-us" element={<EnquirePage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/account" element={<EnquirePage />} />
-            
-            <Route path="/privacy-policy" element={<PrivacyPage />} />
-            <Route path="/terms-of-use" element={<TermsPage />} />
-            <Route path="/sitemap" element={<SitemapPage />} />
-            
-            <Route path="/charter/yachts-for-charter/:slug" element={<YachtDetailPage />} />
-            <Route path="/buy/yachts-for-sale/:slug" element={<YachtDetailPage />} />
-            <Route path="/yacht/:slug" element={<YachtDetailPage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+          <Routes>
+               <Route path="/" element={<Home />} />
+               <Route path="/about" element={<AboutPage />} />
+               <Route path="/charter" element={<CharterPage />} />
+              <Route path="/charter/yachts" element={<CharterPage />} />
+              <Route path="/charter/yachts-for-charter" element={<CharterPage />} />
+              <Route path="/charter/inspiration" element={<CharterInspirationPage />} />
+              <Route path="/charter/destinations" element={<DestinationsPage />} />
+              <Route path="/charter/destinations/:region" element={<DestinationsPage />} />
+              <Route path="/charter/new-to-charter" element={<CharterPage />} />
+              <Route path="/charter/corporate-yacht-charter" element={<CharterPage />} />
+              <Route path="/charter/*" element={<CharterPage />} />
+              
+              <Route path="/buy" element={<BuyPage />} />
+              <Route path="/buy-a-yacht" element={<BuyPage />} />
+              <Route path="/buy-a-yacht/yachts-for-sale" element={<BuyPage />} />
+              <Route path="/sale" element={<SalePage />} />
+              <Route path="/sell" element={<SalePage />} />
+              <Route path="/sell-a-yacht" element={<SalePage />} />
+              
+              <Route path="/build" element={<BuildPage />} />
+              <Route path="/build-a-yacht" element={<BuildPage />} />
+              <Route path="/build-a-yacht/technical-services" element={<BuildPage />} />
+              <Route path="/build-a-yacht/shipyards" element={<BuildPage />} />
+              
+              <Route path="/manage" element={<ManagementPage />} />
+              <Route path="/management" element={<ManagementPage />} />
+              <Route path="/yacht-owner-services" element={<ManagementPage />} />
+              <Route path="/yacht-owner-services/yacht-management" element={<ManagementPage />} />
+              <Route path="/yacht-owner-services/charter-management" element={<ManagementPage />} />
+              
+              <Route path="/destinations" element={<DestinationsPage />} />
+              <Route path="/enquire" element={<EnquirePage />} />
+              <Route path="/contact" element={<EnquirePage />} />
+              <Route path="/contact-us" element={<EnquirePage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/account" element={<EnquirePage />} />
+              
+              <Route path="/privacy-policy" element={<PrivacyPage />} />
+              <Route path="/terms-of-use" element={<TermsPage />} />
+              <Route path="/sitemap" element={<SitemapPage />} />
+              
+              <Route path="/charter/yachts-for-charter/:slug" element={<YachtDetailPage />} />
+              <Route path="/buy/yachts-for-sale/:slug" element={<YachtDetailPage />} />
+              <Route path="/yacht/:slug" element={<YachtDetailPage />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
     </BrowserRouter>
   );
 }
