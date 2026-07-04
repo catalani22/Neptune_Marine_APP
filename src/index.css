@@ -488,18 +488,24 @@ a:hover {
   height: 70px;
 }
 
+@media (min-width: 1200px) {
+  .s-head__container {
+    height: 80px;
+  }
+}
+
 .s-head__logo {
   color: #18c0d6;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
+  height: 100%;
 }
 
 .s-head-nav {
   align-items: center;
   display: flex;
-  gap: 20px;
+  gap: 16px;
 }
 
 @media (min-width: 1200px) {
@@ -514,14 +520,22 @@ a:hover {
 
 .s-head-nav__link {
   color: inherit;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.01em;
-  line-height: 0.9;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
   text-decoration: none;
   text-transform: uppercase;
   transition: color 0.2s ease-in-out;
-  padding: 10px;
+  padding: 8px 4px;
+  white-space: nowrap;
+}
+
+@media (min-width: 1200px) {
+  .s-head-nav__link {
+    font-size: 0.875rem;
+    padding: 10px 6px;
+  }
 }
 
 .s-head-nav__link:hover,
@@ -530,18 +544,57 @@ a:hover {
   outline: 0;
 }
 
+.s-head-nav__link--i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.s-head__hd {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .s-head__hd {
+    display: inline-flex;
+  }
+}
+
+.s-head__sd {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .s-head__sd {
+    display: inline-flex;
+  }
+}
+
 .menu-i {
   display: flex;
   flex-direction: column;
-  height: 14px;
+  height: 12px;
   justify-content: space-between;
-  width: 18px;
+  width: 16px;
 }
 
 .menu-i__line {
   background-color: currentColor;
   display: block;
-  padding: 1px;
+  height: 2px;
+}
+
+/* Mobile nav adjustments */
+@media (max-width: 1199px) {
+  .s-head-nav--left,
+  .s-head-nav--right {
+    gap: 4px;
+  }
+  
+  .s-head-nav__link:not(.s-head-nav__link--i) {
+    display: none;
+  }
 }
 
 /* ============= HERO BANNER ============= */
@@ -549,8 +602,8 @@ a:hover {
 .h-bann {
   background-color: #ccc;
   height: 60vh;
-  max-height: 639px;
-  min-height: 400px;
+  max-height: 580px;
+  min-height: 420px;
   position: relative;
   margin-top: 70px;
   overflow: hidden;
@@ -558,15 +611,17 @@ a:hover {
 
 @media (min-width: 768px) {
   .h-bann {
-    height: calc(100vh - 120px);
+    height: calc(100vh - 140px);
     max-height: 700px;
   }
 }
 
 @media (min-width: 1200px) {
   .h-bann {
-    height: calc(100vh - 70px);
+    margin-top: 90px;
+    height: calc(100vh - 90px);
     max-height: 46.875vw;
+    min-height: 500px;
   }
 }
 

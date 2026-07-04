@@ -195,18 +195,18 @@ function ContentPods() {
   ];
 
   return (
-    <div className="fls">
+    <div className="fls fls--home">
       {pods.map((pod, i) => (
         <div key={i} className={`fls__item ${pod.double ? 'fls__item--double' : ''}`}>
           <Link to={pod.link} className="content-pod">
             <img src={pod.image} alt={pod.title} className="media-fit content-pod__img" />
-            <div className="content-pod__cont content-pod__cont--grad">
+            <div className="content-pod__cont content-pod__cont--grad content-pod__cont--bottom">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info">
                   <span>{pod.category}</span>
                 </div>
                 <h2 className="content-pod__title">{pod.title}</h2>
-                <span className="a-link">
+                <span className="a-link a-link--white">
                   <span className="a-link__text">{pod.cta}</span>
                   <ArrowRight className="a-link__icon" />
                 </span>
@@ -275,11 +275,11 @@ function DestinationPods() {
 // ============= HTML AREA SECTION =============
 function HtmlArea() {
   return (
-    <div className="html-area">
+    <div className="html-area html-area--center">
       <div className="html-area__subtitle">BOLD. BRAVE. BRIGHT. BRILLIANT. BETTER.</div>
       <h2 className="html-area__title">Discover the difference</h2>
-      <div className="html-area__standfirst">
-        <p style={{ textAlign: 'center' }}>As a Neptune Marine client, you always come first, whether that's charter, sale and purchase, build, refit or any aspect of yacht ownership. That's the Neptune Marine difference.</p>
+      <div className="html-area__standfirst html-area__standfirst--center">
+        <p>As a Neptune Marine client, you always come first, whether that's charter, sale and purchase, build, refit or any aspect of yacht ownership. That's the Neptune Marine difference.</p>
       </div>
     </div>
   );
@@ -295,7 +295,7 @@ function FiftyFifty() {
           alt="Charter"
           className="media-fit hwcc__img"
         />
-        <div className="hwcc__main">
+        <div className="hwcc__main hwcc__center">
           <h2 className="hwcc__title">charter a yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your great escape. Tailored by Neptune Marine.</p>
           <p className="hwcc__summary">Cruise in inimitable style and experience real freedom. The adventure of a lifetime awaits aboard the world's greatest superyachts, all curated by your own professional broker.</p>
@@ -309,7 +309,7 @@ function FiftyFifty() {
           alt="Buy"
           className="media-fit hwcc__img"
         />
-        <div className="hwcc__main">
+        <div className="hwcc__main hwcc__center">
           <h2 className="hwcc__title">BUY A Yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your life. Spent wisely.</p>
           <p className="hwcc__summary">From the global fleet of mega yachts offered for sale, we hand-pick the best opportunities and share our expert knowledge, so that you can make the best decisions.</p>
@@ -346,7 +346,7 @@ function SecondFiftyFifty() {
   return (
     <div className="fifty-fifty fifty-fifty--margins fifty-fifty--mb-0">
       <div className="hwcc hwcc--gradient theme-purple-yellow">
-        <div className="hwcc__main">
+        <div className="hwcc__main hwcc__center">
           <h2 className="hwcc__title">sell a yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your perfect buyer. Our exclusive audience.</p>
           <p className="hwcc__summary">Our directly employed brokers share market-leading intelligence and powerful client database insights with our experienced global team to ensure the best outcome for you.</p>
@@ -360,7 +360,7 @@ function SecondFiftyFifty() {
           alt="Build"
           className="media-fit hwcc__img"
         />
-        <div className="hwcc__main">
+        <div className="hwcc__main hwcc__center">
           <h2 className="hwcc__title">BUILD A Yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your vision. Our expertise.</p>
           <p className="hwcc__summary">From concept to launch, our new build team will guide you through every step of the construction process, ensuring your dream yacht becomes a reality.</p>
