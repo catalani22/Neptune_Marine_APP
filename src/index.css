@@ -649,11 +649,11 @@ a:hover {
 /* Ensure hero sits below the fixed header to avoid header overlapping the image */
 .h-bann {
   position: relative;
-  margin-top: 70px;
+  margin-top: 0;
 }
 
 @media (min-width: 1200px) {
-  .h-bann { margin-top: 80px; }
+  .h-bann { margin-top: 0; }
 }
 
 .h-bann__bg {
@@ -1558,7 +1558,7 @@ a:hover {
 
 /* ============= INTERIOR BANNER (i-bann) ============= */
 .i-bann {
-  margin-top: 70px;
+  margin-top: 0;
 }
 
 .i-bann__main {
