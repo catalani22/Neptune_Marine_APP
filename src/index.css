@@ -1426,6 +1426,23 @@ a:hover {
   position: absolute;
 }
 
+.h-bann .i-bann__ta.theme-border {
+  position: absolute;
+  inset: 20px calc(env(safe-area-inset-right, 0) + 20px) 20px calc(env(safe-area-inset-left, 0) + 20px);
+}
+
+@media (min-width: 768px) {
+  .h-bann .i-bann__ta.theme-border {
+    inset: 32px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .h-bann .i-bann__ta.theme-border {
+    inset: 56px 50px;
+  }
+}
+
 .theme-border::after {
   border: 3px solid;
   border-image-slice: 1;
