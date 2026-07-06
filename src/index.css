@@ -515,13 +515,13 @@ a:hover {
 .s-head-nav {
   align-items: center;
   display: flex;
-  gap: 20px;
+  gap: 12px; /* tightened to better match Burgess */
   flex-wrap: nowrap;
 }
 
 @media (min-width: 1200px) {
   .s-head-nav {
-    gap: 31px;
+    gap: 18px;
   }
 }
 

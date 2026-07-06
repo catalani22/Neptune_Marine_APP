@@ -38,16 +38,14 @@ function Header() {
               <span className="menu-i__line"></span>
             </span>
           </button>
-          <button 
-            className="s-head-nav__link s-head-nav__link--i s-head__hd" 
-            aria-label="Open the search panel"
-            onClick={() => setSearchOpen(!searchOpen)}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
+
+          <Link to="/" className="s-head__logo" aria-label="Navigate to the home page">
+            <img 
+              src="/assets/images/brand/neptunebw.png" 
+              alt="Neptune Marine" 
+              style={{ height: '40px', width: 'auto', maxWidth: '164px' }}
+            />
+          </Link>
 
           <Link to="/charter" className="s-head-nav__link s-head__sd">Charter</Link>
           <Link to="/buy" className="s-head-nav__link s-head__sd">Buy</Link>
@@ -57,14 +55,8 @@ function Header() {
           <Link to="/adventure" className="s-head-nav__link s-head__sd">Adventure</Link>
         </nav>
         
-        <Link to="/" className="s-head__logo" aria-label="Navigate to the home page">
-          <img 
-            src="/assets/images/brand/neptunebw.png" 
-            alt="Neptune Marine" 
-            style={{ height: '40px', width: 'auto', maxWidth: '164px' }}
-          />
-        </Link>
-        
+        <div className="s-head__container" />
+
         <nav className="s-head-nav s-head-nav--right">
           <button className="s-head-nav__link s-head-nav__link--i s-head__sd" aria-label="Search" onClick={() => setSearchOpen(!searchOpen)}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
