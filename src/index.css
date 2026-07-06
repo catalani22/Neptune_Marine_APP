@@ -385,13 +385,14 @@
 }
 
 /* ============= STICKY HEADER OFFSET ============= */
+/* Remove artificial padding — header is fixed and hero should sit flush under it */
 main {
-  padding-top: 70px;
+  padding-top: 0;
 }
 
 @media (min-width: 1200px) {
   main {
-    padding-top: 90px;
+    padding-top: 0;
   }
 }
 
@@ -401,7 +402,7 @@ main {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+  scroll-padding-top: 0;
 }
 
 body {

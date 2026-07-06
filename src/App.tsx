@@ -76,8 +76,6 @@ function Header() {
           <Link to="/enquire" className="s-head-nav__link s-head__sd">Contact Us</Link>
         </nav>
       </header>
-      <div className="s-head__container"></div>
-
       {/* Mobile Menu */}
       <div className={`mobile-menu ${mobileMenuOpen ? 'mobile-menu--open' : ''}`}>
         <Link to="/charter" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Charter</Link>
