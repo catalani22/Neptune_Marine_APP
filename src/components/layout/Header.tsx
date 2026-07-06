@@ -20,7 +20,7 @@ export function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <Ship className="w-8 h-8 text-[#c9a227]" />
+            <Ship className="w-10 h-10 text-[#c9a227]" />
             <span className="text-xl font-serif font-semibold text-[#1a1a1a]">
               NEPTUNE MARINE
             </span>
