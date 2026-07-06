@@ -1422,6 +1422,10 @@ a:hover {
   position: relative;
 }
 
+.h-bann__cont.theme-border {
+  position: absolute;
+}
+
 .theme-border::after {
   border: 3px solid;
   border-image-slice: 1;
