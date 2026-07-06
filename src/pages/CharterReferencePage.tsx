@@ -88,7 +88,7 @@ const CharterReferencePage: React.FC = () => {
       }
     };
 
-    setMeta('meta[name="description"]', 'content', 'Charter world-class yachts with Neptune Marine. Prices include a transparent 10% service markup; deposits accepted in crypto.');
+    setMeta('meta[name="description"]', 'content', 'Charter world-class yachts with Neptune Marine. Deposit accepted in crypto.');
     setMeta('meta[property="og:title"]', 'content', 'Charter — Neptune Marine');
     setMeta('meta[property="og:description"]', 'content', 'The Ultimate Standard in Luxury Yachting — handpicked yachts for charter worldwide.');
 
@@ -186,7 +186,7 @@ const CharterReferencePage: React.FC = () => {
                     <div className="card-footer">
                       <div className="price">
                         <span className="price-main">From {formatCurrency(priceWithMarkup, y.currency)}</span>
-                        <span className="price-sub">({formatCurrency(y.basePrice, y.currency)} + 10% service fee)</span>
+
                       </div>
                       <div className="card-actions">
                         <Link to={`/yacht/${y.slug}`} className="btn btn--ghost">View details</Link>
@@ -203,7 +203,7 @@ const CharterReferencePage: React.FC = () => {
 
       <section className="charter-cta">
         <div className="container">
-          <p className="muted">Deposit: 10% (crypto accepted). For bespoke requests contact <a href="mailto:ale.catalani@neptunemarine.vip">ale.catalani@neptunemarine.vip</a></p>
+          <p className="muted">For bespoke requests contact <a href="mailto:ale.catalani@neptunemarine.vip">ale.catalani@neptunemarine.vip</a></p>
         </div>
       </section>
     </main>
