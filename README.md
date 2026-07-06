@@ -239,7 +239,7 @@ Cores temáticas disponíveis:
 ## Deploy
 
 - **Platform**: Vercel
-- **URL**: https://neptune-marine.vercel.app
+- **URL**: https://neptunemarine.vip
 - **Status**: Produção
 
 ## Comandos Úteis

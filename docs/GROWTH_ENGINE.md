@@ -37,7 +37,7 @@ Tweet:
 💰 From $[price]/week
 
 Pay with crypto. No banks. Pure luxury.
-👉 neptune-marine.vercel.app/charter/[slug]
+👉 neptunemarine.vip/charter/[slug]
 #YachtCharter #LuxuryYacht #[Destination] #CryptoPayment"
 ```
 
@@ -54,7 +54,7 @@ Tweet:
 💰 $[price]/week (10% off for last minute!)
 
 Pay with ETH, SOL, USDC or BNB 🚀
-👉 neptune-marine.vercel.app/charter/[slug]
+👉 neptunemarine.vip/charter/[slug]
 #LastMinute #YachtCharter #LuxuryTravel"
 ```
 
@@ -68,7 +68,7 @@ Tweet:
 💰 $[price] (crypto accepted)
 
 View full specs & make an offer 👇
-neptune-marine.vercel.app/buy/[slug]
+neptunemarine.vip/buy/[slug]
 #YachtForSale #LuxuryYacht #Web3"
 ```
 
@@ -85,7 +85,7 @@ Tweet:
 🌴 Caribbean — [N] available
 
 All bookable with crypto 🚀
-neptune-marine.vercel.app
+neptunemarine.vip
 #YachtCharter #LuxuryTravel #Web3"
 ```
 
@@ -97,7 +97,7 @@ neptune-marine.vercel.app
 Reply:
 "Check Neptune Marine — luxury yacht charter & sales with crypto payments ⚓
 Best rates + 10% markup transparency. No hidden fees.
-👉 neptune-marine.vercel.app"
+👉 neptunemarine.vip"
 ```
 
 ---
@@ -144,12 +144,12 @@ Twitter/X:
 [N] days of pure luxury via @NeptuneMarine
 
 ETH. SOL. USDC. No banks needed.
-👉 neptune-marine.vercel.app
+👉 neptunemarine.vip
 #YachtLife #Web3 #LuxuryTravel #[Destination]"
 
 WhatsApp:
 "Reservei um iate de [LOA]m em [Destino] pagando com crypto!
-Tudo via Neptune Marine — confere: neptune-marine.vercel.app"
+Tudo via Neptune Marine — confere: neptunemarine.vip"
 ```
 
 ### 2. Iate visto/favoritado (menor fricção)
@@ -157,7 +157,7 @@ Tudo via Neptune Marine — confere: neptune-marine.vercel.app"
 "Just found my dream yacht on Neptune Marine 😍
 [Yacht Name] — [Destination] — $[price]/week
 Who's joining? 🛥️
-neptune-marine.vercel.app/charter/[slug]"
+neptunemarine.vip/charter/[slug]"
 ```
 
 ### OG Image Dinâmica por Iate

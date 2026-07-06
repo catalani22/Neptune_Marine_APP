@@ -54,6 +54,7 @@ function Header() {
           <Link to="/sell" className="s-head-nav__link s-head__sd">Sell</Link>
           <Link to="/build" className="s-head-nav__link s-head__sd">Build</Link>
           <Link to="/manage" className="s-head-nav__link s-head__sd">Manage</Link>
+          <Link to="/adventure" className="s-head-nav__link s-head__sd">Adventure</Link>
         </nav>
         
         <Link to="/" className="s-head__logo" aria-label="Navigate to the home page">
@@ -84,6 +85,7 @@ function Header() {
         <Link to="/sell" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Sell</Link>
         <Link to="/build" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Build</Link>
         <Link to="/manage" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Manage</Link>
+        <Link to="/adventure" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Adventure</Link>
         <Link to="/account" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>My account</Link>
         <Link to="/enquire" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Contact Us</Link>
       </div>
@@ -148,14 +150,14 @@ function Hero() {
 function ContentPods() {
   const pods = [
     {
-      image: '/assets/images/burgess/yachts/joy.jpg',
+      image: '/assets/images/home/buy-1.jpg',
       category: 'Yacht charters',
       title: 'Last-minute availability',
       link: '/charter',
       cta: 'View available yachts'
     },
     {
-      image: '/assets/images/burgess/yachts/alvia.jpg',
+      image: '/assets/images/home/charter-2.jpg',
       category: 'Unforgettable journeys',
       title: 'Yachts for charter',
       link: '/charter',
@@ -224,10 +226,7 @@ function FiftyFifty() {
   return (
     <div className="fifty-fifty fifty-fifty--margins">
       <div className="hwcc loading">
-        <picture>
-          <source srcSet="/assets/images/burgess/homepage/lady_jorgia_00004792_vb1459357_3840x2560.jpg?width=350&height=465&rmode=crop&format=webp&quality=60&v=202309141304 350w, /assets/images/burgess/homepage/lady_jorgia_00004792_vb1459357_3840x2560.jpg?width=500&height=465&rmode=crop&format=webp&quality=60&v=202309141304 500w, /assets/images/burgess/homepage/lady_jorgia_00004792_vb1459357_3840x2560.jpg?width=700&height=465&rmode=crop&format=webp&quality=60&v=202309141304 700w" sizes="100vw" media="(max-width: 750px)"/>
-          <img className="hwcc__img media-fit" src="/assets/images/burgess/homepage/lady_jorgia_00004792_vb1459357_3840x2560.jpg?width=1651&height=1297&rmode=crop&format=webp&quality=60&v=202309141304" loading="lazy" alt="" sizes="(max-width: 750px) 100vw, 50vw"/>
-        </picture>
+        <img className="hwcc__img media-fit" src="/assets/images/home/fifty-charter.jpg" loading="lazy" alt="Charter a yacht" />
         <div className="hwcc__main">
           <h2 className="hwcc__title">charter a yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your great escape. Tailored by Neptune Marine.</p>
@@ -237,10 +236,7 @@ function FiftyFifty() {
       </div>
       
       <div className="hwcc loading">
-        <picture>
-          <source srcSet="/assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=350&height=465&rmode=crop&format=webp&quality=60&v=202309141304 350w, /assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=500&height=465&rmode=crop&format=webp&quality=60&v=202309141304 500w, /assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=700&height=465&rmode=crop&format=webp&quality=60&v=202309141304 700w" sizes="100vw" media="(max-width: 750px)"/>
-          <img className="hwcc__img media-fit" src="/assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=1651&height=1297&rmode=crop&format=webp&quality=60&v=202309141304" loading="lazy" alt="" sizes="(max-width: 750px) 100vw, 50vw"/>
-        </picture>
+        <img className="hwcc__img media-fit" src="/assets/images/home/fifty-buy.jpg" loading="lazy" alt="Buy a yacht" />
         <div className="hwcc__main">
           <h2 className="hwcc__title">BUY A Yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your life. Spent wisely.</p>
@@ -256,14 +252,11 @@ function FiftyFifty() {
 function HighlightPanel() {
   return (
     <div className="hl-panel theme-orange">
-      <picture className="hl-panel__img">
-        <source srcSet="/assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=335&height=250&rmode=crop&format=webp&quality=60&v=202309141304 335w, /assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=670&height=500&rmode=crop&format=webp&quality=60&v=202309141304 670w, /assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=1005&height=750&rmode=crop&format=webp&quality=60&v=202309141304 1005w" media="(max-width: 750px)" sizes="100vw"/>
-        <img src="/assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=1330&height=807&rmode=crop&format=webp&quality=60&v=202309141304" srcSet="/assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=1330&height=807&rmode=crop&format=webp&quality=60&v=202309141304 1330w, /assets/images/burgess/homepage/seanna_00004832_vb1583505_3840x2560.jpg?width=2833&height=1217&rmode=crop&format=webp&quality=60&v=202309141304 2833w" alt="" loading="lazy" className="media-fit" sizes="70vw"/>
-      </picture>
+      <img src="/assets/images/home/highlight.jpg" alt="About Neptune Marine" loading="lazy" className="hl-panel__img media-fit" />
       <div className="hl-panel__contents">
         <h2 className="hl-panel__title">About us</h2>
         <p className="hl-panel__mt">Your wish. Our world.</p>
-        <p>Our reputation is your recommendation. Since 1975 all our knowledge has been distilled into one goal, making sure you enjoy the best yachting experience.<br/><br/>If it involves yachts, we&rsquo;ve got you covered.</p>
+        <p>Our reputation is your recommendation. Neptune Marine brings world-class expertise to every charter, sale and yachting experience &mdash; ensuring you always come first.<br/><br/>If it involves yachts, we&rsquo;ve got you covered.</p>
         <Link to="/about" className="btn btn--solid-grad hl-panel__btn">About us</Link>
       </div>
       <div className="hl-panel__border theme-border"></div>
@@ -286,10 +279,7 @@ with our experienced global team to ensure the best outcome for you.</p>
       </div>
       
       <div className="hwcc loading">
-        <picture>
-          <source srcSet="/assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=350&height=465&rmode=crop&format=webp&quality=60&v=202309141304 350w, /assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=500&height=465&rmode=crop&format=webp&quality=60&v=202309141304 500w, /assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=700&height=465&rmode=crop&format=webp&quality=60&v=202309141304 700w" sizes="100vw" media="(max-width: 750px)"/>
-          <img className="hwcc__img media-fit" src="/assets/images/burgess/homepage/seanna_00004832_vb1583043_3840x2560.jpg?width=1651&height=1297&rmode=crop&format=webp&quality=60&v=202309141304" loading="lazy" alt="" sizes="(max-width: 750px) 100vw, 50vw"/>
-        </picture>
+        <img className="hwcc__img media-fit" src="/assets/images/home/dest-synthesis.jpg" loading="lazy" alt="Build a yacht" />
         <div className="hwcc__main">
           <h2 className="hwcc__title">BUILD A Yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your vision. Our expertise.</p>
@@ -334,20 +324,31 @@ function Footer() {
             <li><Link to="/sell/marketing">Marketing</Link></li>
           </ul>
         </div>
+
+        <div>
+          <h3 className="s-foot__title">Adventure</h3>
+          <ul className="s-foot__links">
+            <li><Link to="/adventure">Overview</Link></li>
+            <li><Link to="/last-minute-cruises">Last Minute Cruises</Link></li>
+            <li><Link to="/jets">Private Jet Charter</Link></li>
+            <li><Link to="/helicopters">Helicopter Charter</Link></li>
+            <li><Link to="/luxury-cars">Luxury Cars</Link></li>
+            <li><Link to="/mansions">Mansions &amp; Villas</Link></li>
+          </ul>
+        </div>
         
         <div>
           <h3 className="s-foot__title">Contact</h3>
           <ul className="s-foot__links">
-            <li><a href="tel:+442076964500">+44 20 7696 4500</a></li>
-            <li><a href="mailto:info@neptunemarine.com">info@neptunemarine.com</a></li>
+            <li><a href="mailto:info@neptunemarine.vip">info@neptunemarine.vip</a></li>
             <li><Link to="/enquire">Enquire Now</Link></li>
-            <li><Link to="/offices">Our Offices</Link></li>
+            <li><Link to="/about">About Us</Link></li>
           </ul>
         </div>
       </div>
       
       <div className="s-foot__bottom">
-        <p>© 2025 Neptune Marine. All rights reserved. | <Link to="/privacy">Privacy Policy</Link> | <Link to="/terms">Terms of Use</Link></p>
+        <p>© 2025 Neptune Marine. All rights reserved. | <Link to="/privacy-policy">Privacy Policy</Link> | <Link to="/terms-of-use">Terms of Use</Link> | <a href="https://neptunemarine.vip">neptunemarine.vip</a></p>
       </div>
     </footer>
   );
@@ -1695,7 +1696,7 @@ function ExtraContentPods() {
       <div className="fls">
         <div className="fls__item fls__item--double">
           <Link to="/charter/destinations/corsica-and-sardinia" className="content-pod">
-            <img src="/assets/images/burgess/destinations/sardinia.jpg" alt="Sardinia" className="media-fit content-pod__img" />
+            <img src="/assets/images/home/dest-marina.jpg" alt="Sardinia" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>Destinations</span></div>
@@ -1728,7 +1729,7 @@ function ExtraContentPods() {
       <div className="fls">
         <div className="fls__item">
           <Link to="/buy-a-yacht/yachts-for-sale" className="content-pod">
-            <img src="/assets/images/burgess/yachts/synthesis.jpg" alt="SYNTHESIS" className="media-fit content-pod__img" />
+            <img src="/assets/images/home/dest-synthesis.jpg" alt="SYNTHESIS" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>Buy a yacht</span></div>
@@ -1761,7 +1762,7 @@ function ExtraContentPods() {
       <div className="fls">
         <div className="fls__item">
           <Link to="/editorial/news/burgess-x-joro-the-partnership" className="content-pod">
-            <img src="/assets/images/burgess/editorial/joro.jpg" alt="Antarctica" className="media-fit content-pod__img" />
+            <img src="/assets/images/editorial/joro.jpg" alt="Antarctica" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>Burgess | JORO</span></div>
@@ -1776,7 +1777,7 @@ function ExtraContentPods() {
         </div>
         <div className="fls__item fls__item--double">
           <Link to="/editorial/news/italian-shipyards-new-build-market" className="content-pod">
-            <img src="/assets/images/burgess/editorial/riva.jpg" alt="Riva" className="media-fit content-pod__img" />
+            <img src="/assets/images/editorial/riva.jpg" alt="Riva" className="media-fit content-pod__img" />
             <div className="content-pod__cont content-pod__cont--grad">
               <div className="content-pod__cont-inner">
                 <div className="content-pod__info"><span>Editorial</span></div>
@@ -1794,6 +1795,236 @@ function ExtraContentPods() {
   );
 }
 
+// ============= REFIT SECTION =============
+function RefitSection() {
+  return (
+    <div className="fifty-fifty fifty-fifty--margins fifty-fifty--mb-0">
+      <div className="hwcc loading">
+        <img className="hwcc__img media-fit" src="/assets/images/home/refit.jpg" loading="lazy" alt="Refit a yacht" />
+        <div className="hwcc__main">
+          <h2 className="hwcc__title">REFIT A Yacht</h2>
+          <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Asset upgrades. Enhancing your investment.</p>
+          <p className="hwcc__summary">From full superyacht refits to targeted upgrades, our technical team manages every detail &mdash; on time, on budget, and to the highest standards.</p>
+          <Link to="/refit" className="btn btn--primary btn--white">Refit a yacht</Link>
+        </div>
+      </div>
+
+      <div className="hwcc hwcc--gradient theme-aqua">
+        <div className="hwcc__main">
+          <h2 className="hwcc__title">YACHT MANAGEMENT</h2>
+          <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Effortless ownership. Expert care.</p>
+          <p className="hwcc__summary">Neptune Marine manages your vessel with the same precision and passion you expect on board. From crew and compliance to charter management &mdash; we handle everything.</p>
+          <Link to="/manage" className="btn btn--primary btn--white btn--white-grad">Our services</Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============= SUSTAINABILITY SECTION =============
+function SustainabilitySection() {
+  return (
+    <div className="fifty-fifty fifty-fifty--margins">
+      <div className="hwcc hwcc--gradient theme-blue">
+        <div className="hwcc__main">
+          <h2 className="hwcc__title">SUSTAINABILITY</h2>
+          <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Leading change. It&rsquo;s our business.</p>
+          <p className="hwcc__summary">We are committed to responsible yachting. Neptune Marine actively supports ocean conservation, promotes sustainable practices across our fleet and partners with leading environmental organisations worldwide.</p>
+          <Link to="/sustainability" className="btn btn--primary btn--white btn--white-grad">Our commitments</Link>
+        </div>
+      </div>
+
+      <div className="hwcc loading">
+        <img className="hwcc__img media-fit" src="/assets/images/home/sustainability.jpg" loading="lazy" alt="Ocean sustainability" />
+        <div className="hwcc__main">
+          <h2 className="hwcc__title">OCEAN FIRST</h2>
+          <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Protecting the sea we sail.</p>
+          <p className="hwcc__summary">Every charter, every sale, every voyage &mdash; Neptune Marine gives back to the ocean that makes it all possible.</p>
+          <Link to="/sustainability" className="btn btn--primary btn--white">Learn more</Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============= EDITORIAL SECTION =============
+function EditorialSection() {
+  const articles = [
+    {
+      image: '/assets/images/editorial/monaco.jpg',
+      category: '2026 Events',
+      title: 'Global boat shows: Plan your calendar',
+      link: '/editorial/boat-shows-events',
+    },
+    {
+      image: '/assets/images/editorial/joro.jpg',
+      category: 'Neptune Marine | JORO',
+      title: 'Extraordinary journeys, redefined',
+      link: '/editorial/news/neptune-x-joro',
+    },
+    {
+      image: '/assets/images/editorial/rox-star.jpg',
+      category: 'Charter',
+      title: 'Last-minute summer availability',
+      link: '/charter',
+    },
+    {
+      image: '/assets/images/editorial/va-bene.jpg',
+      category: 'Editorial',
+      title: 'Mediterranean superyacht guide 2026',
+      link: '/editorial/mediterranean-guide',
+    },
+  ];
+
+  return (
+    <div className="u-ed">
+      <div className="u-ed__grid">
+        {articles.map((a, i) => (
+          <Link key={i} to={a.link} className="e-card">
+            <div className="e-card__img-wrap">
+              <img src={a.image} alt={a.title} className="media-fit e-card__img" loading="lazy" />
+            </div>
+            <div className="e-card__body">
+              <span className="e-card__cat">{a.category}</span>
+              <h3 className="e-card__title">{a.title}</h3>
+              <span className="a-link a-link--inherit">
+                <span className="a-link__text">Read more</span>
+                <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+              </span>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ============= ADVENTURE PAGE =============
+function AdventurePage() {
+  const services = [
+    {
+      image: '/assets/images/home/buy-1.jpg',
+      category: 'Last Minute',
+      title: 'Cruise packages available now',
+      link: '/last-minute-cruises',
+      cta: 'View deals',
+    },
+    {
+      image: '/assets/images/home/hero-poster.jpg',
+      category: 'Private Jet Charter',
+      title: 'Fly in absolute comfort',
+      link: '/jets',
+      cta: 'Charter a jet',
+      double: true,
+    },
+    {
+      image: '/assets/images/home/fifty-charter.jpg',
+      category: 'Helicopter Charter',
+      title: 'Island hop in style',
+      link: '/helicopters',
+      cta: 'Book a helicopter',
+    },
+    {
+      image: '/assets/images/home/dest-marina.jpg',
+      category: 'Luxury Cars',
+      title: 'Drive the world\'s finest automobiles',
+      link: '/luxury-cars',
+      cta: 'Browse fleet',
+      double: true,
+    },
+    {
+      image: '/assets/images/home/sustainability.jpg',
+      category: 'Mansions & Villas',
+      title: 'Exclusive residences worldwide',
+      link: '/mansions',
+      cta: 'Explore properties',
+    },
+  ];
+
+  return (
+    <div>
+      <section className="h-bann theme-blue">
+        <img src="/assets/images/home/hero-poster.jpg" alt="Adventure" className="media-fit h-bann__media" />
+        <div className="h-ban__grad"></div>
+        <div className="h-bann__cont theme-border">
+          <span></span>
+          <div>
+            <p className="h-bann__title">Beyond the sea. Complete luxury.</p>
+            <div>
+              <span className="h-bann__sub-title h-bann__sub-title--outline">Discover the</span>
+              <span className="h-bann__sub-title theme-text">Adventure</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="cws">
+        <div className="cws__inner">
+          <div className="html-area">
+            <div className="html-area__subtitle">LUXURY LIFESTYLE</div>
+            <h2 className="html-area__title und-title und-title--center">More than yachts</h2>
+            <div className="html-area__standfirst" style={{ textAlign: 'center' }}>
+              <p>Neptune Marine extends beyond the sea. Charter a private jet, island-hop by helicopter, drive legendary supercars, or retreat to an exclusive mansion &mdash; all payable in crypto, all with our transparent 10% service commitment.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="fls">
+        {services.slice(0, 3).map((s, i) => (
+          <div key={i} className={`fls__item ${s.double ? 'fls__item--double' : ''}`}>
+            <Link to={s.link} className="content-pod">
+              <img src={s.image} alt={s.title} className="media-fit content-pod__img" />
+              <div className="content-pod__cont content-pod__cont--grad">
+                <div className="content-pod__cont-inner">
+                  <div className="content-pod__info"><span>{s.category}</span></div>
+                  <h2 className="content-pod__title">{s.title}</h2>
+                  <span className="a-link a-link--inherit">
+                    <span className="a-link__text">{s.cta}</span>
+                    <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+
+      <div className="fls">
+        {services.slice(3).map((s, i) => (
+          <div key={i} className={`fls__item ${s.double ? 'fls__item--double' : ''}`}>
+            <Link to={s.link} className="content-pod">
+              <img src={s.image} alt={s.title} className="media-fit content-pod__img" />
+              <div className="content-pod__cont content-pod__cont--grad">
+                <div className="content-pod__cont-inner">
+                  <div className="content-pod__info"><span>{s.category}</span></div>
+                  <h2 className="content-pod__title">{s.title}</h2>
+                  <span className="a-link a-link--inherit">
+                    <span className="a-link__text">{s.cta}</span>
+                    <svg className="a-link__icon"><use href="#svg-arrow-right" /></svg>
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+
+      <div className="hl-panel theme-aqua">
+        <img src="/assets/images/home/highlight.jpg" alt="Crypto payments" loading="lazy" className="hl-panel__img media-fit" />
+        <div className="hl-panel__contents">
+          <h2 className="hl-panel__title">Pay with crypto</h2>
+          <p className="hl-panel__mt">All services. All currencies.</p>
+          <p>Every adventure bookable on Neptune Marine accepts crypto payments. BTC, ETH, SOL, USDT and more &mdash; fast, private, borderless.<br/><br/>10% deposit secures your reservation instantly.</p>
+          <Link to="/enquire" className="btn btn--solid-grad hl-panel__btn">Enquire now</Link>
+        </div>
+        <div className="hl-panel__border theme-border"></div>
+      </div>
+    </div>
+  );
+}
+
+
 // ============= HOME PAGE =============
 function Home() {
   return (
@@ -1805,6 +2036,9 @@ function Home() {
       <FiftyFifty />
       <HighlightPanel />
       <SecondFiftyFifty />
+      <RefitSection />
+      <SustainabilitySection />
+      <EditorialSection />
     </>
   );
 }
@@ -1987,6 +2221,15 @@ function App() {
               <Route path="/contact-us" element={<EnquirePage />} />
               <Route path="/search" element={<SearchPage />} />
               <Route path="/account" element={<EnquirePage />} />
+
+              <Route path="/adventure" element={<AdventurePage />} />
+              <Route path="/last-minute-cruises" element={<AdventurePage />} />
+              <Route path="/jets" element={<AdventurePage />} />
+              <Route path="/helicopters" element={<AdventurePage />} />
+              <Route path="/luxury-cars" element={<AdventurePage />} />
+              <Route path="/mansions" element={<AdventurePage />} />
+              <Route path="/refit" element={<ManagementPage />} />
+              <Route path="/sustainability" element={<AboutPage />} />
               
               <Route path="/privacy-policy" element={<PrivacyPage />} />
               <Route path="/terms-of-use" element={<TermsPage />} />
