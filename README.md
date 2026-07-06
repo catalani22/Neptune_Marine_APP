@@ -1,4 +1,4 @@
-# Neptune Marine - Luxury Yacht Charter Platform
+# Neptune Marine - The Ultimate Standard in Luxury Yachting
 
 ## Visão Geral
 

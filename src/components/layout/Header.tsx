@@ -105,7 +105,7 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-[#c9a227]">Services</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="/charter" className="hover:text-white">Luxury Charter</a></li>
+              <li><a href="/charter" className="hover:text-white">Charter</a></li>
               <li><a href="/cabin-cruise" className="hover:text-white">Cabin Cruises</a></li>
               <li><a href="/sale" className="hover:text-white">Yacht Sales</a></li>
               <li><a href="/new-build" className="hover:text-white">New Builds</a></li>
