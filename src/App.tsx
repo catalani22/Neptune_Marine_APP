@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { supabase } from './lib/supabase';
 import { YachtDetailPage } from './pages/YachtDetailPage';
-import CharterReferencePage from './pages/CharterReferencePage';
 
 interface Yacht {
   id: string;
@@ -2178,7 +2177,7 @@ function App() {
           <Routes>
                <Route path="/" element={<Home />} />
                <Route path="/about" element={<AboutPage />} />
-               <Route path="/charter" element={<CharterReferencePage />} />
+               <Route path="/charter" element={<CharterPage />} />
               <Route path="/charter/yachts" element={<CharterPage />} />
               <Route path="/charter/yachts-for-charter" element={<CharterPage />} />
               <Route path="/charter/inspiration" element={<CharterInspirationPage />} />
