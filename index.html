@@ -50,6 +50,34 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+        <script>
+  (function(){
+    function showError(msg, stack){
+      try{
+        var el = document.getElementById("__error_overlay__");
+        if(!el){
+          el = document.createElement("div");
+          el.id = "__error_overlay__";
+          document.documentElement.appendChild(el);
+        }
+        el.style.cssText = "position:fixed;left:0;top:0;right:0;background:#b00020;color:#fff;padding:16px;z-index:2147483647;font-family:monospace;white-space:pre-wrap;max-height:60vh;overflow:auto;";
+        el.textContent = msg + (stack ? "
+
+" + stack : "");
+      }catch(e){console.error(e);}
+    }
+    window.addEventListener("error", function(e){
+      showError("Error: " + (e.message || e.toString()), (e.error && e.error.stack) || (e.filename ? e.filename+":"+str(e.lineno)+":"+str(e.colno) : ""));
+      console.error(e.error || e);
+    }, true);
+    window.addEventListener("unhandledrejection", function(e){
+      var reason = e.reason || e;
+      showError("Unhandled promise rejection: " + (reason && reason.message || String(reason)), reason && reason.stack || String(reason));
+      console.error("Unhandled promise rejection", e);
+    });
+  })();
+    </script>
+
+<script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
