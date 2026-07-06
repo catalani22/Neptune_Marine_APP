@@ -329,7 +329,7 @@ function Footer() {
         <div>
           <h3 className="s-foot__title">Contact</h3>
           <ul className="s-foot__links">
-            <li><a href="mailto:info@neptunemarine.vip">info@neptunemarine.vip</a></li>
+            <li><a href="mailto:ale.catalani@neptunemarine.vip">ale.catalani@neptunemarine.vip</a></li>
             <li><Link to="/enquire">Enquire Now</Link></li>
             <li><Link to="/about">About Us</Link></li>
           </ul>
@@ -1087,6 +1087,7 @@ function EnquirePage() {
           </div>
           
           <button type="submit" className="btn btn--primary">Send Enquiry</button>
+          <p style={{ color: '#666', marginTop: '12px' }}>Or email us directly at <a href="mailto:ale.catalani@neptunemarine.vip">ale.catalani@neptunemarine.vip</a></p>
         </form>
       </div>
     </div>
@@ -1607,7 +1608,7 @@ function TermsPage() {
 
         <div style={{ marginBottom: '40px' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '15px', color: '#000' }}>CONTACT US</h2>
-          <p style={{ color: '#666', lineHeight: '1.6' }}>For questions about these terms, contact us at info@neptunemarine.com</p>
+          <p style={{ color: '#666', lineHeight: '1.6' }}>For questions about these terms, contact us at <a href="mailto:ale.catalani@neptunemarine.vip">ale.catalani@neptunemarine.vip</a></p>
         </div>
       </div>
     </div>
