@@ -640,6 +640,16 @@ a:hover {
   }
 }
 
+/* Ensure hero sits below the fixed header to avoid header overlapping the image */
+.h-bann {
+  position: relative;
+  margin-top: 70px;
+}
+
+@media (min-width: 1200px) {
+  .h-bann { margin-top: 80px; }
+}
+
 .h-bann__bg {
   position: absolute;
   top: 0;
@@ -702,14 +712,16 @@ a:hover {
 
 @media (min-width: 768px) {
   .h-bann__cont {
-    inset: 32px;
+    /* ensure hero content clears fixed header on tablet */
+    inset: 72px 32px 32px 32px;
     padding: 24px;
   }
 }
 
 @media (min-width: 1200px) {
   .h-bann__cont {
-    inset: 56px 50px;
+    /* top inset increased to header height (80px) + 16px buffer */
+    inset: 96px 50px 56px 50px;
     padding: 28px;
   }
 }
