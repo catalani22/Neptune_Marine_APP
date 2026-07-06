@@ -387,6 +387,7 @@
 /* ============= STICKY HEADER OFFSET ============= */
 /* Remove artificial padding — header is fixed and hero should sit flush under it */
 .page-header, .hero, .h-bann__media-img { margin-top: 0 !important; padding-top: 0 !important; }
+.hero, .page-header { position: relative; top: 0 !important; }
 main {
   padding-top: 0;
 }
