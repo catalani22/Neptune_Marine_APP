@@ -17,10 +17,10 @@ export function Header() {
   return (
     <header className="site-header fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-5">
+        <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <Ship className="w-12 h-12 -mt-0 text-[#c9a227]" />
+            <Ship className="w-9 h-9 text-[#c9a227]" />
             <span className="text-xl font-serif font-semibold text-[#1a1a1a]">
               NEPTUNE MARINE
             </span>

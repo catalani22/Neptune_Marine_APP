@@ -387,7 +387,7 @@
 /* ============= STICKY HEADER OFFSET ============= */
 /* Remove artificial padding — header is fixed and hero should sit flush under it */
 /* Force compact header and ensure hero starts immediately below it */
-.site-header{ height:44px !important; min-height:44px !important; }
+.site-header{ height:33px !important; min-height:33px !important; }
 .site-header .max-w-7xl > .flex{ height:100% !important; }
 .site-header a{ display:flex; align-items:center; height:100% !important; }
 .site-header .btn-gold, .site-header nav a, .site-header button{ padding-top:0 !important; padding-bottom:0 !important; }
