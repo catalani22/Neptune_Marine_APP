@@ -1,24 +1,26 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-// For client-side (Vite): use import.meta.env
-// For server-side (Node.js scripts): use process.env
-const getSupabaseUrl = () => {
-  if (typeof import.meta !== 'undefined' && import.meta.env) {
-    return import.meta.env.VITE_SUPABASE_URL || 'https://uhmzdrpetrgwuxfodiaf.supabase.co';
+const supabaseUrl =
+  (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_SUPABASE_URL) ||
+  'https://uhmzdrpetrgwuxfodiaf.supabase.co';
+
+const supabaseAnonKey =
+  (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_SUPABASE_ANON_KEY) ||
+  (typeof process !== 'undefined' && (process.env?.VITE_SUPABASE_ANON_KEY || process.env?.SUPABASE_ANON_KEY)) ||
+  '';
+
+let _supabase: SupabaseClient;
+
+try {
+  if (!supabaseAnonKey) {
+    throw new Error('VITE_SUPABASE_ANON_KEY is not set');
   }
-  return process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || 'https://uhmzdrpetrgwuxfodiaf.supabase.co';
-};
+  _supabase = createClient(supabaseUrl, supabaseAnonKey);
+} catch {
+  // Fallback: create client with a placeholder so the app mounts even without the key.
+  // All Supabase queries will return errors gracefully instead of crashing the app.
+  _supabase = createClient(supabaseUrl, 'placeholder-not-configured');
+}
 
-const getSupabaseKey = () => {
-  if (typeof import.meta !== 'undefined' && import.meta.env) {
-    return import.meta.env.VITE_SUPABASE_ANON_KEY || '';
-  }
-  return process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || '';
-};
-
-const supabaseUrl = getSupabaseUrl();
-const supabaseAnonKey = getSupabaseKey();
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
+export const supabase = _supabase;
 export default supabase;
