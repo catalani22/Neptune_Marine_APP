@@ -50,7 +50,7 @@ function Header() {
           </button>
 
           <Link to="/charter" className="s-head-nav__link s-head__sd">Charter</Link>
-          <Link to="/sale" className="s-head-nav__link s-head__sd">Buy</Link>
+          <Link to="/buy" className="s-head-nav__link s-head__sd">Buy</Link>
           <Link to="/sell" className="s-head-nav__link s-head__sd">Sell</Link>
           <Link to="/build" className="s-head-nav__link s-head__sd">Build</Link>
           <Link to="/manage" className="s-head-nav__link s-head__sd">Manage</Link>
@@ -81,7 +81,7 @@ function Header() {
       {/* Mobile Menu */}
       <div className={`mobile-menu ${mobileMenuOpen ? 'mobile-menu--open' : ''}`}>
         <Link to="/charter" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Charter</Link>
-        <Link to="/sale" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Buy</Link>
+        <Link to="/buy" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Buy</Link>
         <Link to="/sell" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Sell</Link>
         <Link to="/build" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Build</Link>
         <Link to="/manage" className="mobile-menu__link" onClick={() => setMobileMenuOpen(false)}>Manage</Link>
@@ -240,7 +240,7 @@ function FiftyFifty() {
           <h2 className="hwcc__title">BUY A Yacht</h2>
           <p className="und-title und-title--center und-title--inherit hwcc__subtitle">Your life. Spent wisely.</p>
           <p className="hwcc__summary">From the global fleet of mega yachts offered for sale, we hand-pick the best opportunities and share our expert knowledge, so that you can make the best decisions.</p>
-          <Link to="/sale" className="btn btn--primary btn--white">Yachts for sale</Link>
+          <Link to="/buy" className="btn btn--primary btn--white">Yachts for sale</Link>
         </div>
       </div>
     </div>
@@ -308,7 +308,7 @@ function Footer() {
         <div>
           <h3 className="s-foot__title">Buy</h3>
           <ul className="s-foot__links">
-            <li><Link to="/sale">Yachts for Sale</Link></li>
+            <li><Link to="/buy">Yachts for Sale</Link></li>
             <li><Link to="/sale/new-builds">New Builds</Link></li>
             <li><Link to="/sale/projects">Projects</Link></li>
             <li><Link to="/sale/buying-guide">Buying Guide</Link></li>
@@ -622,7 +622,7 @@ function BuyPage() {
             <h2 className="hwcc__title">buy a yacht</h2>
             <p className="und-title und-title--center und-title--inherit hwcc__subtitle">All yachts for sale</p>
             <p className="hwcc__summary">When it comes to buying a yacht we'll understand your requirements and handpick the best opportunities for you.</p>
-            <Link to="/sale" className="btn btn--primary btn--white">Find your next yacht</Link>
+            <Link to="/buy" className="btn btn--primary btn--white">Find your next yacht</Link>
           </div>
         </div>
         <div className="hwcc">

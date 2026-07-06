@@ -601,11 +601,10 @@ a:hover {
 
 .h-bann {
   background-color: #ccc;
-  height: 60vh;
-  max-height: 580px;
-  min-height: 420px;
+  height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0) - 150px);
+  max-height: 639px;
+  min-height: 450px;
   position: relative;
-  margin-top: 70px;
   overflow: hidden;
 }
 
@@ -618,8 +617,7 @@ a:hover {
 
 @media (min-width: 1200px) {
   .h-bann {
-    margin-top: 90px;
-    height: calc(100vh - 90px);
+    height: calc(100vh - env(safe-area-inset-bottom, 0) - env(safe-area-inset-top, 0) - 70px);
     max-height: 46.875vw;
     min-height: 500px;
   }
