@@ -1,0 +1,20 @@
+.charter-hero { position: relative; height: 70vh; min-height: 420px; overflow: hidden; display:flex; align-items:center; justify-content:center; }
+.charter-hero__video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
+.charter-hero__overlay { position:relative; z-index:2; color:#fff; text-align:center; padding: 2rem; background: rgba(0,0,0,0.25); border-radius: 6px; }
+.charter-hero__title { font-size: clamp(28px, 6vw, 56px); margin:0; font-weight:700; }
+.charter-hero__subtitle { margin:8px 0 0; font-size:18px; }
+
+.container { max-width:1200px; margin:0 auto; padding:0 20px; }
+
+.charter-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:20px; padding:40px 20px; }
+.card { background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 6px 18px rgba(0,0,0,0.08); text-align:left; }
+.card img { width:100%; height:250px; object-fit:cover; display:block; }
+.card-body { padding:12px 16px 18px; }
+.card h3 { margin:0 0 8px; font-size:18px; }
+.card p { margin:0; color:#666; }
+
+.charter-cta { padding:40px 20px; text-align:center; }
+.btn { display:inline-block; background:#0a3b5d; color:#fff; padding:10px 18px; border-radius:4px; text-decoration:none; }
+
+@media (max-width: 900px) { .charter-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 600px) { .charter-grid { grid-template-columns: 1fr; } .charter-hero { height: 50vh; } }
