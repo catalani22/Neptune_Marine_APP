@@ -478,7 +478,7 @@ a:hover {
   gap: 20px;
   grid-template-columns: 1fr 164px 1fr;
   max-width: 100%;
-  padding: 8px calc(env(safe-area-inset-right, 0) + 22px) 8px calc(env(safe-area-inset-left, 0) + 22px);
+  padding: 15px calc(env(safe-area-inset-right, 0) + 22px) 15px calc(env(safe-area-inset-left, 0) + 22px);
   position: fixed;
   top: 0;
   width: 100%;
@@ -488,7 +488,7 @@ a:hover {
 @media (min-width: 1200px) {
   .s-head {
     grid-template-columns: 1fr auto 1fr;
-    padding: 10px 40px;
+    padding: 22px 40px 21px;
   }
 }
 
@@ -2388,3 +2388,6 @@ a:hover {
   outline: none;
   border-color: #18c0d6;
 }
+
+/* Fix: s-head__container esta dentro do header como coluna central - zerar altura */
+.s-head .s-head__container { height: 0 !important; min-height: 0 !important; padding: 0 !important; }
