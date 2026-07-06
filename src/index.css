@@ -478,7 +478,7 @@ a:hover {
   gap: 20px;
   grid-template-columns: 1fr 164px 1fr;
   max-width: 100%;
-  padding: 15px calc(env(safe-area-inset-right, 0) + 22px) 15px calc(env(safe-area-inset-left, 0) + 22px);
+  padding: 8px calc(env(safe-area-inset-right, 0) + 22px) 8px calc(env(safe-area-inset-left, 0) + 22px);
   position: fixed;
   top: 0;
   width: 100%;
@@ -488,7 +488,7 @@ a:hover {
 @media (min-width: 1200px) {
   .s-head {
     grid-template-columns: 1fr auto 1fr;
-    padding: 22px 40px 21px;
+    padding: 10px 40px;
   }
 }
 
